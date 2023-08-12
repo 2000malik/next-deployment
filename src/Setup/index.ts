@@ -1,2 +1,2 @@
-export { default as setupAxios } from './axios'
-export * from './redux/RootReducer'
+import { default as setupAxios } from "@/setup/axios"
+export * from '@/setup/redux/RootReducer'

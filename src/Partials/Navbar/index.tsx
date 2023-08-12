@@ -1,13 +1,13 @@
+'use client';
+
 import moment from "moment";
-import { Link } from "react-router-dom";
-import { useAppSelector } from "../../Hooks";
 import { useEffect, useState } from "react";
-import { getImage } from "../../Utils";
 import { Popover, Transition, Disclosure } from "@headlessui/react";
 import React from "react";
+import Link from "next/link";
+import { getImage } from "@/utils";
 
 const Navbar = () => {
-    const user = useAppSelector(state => state.auth.user);
 
     return (
         <nav className="inset-0 z-10 bg-grayTrue">
@@ -29,7 +29,7 @@ const Navbar = () => {
                         <div className="flex gap-4">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="40" height="40" rx="20" fill="#141414" />
-                                <path d="M27.5 27.5L24.5834 24.5833M26.6667 19.5833C26.6667 23.4954 23.4954 26.6667 19.5833 26.6667C15.6713 26.6667 12.5 23.4954 12.5 19.5833C12.5 15.6713 15.6713 12.5 19.5833 12.5C23.4954 12.5 26.6667 15.6713 26.6667 19.5833Z" stroke="#D0D5DD" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M27.5 27.5L24.5834 24.5833M26.6667 19.5833C26.6667 23.4954 23.4954 26.6667 19.5833 26.6667C15.6713 26.6667 12.5 23.4954 12.5 19.5833C12.5 15.6713 15.6713 12.5 19.5833 12.5C23.4954 12.5 26.6667 15.6713 26.6667 19.5833Z" stroke="#D0D5DD" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             <div className="bg-white rounded-full px-3 py-2 font-inter text-sm text-[#042946] flex items-center">
                                 <div className="font-semibold">
@@ -74,12 +74,12 @@ export const HomeNavbar = () => {
                     <div>
                         <div className="flex px-4 justify-between">
 
-                            <img src={getImage("naija-flag.png")} alt="" />
+                            <img src={("/images/naija-flag.png")} alt="" />
                             <button onClick={() => setShowNav(false)}>
                                 <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="13.5" cy="13.5" r="13.5" fill="#E2E2E2" />
-                                    <path d="M18 9L9 18" stroke="#282828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M9 9L18 18" stroke="#282828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M18 9L9 18" stroke="#282828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M9 9L18 18" stroke="#282828" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </button>
                         </div>
@@ -91,14 +91,14 @@ export const HomeNavbar = () => {
                             </div>
                             <div className="flex gap-2">
                                 <div>
-                                    <Link to="/signup" className="inline-block md:text-base text-sm text-white font-bold bg-gradient-to-r transition-colors ease-in-out duration-100 hover:from-[#FC15FF] from-[#ED2DF0] to-[#803D81] hover:to-[#F7B0F8] px-12 md:py-3 py-4 md:rounded-xl rounded-2xl border border-[#D8D8D8] md:w-auto  text-center ">
+                                    <Link href="/signup" className="inline-block md:text-base text-sm text-white font-bold bg-gradient-to-r transition-colors ease-in-out duration-100 hover:from-[#FC15FF] from-[#ED2DF0] to-[#803D81] hover:to-[#F7B0F8] px-12 md:py-3 py-4 md:rounded-xl rounded-2xl border border-[#D8D8D8] md:w-auto  text-center ">
                                         <div className="text-center">
                                             <span>Get started</span>
                                         </div>
                                     </Link>
                                 </div>
                                 <div>
-                                    <Link to="/login" className="inline-block font-bold md:text-base text-sm border-[#883D89] text-[#883D89] px-10 md:px-8 md:py-3 py-4 md:rounded-xl rounded-2xl border-[1.5px] md:ml-4 md:w-auto text-center justify-center md:mt-0">
+                                    <Link href="/login" className="inline-block font-bold md:text-base text-sm border-[#883D89] text-[#883D89] px-10 md:px-8 md:py-3 py-4 md:rounded-xl rounded-2xl border-[1.5px] md:ml-4 md:w-auto text-center justify-center md:mt-0">
                                         <div className="text-center">
                                             <span>Login</span>
                                         </div>
@@ -123,7 +123,7 @@ export const HomeNavbar = () => {
                                                 <div>
                                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect width="30" height="30" rx="12" fill="#E5E8FF" />
-                                                        <g clip-path="url(#clip0_2331_6721)">
+                                                        <g clipPath="url(#clip0_2331_6721)">
                                                             <path d="M16.6667 15C16.6667 15.9192 15.9192 16.6667 15 16.6667C14.0808 16.6667 13.3333 15.9192 13.3333 15C13.3333 14.0808 14.0808 13.3333 15 13.3333C15.9192 13.3333 16.6667 14.0808 16.6667 15ZM25.0008 17.9567C25.0008 19.6758 23.9175 21.2433 22.3058 21.8575C21.1883 22.2842 20.1325 22.5 19.1658 22.5C17.8042 22.5 16.5842 22.1675 15.405 21.8458C14.2817 21.5392 13.2217 21.25 12.0833 21.25C10.7742 21.25 9.94833 21.3342 9.23416 21.5408C8.22916 21.83 7.1725 21.635 6.33416 21.0042C5.48666 20.3667 5.00083 19.3933 5.00083 18.3333V12.0433C5.00083 10.3242 6.08333 8.75667 7.695 8.1425C8.8125 7.71583 9.86916 7.5 10.835 7.5C12.1967 7.5 13.4158 7.8325 14.5958 8.15417C15.7192 8.46083 16.7792 8.75 17.9175 8.75C19.2258 8.75 20.0525 8.66583 20.7667 8.45917C21.7733 8.17 22.83 8.365 23.6675 8.99583C24.515 9.63333 25.0008 10.6067 25.0008 11.6667V17.9567ZM10.0008 16.6667C10.0008 16.2067 9.6275 15.8333 9.1675 15.8333C8.7075 15.8333 8.33416 16.2067 8.33416 16.6667C8.33416 17.1267 8.7075 17.5 9.1675 17.5C9.6275 17.5 10.0008 17.1267 10.0008 16.6667ZM10.0008 11.6667C10.0008 11.2067 9.6275 10.8333 9.1675 10.8333C8.7075 10.8333 8.33416 11.2067 8.33416 11.6667C8.33416 12.1267 8.7075 12.5 9.1675 12.5C9.6275 12.5 10.0008 12.1267 10.0008 11.6667ZM18.3342 15C18.3342 13.1617 16.8392 11.6667 15.0008 11.6667C13.1625 11.6667 11.6675 13.1617 11.6675 15C11.6675 16.8383 13.1625 18.3333 15.0008 18.3333C16.8392 18.3333 18.3342 16.8383 18.3342 15ZM21.6675 18.3333C21.6675 17.8733 21.2942 17.5 20.8342 17.5C20.3742 17.5 20.0008 17.8733 20.0008 18.3333C20.0008 18.7933 20.3742 19.1667 20.8342 19.1667C21.2942 19.1667 21.6675 18.7933 21.6675 18.3333ZM21.6675 13.3333C21.6675 12.8733 21.2942 12.5 20.8342 12.5C20.3742 12.5 20.0008 12.8733 20.0008 13.3333C20.0008 13.7933 20.3742 14.1667 20.8342 14.1667C21.2942 14.1667 21.6675 13.7933 21.6675 13.3333Z" fill="#058240" />
                                                         </g>
                                                         <defs>
@@ -141,7 +141,7 @@ export const HomeNavbar = () => {
                                                         Send and receive funds locally and globally. Make payments like tuition fees, accommodation, insurance.
                                                     </p>
                                                     <div className="mt-2">
-                                                        <Link to="/login" className="text-[#ED2DF0] font-semibold underline text-sm">
+                                                        <Link href="/login" className="text-[#ED2DF0] font-semibold underline text-sm">
                                                             Get Started
                                                         </Link>
                                                     </div>
@@ -152,7 +152,7 @@ export const HomeNavbar = () => {
                                                 <div>
                                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect width="30" height="30" rx="12" fill="#E5E8FF" />
-                                                        <g clip-path="url(#clip0_2331_6745)">
+                                                        <g clipPath="url(#clip0_2331_6745)">
                                                             <path d="M20.8333 6.66663H9.16667C6.86917 6.66663 5 8.53579 5 10.8333V19.1666C5 21.4641 6.86917 23.3333 9.16667 23.3333H20.8333C23.1308 23.3333 25 21.4641 25 19.1666V10.8333C25 8.53579 23.1308 6.66663 20.8333 6.66663ZM8.33333 14.1666H13.3333C13.7933 14.1666 14.1667 14.54 14.1667 15C14.1667 15.46 13.7933 15.8333 13.3333 15.8333H8.33333C7.87333 15.8333 7.5 15.46 7.5 15C7.5 14.54 7.87333 14.1666 8.33333 14.1666ZM21.6667 19.1666H8.33333C7.87333 19.1666 7.5 18.7933 7.5 18.3333C7.5 17.8733 7.87333 17.5 8.33333 17.5H21.6667C22.1267 17.5 22.5 17.8733 22.5 18.3333C22.5 18.7933 22.1267 19.1666 21.6667 19.1666ZM22.5 14.1666C22.5 15.0858 21.7525 15.8333 20.8333 15.8333H17.5C16.5808 15.8333 15.8333 15.0858 15.8333 14.1666V12.5C15.8333 11.5808 16.5808 10.8333 17.5 10.8333H20.8333C21.7525 10.8333 22.5 11.5808 22.5 12.5V14.1666ZM20.8333 12.5V14.1666H17.5V12.5H20.8333Z" fill="#3F1A6B" />
                                                         </g>
                                                         <defs>
@@ -171,7 +171,7 @@ export const HomeNavbar = () => {
                                                         Spend globally with your personalized virtual card. Manage your card from anywhere.
                                                     </p>
                                                     <div className="mt-2">
-                                                        <Link to="/login" className="text-[#ED2DF0] bg-[#FFD8FF] rounded-2xl py-1 px-2 font-semibold text-sm">
+                                                        <Link href="/login" className="text-[#ED2DF0] bg-[#FFD8FF] rounded-2xl py-1 px-2 font-semibold text-sm">
                                                             Coming soon!
                                                         </Link>
                                                     </div>
@@ -182,7 +182,7 @@ export const HomeNavbar = () => {
                                                 <div>
                                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect width="30" height="30" rx="12" fill="#E5E8FF" />
-                                                        <g clip-path="url(#clip0_2331_6784)">
+                                                        <g clipPath="url(#clip0_2331_6784)">
                                                             <path d="M25 12.0667V21.6667C25 21.8877 24.9122 22.0996 24.7559 22.2559C24.5997 22.4122 24.3877 22.5 24.1667 22.5C23.9457 22.5 23.7337 22.4122 23.5774 22.2559C23.4211 22.0996 23.3334 21.8877 23.3334 21.6667V14.7933L17.1667 17.74C16.5165 18.1238 15.7742 18.3237 15.0192 18.3183C14.2274 18.3196 13.45 18.1068 12.7692 17.7025L6.61918 14.775C6.13575 14.515 5.73069 14.1305 5.44604 13.6611C5.16138 13.1918 5.00749 12.6549 5.00035 12.106C4.99321 11.5572 5.13307 11.0164 5.40542 10.5399C5.67777 10.0633 6.07268 9.66829 6.54918 9.39584C6.57168 9.38251 6.59585 9.37001 6.61918 9.35834L12.8334 6.39334C13.5042 6.00806 14.2657 5.80845 15.0393 5.81504C15.8129 5.82163 16.5708 6.03418 17.235 6.43084L23.3809 9.35834C23.8658 9.62666 24.2711 10.0186 24.5555 10.4943C24.8399 10.97 24.9932 11.5125 25 12.0667ZM15.0184 19.9833C13.9522 19.9857 12.9043 19.7063 11.9809 19.1733L8.33335 17.4325V19.6825C8.33385 20.5721 8.61865 21.4383 9.14621 22.1546C9.67376 22.8709 10.4164 23.3998 11.2659 23.6642C12.4795 24.0126 13.7375 24.1819 15 24.1667C16.2627 24.1808 17.5207 24.0104 18.7342 23.6608C19.5836 23.3965 20.3263 22.8675 20.8538 22.1512C21.3814 21.4349 21.6662 20.5688 21.6667 19.6792V17.4367L17.9509 19.2117C17.0589 19.7241 16.047 19.991 15.0184 19.985V19.9833Z" fill="#068FB0" />
                                                         </g>
                                                         <defs>
@@ -201,7 +201,7 @@ export const HomeNavbar = () => {
                                                         Apply for Euro, USD and Pounds loan on behalf of your loved ones abroad.
                                                     </p>
                                                     <div className="mt-2">
-                                                        <Link to="/login" className="text-[#ED2DF0] bg-[#FFD8FF] rounded-2xl py-1 px-2 font-semibold text-sm">
+                                                        <Link href="/login" className="text-[#ED2DF0] bg-[#FFD8FF] rounded-2xl py-1 px-2 font-semibold text-sm">
                                                             Coming soon!
                                                         </Link>
                                                     </div>
@@ -212,7 +212,7 @@ export const HomeNavbar = () => {
                                                 <div>
                                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect width="30" height="30" rx="12" fill="#E5E8FF" />
-                                                        <g clip-path="url(#clip0_2331_6792)">
+                                                        <g clipPath="url(#clip0_2331_6792)">
                                                             <path d="M16.6667 15C16.6667 15.9192 15.9192 16.6667 15 16.6667C14.0808 16.6667 13.3333 15.9192 13.3333 15C13.3333 14.0808 14.0808 13.3333 15 13.3333C15.9192 13.3333 16.6667 14.0808 16.6667 15ZM25.0008 17.9567C25.0008 19.6758 23.9175 21.2433 22.3058 21.8575C21.1883 22.2842 20.1325 22.5 19.1658 22.5C17.8042 22.5 16.5842 22.1675 15.405 21.8458C14.2817 21.5392 13.2217 21.25 12.0833 21.25C10.7742 21.25 9.94832 21.3342 9.23416 21.5408C8.22916 21.83 7.17249 21.635 6.33416 21.0042C5.48666 20.3667 5.00082 19.3933 5.00082 18.3333V12.0433C5.00082 10.3242 6.08332 8.75667 7.69499 8.1425C8.81249 7.71583 9.86916 7.5 10.835 7.5C12.1967 7.5 13.4158 7.8325 14.5958 8.15417C15.7192 8.46083 16.7792 8.75 17.9175 8.75C19.2258 8.75 20.0525 8.66583 20.7667 8.45917C21.7733 8.17 22.83 8.365 23.6675 8.99583C24.515 9.63333 25.0008 10.6067 25.0008 11.6667V17.9567ZM10.0008 16.6667C10.0008 16.2067 9.62749 15.8333 9.16749 15.8333C8.70749 15.8333 8.33416 16.2067 8.33416 16.6667C8.33416 17.1267 8.70749 17.5 9.16749 17.5C9.62749 17.5 10.0008 17.1267 10.0008 16.6667ZM10.0008 11.6667C10.0008 11.2067 9.62749 10.8333 9.16749 10.8333C8.70749 10.8333 8.33416 11.2067 8.33416 11.6667C8.33416 12.1267 8.70749 12.5 9.16749 12.5C9.62749 12.5 10.0008 12.1267 10.0008 11.6667ZM18.3342 15C18.3342 13.1617 16.8392 11.6667 15.0008 11.6667C13.1625 11.6667 11.6675 13.1617 11.6675 15C11.6675 16.8383 13.1625 18.3333 15.0008 18.3333C16.8392 18.3333 18.3342 16.8383 18.3342 15ZM21.6675 18.3333C21.6675 17.8733 21.2942 17.5 20.8342 17.5C20.3742 17.5 20.0008 17.8733 20.0008 18.3333C20.0008 18.7933 20.3742 19.1667 20.8342 19.1667C21.2942 19.1667 21.6675 18.7933 21.6675 18.3333ZM21.6675 13.3333C21.6675 12.8733 21.2942 12.5 20.8342 12.5C20.3742 12.5 20.0008 12.8733 20.0008 13.3333C20.0008 13.7933 20.3742 14.1667 20.8342 14.1667C21.2942 14.1667 21.6675 13.7933 21.6675 13.3333Z" fill="#058240" />
                                                         </g>
                                                         <defs>
@@ -231,7 +231,7 @@ export const HomeNavbar = () => {
                                                         Process payment for your international student from Africa easily and quickly.
                                                     </p>
                                                     <div className="mt-2">
-                                                        <Link to="/login" className="text-[#ED2DF0] font-semibold underline text-sm">
+                                                        <Link href="/login" className="text-[#ED2DF0] font-semibold underline text-sm">
                                                             Get Started
                                                         </Link>
                                                     </div>
@@ -257,7 +257,7 @@ export const HomeNavbar = () => {
                                                 <div>
                                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect width="30" height="30" rx="12" fill="#E5E8FF" />
-                                                        <g clip-path="url(#clip0_2373_6809)">
+                                                        <g clipPath="url(#clip0_2373_6809)">
                                                             <path d="M20.8333 10H13.3725L22.7817 6.61752C23.215 6.46169 23.44 5.98502 23.2842 5.55169C23.1283 5.11836 22.6508 4.89086 22.2183 5.04919L7.87667 10.205C6.20917 10.7492 5 12.32 5 14.1667V20.8334C5 23.1309 6.86917 25 9.16667 25H20.8333C23.1308 25 25 23.1309 25 20.8334V14.1667C25 11.8692 23.1308 10 20.8333 10ZM11.6667 21.6667H9.16667C8.70667 21.6667 8.33333 21.2934 8.33333 20.8334C8.33333 20.3734 8.70667 20 9.16667 20H11.6667C12.1267 20 12.5 20.3734 12.5 20.8334C12.5 21.2934 12.1267 21.6667 11.6667 21.6667ZM11.6667 18.3334H9.16667C8.70667 18.3334 8.33333 17.96 8.33333 17.5C8.33333 17.04 8.70667 16.6667 9.16667 16.6667H11.6667C12.1267 16.6667 12.5 17.04 12.5 17.5C12.5 17.96 12.1267 18.3334 11.6667 18.3334ZM11.6667 15H9.16667C8.70667 15 8.33333 14.6267 8.33333 14.1667C8.33333 13.7067 8.70667 13.3334 9.16667 13.3334H11.6667C12.1267 13.3334 12.5 13.7067 12.5 14.1667C12.5 14.6267 12.1267 15 11.6667 15ZM18.3333 21.25C16.2658 21.25 14.5833 19.5675 14.5833 17.5C14.5833 15.4325 16.2658 13.75 18.3333 13.75C20.4008 13.75 22.0833 15.4325 22.0833 17.5C22.0833 19.5675 20.4008 21.25 18.3333 21.25ZM20.4167 17.5C20.4167 18.6484 19.4817 19.5834 18.3333 19.5834C17.185 19.5834 16.25 18.6484 16.25 17.5C16.25 16.3517 17.185 15.4167 18.3333 15.4167C19.4817 15.4167 20.4167 16.3517 20.4167 17.5Z" fill="black" />
                                                         </g>
                                                         <defs>
@@ -283,7 +283,7 @@ export const HomeNavbar = () => {
                                                 <div>
                                                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <rect width="30" height="30" rx="12" fill="#E5E8FF" />
-                                                        <g clip-path="url(#clip0_2373_6834)">
+                                                        <g clipPath="url(#clip0_2373_6834)">
                                                             <path d="M15 5C13.0222 5 11.0888 5.58649 9.4443 6.6853C7.79981 7.78412 6.51809 9.3459 5.76121 11.1732C5.00433 13.0004 4.8063 15.0111 5.19215 16.9509C5.578 18.8907 6.53041 20.6725 7.92894 22.0711C9.32746 23.4696 11.1093 24.422 13.0491 24.8079C14.9889 25.1937 16.9996 24.9957 18.8268 24.2388C20.6541 23.4819 22.2159 22.2002 23.3147 20.5557C24.4135 18.9112 25 16.9778 25 15C24.9971 12.3487 23.9426 9.80684 22.0679 7.9321C20.1932 6.05736 17.6513 5.00287 15 5ZM15 21.6667C14.8352 21.6667 14.6741 21.6178 14.537 21.5262C14.4 21.4347 14.2932 21.3045 14.2301 21.1522C14.167 21 14.1505 20.8324 14.1827 20.6708C14.2148 20.5091 14.2942 20.3606 14.4107 20.2441C14.5273 20.1275 14.6758 20.0482 14.8374 20.016C14.9991 19.9839 15.1666 20.0004 15.3189 20.0634C15.4712 20.1265 15.6013 20.2333 15.6929 20.3704C15.7845 20.5074 15.8333 20.6685 15.8333 20.8333C15.8333 21.0543 15.7455 21.2663 15.5893 21.4226C15.433 21.5789 15.221 21.6667 15 21.6667ZM16.6083 15.4217C16.3624 15.5754 16.1613 15.7912 16.0253 16.0474C15.8892 16.3035 15.823 16.591 15.8333 16.8808V17.5C15.8333 17.721 15.7455 17.933 15.5893 18.0893C15.433 18.2455 15.221 18.3333 15 18.3333C14.779 18.3333 14.567 18.2455 14.4107 18.0893C14.2545 17.933 14.1667 17.721 14.1667 17.5V16.8808C14.1544 16.2929 14.2996 15.7123 14.5874 15.1994C14.8752 14.6865 15.2951 14.26 15.8033 13.9642C16.1112 13.7946 16.3576 13.532 16.5073 13.2139C16.657 12.8959 16.7023 12.5387 16.6367 12.1933C16.5717 11.8643 16.4102 11.5622 16.1727 11.3254C15.9352 11.0887 15.6325 10.9281 15.3033 10.8642C15.0631 10.8197 14.816 10.8286 14.5796 10.8902C14.3432 10.9518 14.1232 11.0647 13.9353 11.2208C13.7473 11.3768 13.596 11.5723 13.4919 11.7934C13.3879 12.0145 13.3338 12.2557 13.3333 12.5C13.3333 12.721 13.2455 12.933 13.0893 13.0893C12.933 13.2455 12.721 13.3333 12.5 13.3333C12.279 13.3333 12.067 13.2455 11.9107 13.0893C11.7545 12.933 11.6667 12.721 11.6667 12.5C11.6669 11.9121 11.8226 11.3347 12.118 10.8264C12.4134 10.3181 12.8379 9.89691 13.3486 9.60566C13.8593 9.3144 14.438 9.16339 15.0259 9.16795C15.6138 9.17251 16.19 9.33247 16.6961 9.63162C17.2022 9.93076 17.6202 10.3584 17.9077 10.8713C18.1951 11.3841 18.3419 11.9639 18.333 12.5517C18.324 13.1395 18.1598 13.7146 17.8569 14.2185C17.5541 14.7224 17.1233 15.138 16.6083 15.4217Z" fill="#ED2DF0" />
                                                         </g>
                                                         <defs>
@@ -366,7 +366,7 @@ export const HomeNavbar = () => {
                         <div className="flex items-center justify-between ">
                             <div className="flex items-center gap-14">
 
-                                <Link to="/" className="font-medium text-[#EAECF0]">
+                                <Link href="/" className="font-medium text-[#EAECF0]">
                                     <svg width="109" height="38" viewBox="0 0 109 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.4017 26.8201C11.6213 26.8201 11.9324 26.7525 12.3167 26.3467L11.7586 28.6185C11.5729 29.3708 11.1419 30.04 10.5334 30.5207C9.92498 31.0014 9.17368 31.2663 8.39789 31.2736C7.62211 31.281 6.86592 31.0303 6.24847 30.5612C5.63103 30.0921 5.18741 29.4311 4.98751 28.6825L0.0757469 10.1302C-0.0883018 9.47122 0.0164861 8.77416 0.36706 8.19234C0.717633 7.61053 1.28527 7.19163 1.94511 7.0278C2.60494 6.86396 3.30292 6.96862 3.88549 7.31873C4.46807 7.66885 4.88751 8.23574 5.05156 8.89472L8.45174 23.5011H8.51762L8.94218 21.8416C9.17276 23.0223 10.0054 26.7726 11.4017 26.8201Z" fill="#25AEA4" />
                                         <path d="M25.4438 28.467L25.4017 28.6279C25.2297 29.3201 24.8502 29.9434 24.3138 30.4144C23.7775 30.8854 23.1099 31.1816 22.4005 31.2633C21.5818 31.3437 20.7615 31.1272 20.0895 30.6534C19.4175 30.1795 18.9386 29.48 18.7404 28.6827L15.2543 14.6959H15.1847L12.6483 25.0402C12.6207 25.1584 12.5636 25.2676 12.4823 25.3577C12.401 25.4478 12.2982 25.5159 12.1835 25.5556C12.0785 25.5925 11.9665 25.605 11.8559 25.5922C11.2776 25.5227 10.9208 24.7442 10.4322 23.3881C10.1302 22.5419 9.76053 21.4307 9.39453 20.0855L12.1396 9.33909C12.3174 8.64532 12.7221 8.03069 13.2893 7.59257C13.8565 7.15445 14.554 6.91791 15.271 6.92043C15.9881 6.92295 16.6839 7.16438 17.248 7.60647C17.8121 8.04856 18.2124 8.66602 18.3854 9.36102L21.9485 23.7042C21.9668 23.8066 21.9887 23.9071 22.0143 24.0076C22.0127 24.013 22.0127 24.0187 22.0143 24.0241C22.1058 24.4481 22.2138 24.8867 22.3309 25.3345C22.4663 25.8426 22.6091 26.3269 22.7537 26.7966C22.7575 26.8061 22.7606 26.8159 22.7628 26.8258C23.1782 27.9626 23.751 28.9733 24.4702 29.0025C24.7008 29.0044 25.032 28.9185 25.4438 28.467Z" fill="#25AEA4" />
@@ -379,8 +379,8 @@ export const HomeNavbar = () => {
                                 </Link>
                                 <div className="flex items-center gap-9">
 
-                                    <Link to="/company" className="font-medium text-[#EAECF0]">Company</Link>
-                                    <Link to="/features" className="font-medium text-[#EAECF0]">Features</Link>
+                                    <Link href="/company" className="font-medium text-[#EAECF0]">Company</Link>
+                                    <Link href="/features" className="font-medium text-[#EAECF0]">Features</Link>
                                     <Popover className="md:block hidden">
                                         {({ open }) => (
                                             <>
@@ -405,13 +405,13 @@ export const HomeNavbar = () => {
                                                     <Popover.Panel className="absolute left-0 z-10 mt-3 w-screen bg-black">
                                                         <div className="px-28 py-6">
                                                             <div className="grid md:grid-cols-4 gap-x-6 gap-y-8">
-                                                                <Link to="/radio-stations" className="">
+                                                                <Link href="/radio-stations" className="">
                                                                     <div className="flex gap-4 p-3">
                                                                         <div>
                                                                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path d="M11 8H16C16.5304 8 17.0391 8.21071 17.4142 8.58579C17.7893 8.96086 18 9.46957 18 10C18 10.5304 17.7893 11.0391 17.4142 11.4142C17.0391 11.7893 16.5304 12 16 12H6C5.46957 12 4.96086 11.7893 4.58579 11.4142C4.21071 11.0391 4 10.5304 4 10C4 9.46957 4.21071 8.96086 4.58579 8.58579C4.96086 8.21071 5.46957 8 6 8H7" stroke="#36FFE8" stroke-width="1.5" stroke-linecap="round" />
-                                                                                <path d="M8 16C8 16.3978 7.84196 16.7794 7.56066 17.0607C7.27936 17.342 6.89782 17.5 6.5 17.5C6.10218 17.5 5.72064 17.342 5.43934 17.0607C5.15804 16.7794 5 16.3978 5 16C5 15.6022 5.15804 15.2206 5.43934 14.9393C5.72064 14.658 6.10218 14.5 6.5 14.5C6.89782 14.5 7.27936 14.658 7.56066 14.9393C7.84196 15.2206 8 15.6022 8 16Z" stroke="#36FFE8" stroke-width="1.5" />
-                                                                                <path d="M14 10.5V12M12 16H17M5.5 5L14 1M21 13C21 16.771 21 18.657 19.828 19.828C18.657 21 16.771 21 13 21H9C5.229 21 3.343 21 2.172 19.828C1 18.657 1 16.771 1 13C1 9.229 1 7.343 2.172 6.172C3.343 5 5.229 5 9 5H13C16.771 5 18.657 5 19.828 6.172C20.482 6.825 20.771 7.7 20.898 9" stroke="#36FFE8" stroke-width="1.5" stroke-linecap="round" />
+                                                                                <path d="M11 8H16C16.5304 8 17.0391 8.21071 17.4142 8.58579C17.7893 8.96086 18 9.46957 18 10C18 10.5304 17.7893 11.0391 17.4142 11.4142C17.0391 11.7893 16.5304 12 16 12H6C5.46957 12 4.96086 11.7893 4.58579 11.4142C4.21071 11.0391 4 10.5304 4 10C4 9.46957 4.21071 8.96086 4.58579 8.58579C4.96086 8.21071 5.46957 8 6 8H7" stroke="#36FFE8" strokeWidth="1.5" strokeLinecap="round" />
+                                                                                <path d="M8 16C8 16.3978 7.84196 16.7794 7.56066 17.0607C7.27936 17.342 6.89782 17.5 6.5 17.5C6.10218 17.5 5.72064 17.342 5.43934 17.0607C5.15804 16.7794 5 16.3978 5 16C5 15.6022 5.15804 15.2206 5.43934 14.9393C5.72064 14.658 6.10218 14.5 6.5 14.5C6.89782 14.5 7.27936 14.658 7.56066 14.9393C7.84196 15.2206 8 15.6022 8 16Z" stroke="#36FFE8" strokeWidth="1.5" />
+                                                                                <path d="M14 10.5V12M12 16H17M5.5 5L14 1M21 13C21 16.771 21 18.657 19.828 19.828C18.657 21 16.771 21 13 21H9C5.229 21 3.343 21 2.172 19.828C1 18.657 1 16.771 1 13C1 9.229 1 7.343 2.172 6.172C3.343 5 5.229 5 9 5H13C16.771 5 18.657 5 19.828 6.172C20.482 6.825 20.771 7.7 20.898 9" stroke="#36FFE8" strokeWidth="1.5" strokeLinecap="round" />
                                                                             </svg>
 
                                                                         </div>
@@ -425,7 +425,7 @@ export const HomeNavbar = () => {
                                                                         </div>
                                                                     </div>
                                                                 </Link>
-                                                                <Link to="/media-organizations" className="">
+                                                                <Link href="/media-organizations" className="">
                                                                     <div className="flex gap-4 p-3">
                                                                         <div>
                                                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -446,11 +446,11 @@ export const HomeNavbar = () => {
                                                                         </div>
                                                                     </div>
                                                                 </Link>
-                                                                <Link to="/religious-groups" className="">
+                                                                <Link href="/religious-groups" className="">
                                                                     <div className="flex gap-4 p-3">
                                                                         <div>
                                                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path d="M20.5706 6.00003H15.4277V0.857178H8.57059V6.00003H3.42773V12.8572H8.57059V23.1429H15.4277V12.8572H20.5706V6.00003Z" stroke="#36FFE8" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                <path d="M20.5706 6.00003H15.4277V0.857178H8.57059V6.00003H3.42773V12.8572H8.57059V23.1429H15.4277V12.8572H20.5706V6.00003Z" stroke="#36FFE8" strokeLinecap="round" strokeLinejoin="round" />
                                                                             </svg>
                                                                         </div>
                                                                         <div>
@@ -463,7 +463,7 @@ export const HomeNavbar = () => {
                                                                         </div>
                                                                     </div>
                                                                 </Link>
-                                                                <Link to="/indie-podcaster" className="">
+                                                                <Link href="/indie-podcaster" className="">
                                                                     <div className="flex gap-4 p-3">
                                                                         <div>
                                                                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -487,9 +487,9 @@ export const HomeNavbar = () => {
                                             </>
                                         )}
                                     </Popover>
-                                    <Link to="/listen" className="font-medium text-[#EAECF0]">Listen</Link>
+                                    <Link href="/listen" className="font-medium text-[#EAECF0]">Listen</Link>
 
-                                    <Link to="/pricing" className="font-medium text-[#EAECF0]">Pricing</Link>
+                                    <Link href="/pricing" className="font-medium text-[#EAECF0]">Pricing</Link>
 
                                 </div>
                             </div>
@@ -498,18 +498,18 @@ export const HomeNavbar = () => {
                             <div className="md:block">
                                 <div>
                                     <div className="md:block hidden">
-                                        <img src={getImage("naija-flag.png")} alt="" />
+                                        <img src={("/images/naija-flag.png")} alt="" />
                                     </div>
                                     <div className="md:hidden block">
                                         <button onClick={() => setShowNav(true)}>
                                             <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M25 15H10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M25 9H10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                <path d="M25 21H10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M25 15H10" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M25 9H10" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                <path d="M25 21H10" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </button>
                                     </div>
-                                    {/* <Link to="/login" className="rounded-full inline-block py-2 px-3 border border-neutral">
+                                    {/* <Link href="/login" className="rounded-full inline-block py-2 px-3 border border-neutral">
                                 <div className="flex items-center gap-1">
                                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path opacity="0.4" d="M9 1.5C7.035 1.5 5.4375 3.0975 5.4375 5.0625C5.4375 6.99 6.945 8.55 8.91 8.6175C8.97 8.61 9.03 8.61 9.075 8.6175C9.09 8.6175 9.0975 8.6175 9.1125 8.6175C9.12 8.6175 9.12 8.6175 9.1275 8.6175C11.0475 8.55 12.555 6.99 12.5625 5.0625C12.5625 3.0975 10.965 1.5 9 1.5Z" fill="#282828" />

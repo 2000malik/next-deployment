@@ -1,7 +1,7 @@
 export const WokpaLogo = () => {
     return (
         <svg className="inline" width="138" height="48" viewBox="0 0 138 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_1675_38720)">
+            <g clipPath="url(#clip0_1675_38720)">
                 <mask id="mask0_1675_38720" style={{ maskType: "luminance" }} maskUnits="userSpaceOnUse" x="0" y="0" width="138" height="48">
                     <path d="M137.405 0H0.428711V47.9815H137.405V0Z" fill="white" />
                 </mask>

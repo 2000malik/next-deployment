@@ -1,17 +1,32 @@
-import { Link, NavLink } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../Hooks";
-import { getLogo } from "../../Utils";
-import { reset } from "../../Redux/Auth";
-import { Disclosure, Transition } from '@headlessui/react'
+import { reset } from "@/redux/auth";
+import { useAppSelector, useAppDispatch } from "@/hooks";
+import { Disclosure, Transition } from "@headlessui/react";
+import { PropsWithChildren } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { resetBankState } from "../../Redux/Banks";
-import { resetBeneficiaryState } from "../../Redux/Beneficiary";
-import { resetVirtualAccountState } from "../../Redux/VirtualWallet";
-import { resetWalletState } from "../../Redux/Wallets";
-import { initFlowbite } from 'flowbite'
-import { useEffect } from "react";
-import { useEffectOnce } from "react-use";
+interface NavLinkProps extends PropsWithChildren {
+    href: string;
+    exact: boolean;
+    className: string;
+}
 
+const NavLink: React.FC<NavLinkProps> = ({ href, exact, children, ...props }) => {
+    const { pathname } = useRouter();
+    const isActive = exact ? pathname === href : pathname.startsWith(href);
+
+    if (isActive) {
+        props.className += ' active';
+    }
+
+    return (
+        <Link href={href}>
+            <a {...props}>
+                {children}
+            </a>
+        </Link>
+    );
+}
 
 const Sidebar = () => {
     const minimized = useAppSelector(state => state.sidebar.minimized);
@@ -19,9 +34,9 @@ const Sidebar = () => {
 
     const dispatch = useAppDispatch();
 
-    useEffectOnce(() => {
-        // initFlowbite();
-    })
+    // useEffectOnce(() => {
+    //     // initFlowbite();
+    // })
 
     return (
         <>
@@ -60,11 +75,11 @@ const Sidebar = () => {
                                     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="32" cy="32" r="32" fill="url(#paint0_linear_3125_62399)" />
                                         <path d="M32 32C35.3137 32 38 29.3137 38 26C38 22.6863 35.3137 20 32 20C28.6863 20 26 22.6863 26 26C26 29.3137 28.6863 32 32 32Z" fill="#E5F5F4" />
-                                        <path d="M42.6667 44C42.6667 42.1392 42.6667 41.2089 42.4371 40.4518C41.92 38.7473 40.5861 37.4134 38.8816 36.8963C38.1245 36.6667 37.1941 36.6667 35.3334 36.6667H28.6667C26.806 36.6667 25.8756 36.6667 25.1185 36.8963C23.414 37.4134 22.0801 38.7473 21.563 40.4518C21.3334 41.2089 21.3334 42.1392 21.3334 44M38 26C38 29.3137 35.3137 32 32 32C28.6863 32 26 29.3137 26 26C26 22.6863 28.6863 20 32 20C35.3137 20 38 22.6863 38 26Z" stroke="#E5F5F4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M42.6667 44C42.6667 42.1392 42.6667 41.2089 42.4371 40.4518C41.92 38.7473 40.5861 37.4134 38.8816 36.8963C38.1245 36.6667 37.1941 36.6667 35.3334 36.6667H28.6667C26.806 36.6667 25.8756 36.6667 25.1185 36.8963C23.414 37.4134 22.0801 38.7473 21.563 40.4518C21.3334 41.2089 21.3334 42.1392 21.3334 44M38 26C38 29.3137 35.3137 32 32 32C28.6863 32 26 29.3137 26 26C26 22.6863 28.6863 20 32 20C35.3137 20 38 22.6863 38 26Z" stroke="#E5F5F4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                         <defs>
                                             <linearGradient id="paint0_linear_3125_62399" x1="-0.000996671" y1="63.9996" x2="63.9992" y2="-0.000779231" gradientUnits="userSpaceOnUse">
-                                                <stop stop-color="#083F62" />
-                                                <stop offset="1" stop-color="#25AEA4" />
+                                                <stop stopColor="#083F62" />
+                                                <stop offset="1" stopColor="#25AEA4" />
                                             </linearGradient>
                                         </defs>
                                     </svg>
@@ -130,7 +145,7 @@ const Sidebar = () => {
                                                 <div className="flex justify-between items-center font-medium">
                                                     <div className="flex items-center gap-2">
                                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M17.1189 18C19.4623 16.4151 21 13.7779 21 10.785C21 5.9333 16.9704 2 12 2C7.02958 2 3 5.9333 3 10.785C3 13.7779 4.53771 16.4151 6.88113 18M8.35967 14C7.51875 13.15 7 12.0086 7 10.7505C7 8.12711 9.23881 6 12 6C14.7612 6 17 8.12711 17 10.7505C17 12.0095 16.4813 13.15 15.6403 14M12 22C10.8954 22 10 21.1046 10 20V18C10 16.8954 10.8954 16 12 16C13.1046 16 14 16.8954 14 18V20C14 21.1046 13.1046 22 12 22ZM13 11C13 11.5523 12.5523 12 12 12C11.4477 12 11 11.5523 11 11C11 10.4477 11.4477 10 12 10C12.5523 10 13 10.4477 13 11Z" stroke="#BEE7E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M17.1189 18C19.4623 16.4151 21 13.7779 21 10.785C21 5.9333 16.9704 2 12 2C7.02958 2 3 5.9333 3 10.785C3 13.7779 4.53771 16.4151 6.88113 18M8.35967 14C7.51875 13.15 7 12.0086 7 10.7505C7 8.12711 9.23881 6 12 6C14.7612 6 17 8.12711 17 10.7505C17 12.0095 16.4813 13.15 15.6403 14M12 22C10.8954 22 10 21.1046 10 20V18C10 16.8954 10.8954 16 12 16C13.1046 16 14 16.8954 14 18V20C14 21.1046 13.1046 22 12 22ZM13 11C13 11.5523 12.5523 12 12 12C11.4477 12 11 11.5523 11 11C11 10.4477 11.4477 10 12 10C12.5523 10 13 10.4477 13 11Z" stroke="#BEE7E4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                         </svg>
 
                                                         <div className="font-semibold">
@@ -153,27 +168,27 @@ const Sidebar = () => {
                                                 <Disclosure.Panel>
                                                     <div className="space-y-1 mt-2">
                                                         <div>
-                                                            <Link to="/dashboard" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/dashboard" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Dashboard
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/episodes" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/episodes" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Episodes
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/distribution" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/distribution" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Distribution
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/social-distribution" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/social-distribution" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Social distribution
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/embedded player" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/embedded player" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Embedded player
                                                             </Link>
                                                         </div>
@@ -215,22 +230,22 @@ const Sidebar = () => {
                                                 <Disclosure.Panel>
                                                     <div className="space-y-1 mt-2">
                                                         <div>
-                                                            <Link to="/wallet" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/wallet" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Wallet
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/wokpa-ads" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/wokpa-ads" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Wokpa Ads
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/tips-and-donations" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/tips-and-donations" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Tips and donations
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/campaign" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/campaign" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Campaign
                                                             </Link>
                                                         </div>
@@ -243,10 +258,10 @@ const Sidebar = () => {
                             </div>
 
                             <div>
-                                <NavLink to="/analytics" className={({ isActive }) => `block w-full outline-none py-2 px-3 gap-2 rounded-lg ${isActive ? "bg-[#344054]" : ""}`}>
+                                <NavLink href="/analytics" exact={false} className={`block w-full outline-none py-2 px-3 gap-2 rounded-lg`}>
                                     <div className="flex gap-2">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M6 13V15M10 9V15M14 5V15M5.8 19H14.2C15.8802 19 16.7202 19 17.362 18.673C17.9265 18.3854 18.3854 17.9265 18.673 17.362C19 16.7202 19 15.8802 19 14.2V5.8C19 4.11984 19 3.27976 18.673 2.63803C18.3854 2.07354 17.9265 1.6146 17.362 1.32698C16.7202 1 15.8802 1 14.2 1H5.8C4.11984 1 3.27976 1 2.63803 1.32698C2.07354 1.6146 1.6146 2.07354 1.32698 2.63803C1 3.27976 1 4.11984 1 5.8V14.2C1 15.8802 1 16.7202 1.32698 17.362C1.6146 17.9265 2.07354 18.3854 2.63803 18.673C3.27976 19 4.11984 19 5.8 19Z" stroke="#BEE7E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M6 13V15M10 9V15M14 5V15M5.8 19H14.2C15.8802 19 16.7202 19 17.362 18.673C17.9265 18.3854 18.3854 17.9265 18.673 17.362C19 16.7202 19 15.8802 19 14.2V5.8C19 4.11984 19 3.27976 18.673 2.63803C18.3854 2.07354 17.9265 1.6146 17.362 1.32698C16.7202 1 15.8802 1 14.2 1H5.8C4.11984 1 3.27976 1 2.63803 1.32698C2.07354 1.6146 1.6146 2.07354 1.32698 2.63803C1 3.27976 1 4.11984 1 5.8V14.2C1 15.8802 1 16.7202 1.32698 17.362C1.6146 17.9265 2.07354 18.3854 2.63803 18.673C3.27976 19 4.11984 19 5.8 19Z" stroke="#BEE7E4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
 
                                         <div className="font-semibold">
@@ -264,8 +279,8 @@ const Sidebar = () => {
                                                 <div className="flex justify-between items-center font-medium">
                                                     <div className="flex items-center gap-2">
                                                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M9.39504 19.3711L9.97949 20.6856C10.1532 21.0768 10.4368 21.4093 10.7957 21.6426C11.1547 21.8759 11.5736 22.0001 12.0017 22C12.4298 22.0001 12.8488 21.8759 13.2077 21.6426C13.5667 21.4093 13.8502 21.0768 14.0239 20.6856L14.6084 19.3711C14.8164 18.9047 15.1664 18.5159 15.6084 18.26C16.0532 18.0034 16.5677 17.8941 17.0784 17.9478L18.5084 18.1C18.934 18.145 19.3636 18.0656 19.7451 17.8713C20.1265 17.6771 20.4434 17.3763 20.6573 17.0056C20.8714 16.635 20.9735 16.2103 20.951 15.7829C20.9285 15.3555 20.7825 14.9438 20.5306 14.5978L19.6839 13.4344C19.3825 13.0171 19.2214 12.5148 19.2239 12C19.2238 11.4866 19.3864 10.9864 19.6884 10.5711L20.535 9.40778C20.7869 9.06175 20.933 8.65007 20.9554 8.22267C20.9779 7.79528 20.8759 7.37054 20.6617 7C20.4478 6.62923 20.1309 6.32849 19.7495 6.13423C19.3681 5.93997 18.9385 5.86053 18.5128 5.90556L17.0828 6.05778C16.5722 6.11141 16.0576 6.00212 15.6128 5.74556C15.1699 5.48825 14.8199 5.09736 14.6128 4.62889L14.0239 3.31444C13.8502 2.92317 13.5667 2.59072 13.2077 2.3574C12.8488 2.12408 12.4298 1.99993 12.0017 2C11.5736 1.99993 11.1547 2.12408 10.7957 2.3574C10.4368 2.59072 10.1532 2.92317 9.97949 3.31444L9.39504 4.62889C9.18797 5.09736 8.83792 5.48825 8.39504 5.74556C7.95026 6.00212 7.43571 6.11141 6.92504 6.05778L5.4906 5.90556C5.06493 5.86053 4.63534 5.93997 4.25391 6.13423C3.87249 6.32849 3.55561 6.62923 3.34171 7C3.12753 7.37054 3.02549 7.79528 3.04798 8.22267C3.07046 8.65007 3.2165 9.06175 3.46838 9.40778L4.31504 10.5711C4.61698 10.9864 4.77958 11.4866 4.77949 12C4.77958 12.5134 4.61698 13.0137 4.31504 13.4289L3.46838 14.5922C3.2165 14.9382 3.07046 15.3499 3.04798 15.7773C3.02549 16.2047 3.12753 16.6295 3.34171 17C3.55582 17.3706 3.87274 17.6712 4.25411 17.8654C4.63548 18.0596 5.06496 18.1392 5.4906 18.0944L6.9206 17.9422C7.43127 17.8886 7.94581 17.9979 8.3906 18.2544C8.83513 18.511 9.18681 18.902 9.39504 19.3711Z" stroke="#BEE7E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                            <path d="M11.9999 15C13.6568 15 14.9999 13.6569 14.9999 12C14.9999 10.3431 13.6568 9 11.9999 9C10.3431 9 8.99992 10.3431 8.99992 12C8.99992 13.6569 10.3431 15 11.9999 15Z" stroke="#BEE7E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M9.39504 19.3711L9.97949 20.6856C10.1532 21.0768 10.4368 21.4093 10.7957 21.6426C11.1547 21.8759 11.5736 22.0001 12.0017 22C12.4298 22.0001 12.8488 21.8759 13.2077 21.6426C13.5667 21.4093 13.8502 21.0768 14.0239 20.6856L14.6084 19.3711C14.8164 18.9047 15.1664 18.5159 15.6084 18.26C16.0532 18.0034 16.5677 17.8941 17.0784 17.9478L18.5084 18.1C18.934 18.145 19.3636 18.0656 19.7451 17.8713C20.1265 17.6771 20.4434 17.3763 20.6573 17.0056C20.8714 16.635 20.9735 16.2103 20.951 15.7829C20.9285 15.3555 20.7825 14.9438 20.5306 14.5978L19.6839 13.4344C19.3825 13.0171 19.2214 12.5148 19.2239 12C19.2238 11.4866 19.3864 10.9864 19.6884 10.5711L20.535 9.40778C20.7869 9.06175 20.933 8.65007 20.9554 8.22267C20.9779 7.79528 20.8759 7.37054 20.6617 7C20.4478 6.62923 20.1309 6.32849 19.7495 6.13423C19.3681 5.93997 18.9385 5.86053 18.5128 5.90556L17.0828 6.05778C16.5722 6.11141 16.0576 6.00212 15.6128 5.74556C15.1699 5.48825 14.8199 5.09736 14.6128 4.62889L14.0239 3.31444C13.8502 2.92317 13.5667 2.59072 13.2077 2.3574C12.8488 2.12408 12.4298 1.99993 12.0017 2C11.5736 1.99993 11.1547 2.12408 10.7957 2.3574C10.4368 2.59072 10.1532 2.92317 9.97949 3.31444L9.39504 4.62889C9.18797 5.09736 8.83792 5.48825 8.39504 5.74556C7.95026 6.00212 7.43571 6.11141 6.92504 6.05778L5.4906 5.90556C5.06493 5.86053 4.63534 5.93997 4.25391 6.13423C3.87249 6.32849 3.55561 6.62923 3.34171 7C3.12753 7.37054 3.02549 7.79528 3.04798 8.22267C3.07046 8.65007 3.2165 9.06175 3.46838 9.40778L4.31504 10.5711C4.61698 10.9864 4.77958 11.4866 4.77949 12C4.77958 12.5134 4.61698 13.0137 4.31504 13.4289L3.46838 14.5922C3.2165 14.9382 3.07046 15.3499 3.04798 15.7773C3.02549 16.2047 3.12753 16.6295 3.34171 17C3.55582 17.3706 3.87274 17.6712 4.25411 17.8654C4.63548 18.0596 5.06496 18.1392 5.4906 18.0944L6.9206 17.9422C7.43127 17.8886 7.94581 17.9979 8.3906 18.2544C8.83513 18.511 9.18681 18.902 9.39504 19.3711Z" stroke="#BEE7E4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                            <path d="M11.9999 15C13.6568 15 14.9999 13.6569 14.9999 12C14.9999 10.3431 13.6568 9 11.9999 9C10.3431 9 8.99992 10.3431 8.99992 12C8.99992 13.6569 10.3431 15 11.9999 15Z" stroke="#BEE7E4" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                                         </svg>
 
 
@@ -289,22 +304,22 @@ const Sidebar = () => {
                                                 <Disclosure.Panel>
                                                     <div className="space-y-1 mt-2">
                                                         <div>
-                                                            <Link to="/podcast-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/podcast-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Podcast settings
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/website-page-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/website-page-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Website page settings
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/rss-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/rss-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Rss settings
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link to="/collaborators" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/collaborators" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Collaborators
                                                             </Link>
                                                         </div>
@@ -329,10 +344,6 @@ const Sidebar = () => {
                                 {!minimized && <div
                                     onClick={() => {
                                         dispatch(reset());
-                                        dispatch(resetBankState());
-                                        dispatch(resetBeneficiaryState());
-                                        dispatch(resetWalletState());
-                                        dispatch(resetVirtualAccountState())
                                     }}
                                     className="font-source font-medium text-sm cursor-pointer">
                                     Logout

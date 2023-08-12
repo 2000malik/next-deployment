@@ -1,6 +1,6 @@
+'use client';
+
 import { useRef, useEffect } from "react";
-import { loadingBarRef } from "../App";
-import { toast } from "react-toastify";
 
 export function getAbsoluteUrl(path: string) {
     return process.env.PUBLIC_URL + path;
@@ -27,22 +27,22 @@ export const formatToCurrency = (amount: number | string) => {
     }).format(Number(amount))
 };
 
-export const APICall = async (fn: (args?: any) => Promise<any>, args?: any, showSuccessToast?: boolean) => {
-    try {
-        loadingBarRef.current?.continuousStart();
-        const response = await fn(args)
-        if (showSuccessToast)
-            toast(response.data.message, { type: "success" });
-        loadingBarRef.current?.complete();
-        return response;
-    } catch (error: any) {
-        if (error.response) {
-            toast(error.response.data.message, { type: "error" });
-        }
-        loadingBarRef.current?.complete();
-        throw error;
-    }
-}
+// export const APICall = async (fn: (args?: any) => Promise<any>, args?: any, showSuccessToast?: boolean) => {
+//     try {
+//         loadingBarRef.current?.continuousStart();
+//         const response = await fn(args)
+//         if (showSuccessToast)
+//             toast(response.data.message, { type: "success" });
+//         loadingBarRef.current?.complete();
+//         return response;
+//     } catch (error: any) {
+//         if (error.response) {
+//             toast(error.response.data.message, { type: "error" });
+//         }
+//         loadingBarRef.current?.complete();
+//         throw error;
+//     }
+// }
 
 export async function dataURLtoFile(dataurl: string, filename: string) {
     const res = await fetch(dataurl);
