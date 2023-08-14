@@ -5,7 +5,7 @@ import { useAppSelector, useAppDispatch } from "@/hooks";
 import { Disclosure, Transition } from "@headlessui/react";
 import { PropsWithChildren } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { usePathname, useRouter } from "next/navigation";
 
 interface NavLinkProps extends PropsWithChildren {
     href: string;
@@ -14,7 +14,7 @@ interface NavLinkProps extends PropsWithChildren {
 }
 
 const NavLink: React.FC<NavLinkProps> = ({ href, exact, children, ...props }) => {
-    const { pathname } = useRouter();
+    const pathname = usePathname()
     const isActive = exact ? pathname === href : pathname.startsWith(href);
 
     if (isActive) {

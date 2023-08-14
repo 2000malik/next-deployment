@@ -1,3 +1,5 @@
+"use client";
+
 import { AxiosStatic } from "axios";
 
 export default function setupAxios(axios: AxiosStatic, store: any) {

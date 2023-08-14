@@ -1,10 +1,11 @@
+import { API_URL } from "@/utils";
 import axios from "axios";
-import { API_URL } from "../../Utils";
+
 
 export const register = async (data: any) => axios.post(`${API_URL}/register`, data);
 export const login = async (data: any) => axios.post(`${API_URL}/login`, data);
 export const getProfile = async () => axios.get(`${API_URL}/profile`);
-export const createPin = async (pin: string, pin_confirmation: string) => axios.post(`${API_URL}/pin`, {pin, pin_confirmation});
+export const createPin = async (pin: string, pin_confirmation: string) => axios.post(`${API_URL}/pin`, { pin, pin_confirmation });
 export const verifyUser = async (data: any) => axios.put(`${API_URL}/verify-user`, data);
 export const resendUserOTP = async (data: any) => axios.post(`${API_URL}/register`, data);
 export const forgotPassword = async (data: any) => axios.post(`${API_URL}/forgot-password`, data);

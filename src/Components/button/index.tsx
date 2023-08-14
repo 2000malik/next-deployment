@@ -1,5 +1,4 @@
 "use client";
-
 import { ButtonHTMLAttributes } from "react"
 
 const Button: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {

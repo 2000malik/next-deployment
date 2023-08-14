@@ -1,11 +1,8 @@
 "use client";
-
 import Button from "@/components/button";
-import { getImage } from "../../utils";
+import { getImage } from "@/utils";
 import { Tab, Disclosure } from '@headlessui/react'
 import Image from "next/image";
-
-import produceImg from "../../../public/images/produce-image.png"
 import AllInOne from "./partials/all-in-one";
 import TrendingEpisodes from "./partials/trending-episodes";
 import PodcastYouLike from "./partials/podcasts-you-will-like";

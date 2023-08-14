@@ -1,7 +1,5 @@
 'use client';
-
 import Button from "../../../components/button";
-import WokpaLogo from "../../../components/wokpa-logo";
 import Input from "../../../components/input";
 import PasswordInput from "../../../components/password-input";
 import Link from "next/link";

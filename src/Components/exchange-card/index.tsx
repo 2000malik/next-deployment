@@ -1,3 +1,5 @@
+"use client"; 
+
 interface IExchangeCardProps extends React.PropsWithChildren {
     size: "sm" | "lg"
 }

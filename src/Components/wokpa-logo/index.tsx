@@ -1,3 +1,5 @@
+"use client";
+
 const WokpaLogo = () => {
     return (
         <svg className="inline" width="138" height="48" viewBox="0 0 138 48" fill="none" xmlns="http://www.w3.org/2000/svg">

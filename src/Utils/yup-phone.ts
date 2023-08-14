@@ -1,3 +1,5 @@
+"use client";
+
 import * as Yup from 'yup';
 import gPhoneNumber from 'google-libphonenumber';
 

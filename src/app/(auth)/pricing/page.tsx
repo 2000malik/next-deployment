@@ -1,11 +1,7 @@
 'use client';
-
 import Button from "@/components/button";
-import Input from "@/components/input";
 import WokpaLogo from "@/components/wokpa-logo";
-import { getIcon } from "@/utils";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 
 const FreePlan = () => {

@@ -1,9 +1,17 @@
+'use client';
 import './globals.css'
 import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { PropsWithChildren } from "react";
 import { Inter, Raleway, Poppins } from 'next/font/google'
+import axios from "axios";
+import store, { wrapper } from '@/setup/redux/store';
+import * as _redux from "@/setup"
+import { Provider } from 'react-redux';
+// import { PersistGate } from 'redux-persist/integration/react';
+
+_redux.setupAxios(axios, store())
 
 const inter = Inter({
     subsets: ['latin'],
@@ -25,15 +33,23 @@ const poppins = Poppins({
     variable: '--font-poppins',
 })
 
-export default function RootLayout({ children }: PropsWithChildren) {
+function RootLayout({ children, ...rest }: PropsWithChildren) {
+    // const { store, props } = wrapper.useWrappedStore(rest);
+
     return (
 
         <html lang="en" className={`${inter.variable} ${raleway.variable} ${poppins.variable}`} >
             <body className="" >
-                <main className="relative">
-                    {children}
-                </main>
+                <Provider store={store()}>
+
+                    <main className="relative">
+                        {children}
+                    </main>
+
+                </Provider>
             </body>
         </html >
     )
 }
+
+export default RootLayout;

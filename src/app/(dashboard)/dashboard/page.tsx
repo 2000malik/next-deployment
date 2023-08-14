@@ -1,13 +1,10 @@
 
 "use client";
-
-import { useRouter } from 'next/router';
-import { getProfile } from '@/app/api/auth';
+import { useRouter } from 'next/navigation';
 import Button from '@/components/button';
 import { useAppSelector, useAppDispatch } from '@/hooks';
-import { updateUser } from '@/redux/auth';
+import { useState, } from 'react';
 import { Listbox, Tab } from '@headlessui/react';
-import { useState, useEffect } from 'react';
 
 const GetPaidCard = () => {
     return (

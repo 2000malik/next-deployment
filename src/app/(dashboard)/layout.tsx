@@ -3,7 +3,6 @@
 
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import "/node_modules/flag-icons/css/flag-icons.min.css";
 import { FooterDark } from "@/partials/footer";
 import Navbar, { HomeNavbar } from "@/partials/navbar";
 import Sidebar from "@/partials/sidebar";
