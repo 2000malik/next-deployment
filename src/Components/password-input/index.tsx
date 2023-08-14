@@ -1,10 +1,9 @@
 import { Tab } from '@headlessui/react'
-import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage, FieldAttributes } from 'formik';
 import * as Yup from 'yup';
 import { useRef, useState } from "react";
 
-export const PasswordInput: React.FC<FieldAttributes<any>> = (props) => {
+const PasswordInput: React.FC<FieldAttributes<any>> = (props) => {
     const [visible, setVisible] = useState(false);
     const ref = useRef<any>();
 
@@ -41,3 +40,5 @@ const loginValidationSchema = Yup.object().shape({
         .required('Password is required'),
     username: Yup.string().email('Invalid email').required('Email Required'),
 });
+
+export default PasswordInput;

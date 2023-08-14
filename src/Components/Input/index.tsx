@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage, FieldAttributes } from 'formik';
 import * as Yup from 'yup';
 import { useRef, useState } from "react";
 
-export const Input: React.FC<FieldAttributes<any>> = (props) => {
+const Input: React.FC<FieldAttributes<any>> = (props) => {
 
     return (
 
@@ -22,3 +22,5 @@ const loginValidationSchema = Yup.object().shape({
         .required('Password is required'),
     username: Yup.string().email('Invalid email').required('Email Required'),
 });
+
+export default Input;

@@ -6,7 +6,8 @@ export interface ModalProps extends React.PropsWithChildren {
     onClose: (val: boolean) => void;
     size: "sm" | "md" | "lg" | "xs"
 }
-export const Modal: React.FC<ModalProps> = ({ open, onClose, size, children }) => {
+
+const Modal: React.FC<ModalProps> = ({ open, onClose, size, children }) => {
     return (
         <Transition appear show={open} as={React.Fragment}>
             <Dialog as="div" className="relative z-40" onClose={() => onClose(false)}>
@@ -47,3 +48,5 @@ export const Modal: React.FC<ModalProps> = ({ open, onClose, size, children }) =
         </Transition >
     )
 }
+
+export default Modal;

@@ -1,9 +1,9 @@
 'use client';
 
-import { Button } from "@/Components/Button";
-import { WokpaLogo } from "@/components/WokpaLogo";
-import { Input } from "@/Components/Input";
-import { PasswordInput } from "@/components/PasswordInput";
+import Button from "@/components/button";
+import WokpaLogo from "@/components/wokpa-logo";
+import Input from "@/components/input";
+import PasswordInput from "@/components/password-input";
 import { getIcon } from "@/utils";
 import Link from "next/link";
 

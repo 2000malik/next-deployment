@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { APICall, formatToCurrency, getIcon, getImage } from "../../../Utils";
 import OtpInput from 'react-otp-input';
-import { Modal } from "../../../Components/Modal";
+import { Modal } from "../../../components/modal";
 import { calculateFX, convertFunds, createBeneficiary, creditWallet, getAllBanks, getAllWallets, getNameEnquiry, getPurposeCode, getUser, getVirtualAccount, getVirtualAccountBalance, makeInternationTransfer, makeLocalTransfer, makeTransfer, updateBeneficiary, withdrawWallet } from "../../../Api/General";
 import { BankModel, VirtualAccountModel, WalletModel } from "../../../models/general";
 import * as Yup from 'yup';

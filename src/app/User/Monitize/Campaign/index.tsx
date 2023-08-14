@@ -1,4 +1,4 @@
-import ExchangeCard from "../../../../Components/ExchangeCard"
+import ExchangeCard from "../../../../components/exchange-card"
 import { APICall, dataURLtoFile, formatToCurrency, getIcon, getImage } from "../../../../Utils"
 import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
 import { confirmBVN, confirmBVNImage, getProfile, resendBVNOTP, verifyBVN } from "../../../../Api/Auth"
@@ -9,7 +9,7 @@ import { updateUser } from "../../../../redux/auth"
 import { Tab, Listbox, Switch } from '@headlessui/react'
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import getSymbolFromCurrency from 'currency-symbol-map'
-import { Button } from "../../../../Components/Button"
+import { Button } from "../../../../components/button"
 import { Link } from "react-router-dom";
 
 const CampaignPage = () => {

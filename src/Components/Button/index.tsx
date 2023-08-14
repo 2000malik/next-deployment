@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from "react"
 
-export const Button: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
+const Button: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
 
     return (
 
@@ -15,3 +15,5 @@ export const Button: React.FC<ButtonHTMLAttributes<HTMLButtonElement>> = (props)
 
     )
 }
+
+export default Button;

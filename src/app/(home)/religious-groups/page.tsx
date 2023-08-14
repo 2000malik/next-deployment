@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from "@/Components/Button";
+import Button from "@/components/button";
 import { getImage } from "@/utils";
 import { Tab, Disclosure } from '@headlessui/react'
 import AllInOne from "../partials/all-in-one";
