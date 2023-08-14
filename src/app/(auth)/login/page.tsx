@@ -1,10 +1,9 @@
 'use client';
 
-import Button from "@/components/button";
-import WokpaLogo from "@/components/wokpa-logo";
-import Input from "@/components/input";
-import PasswordInput from "@/components/password-input";
-import { getIcon } from "@/utils";
+import Button from "../../../components/button";
+import WokpaLogo from "../../../components/wokpa-logo";
+import Input from "../../../components/input";
+import PasswordInput from "../../../components/password-input";
 import Link from "next/link";
 
 export default async function Login() {
@@ -14,7 +13,7 @@ export default async function Login() {
                 <div className="flex min-h-screen">
                     <div className="w-6/12 bg-dark contianer md:px-8 py-8">
                         <div>
-                            <img src={getIcon("wokpa.png")} alt="" />
+                            <img src={("/icons/wokpa.png")} alt="" />
                         </div>
                         <div className="mt-24 text-left">
                             <div className="w-7/12 mx-auto ">
