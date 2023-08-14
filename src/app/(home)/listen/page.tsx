@@ -1,5 +1,5 @@
 'use client';
-import { Button } from "../../../components/button/button";
+import { Button } from "../../../components/button";
 import { getImage } from "@/utils";
 import { Tab, Disclosure } from '@headlessui/react'
 import { FeaturedPodcasts, FictionAndDrama, RadioPrograms } from "../partials/trending-episodes";

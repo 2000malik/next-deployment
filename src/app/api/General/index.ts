@@ -1,5 +1,5 @@
+import { API_URL } from "@/utils";
 import axios from "axios";
-import { API_URL } from "../../Utils";
 
 export const getUser = async (user_id: string) => axios.get(`${API_URL}/users/${user_id}`);
 export const calculateFX = async (currency_from: string, currency_to: string) => axios.get(`${API_URL}/fx?currency_from=${currency_from}&currency_to=${currency_to}`);

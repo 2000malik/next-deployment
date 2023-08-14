@@ -1,3 +1,5 @@
+"use client";
+
 import { reset } from "@/redux/auth";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import { Disclosure, Transition } from "@headlessui/react";

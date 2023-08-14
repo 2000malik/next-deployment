@@ -1,5 +1,5 @@
-import { FooterDark } from "@/partials/Footer";
-import { HomeNavbar } from "@/partials/Navbar";
+import { FooterDark } from "@/partials/footer";
+import { HomeNavbar } from "@/partials/navbar";
 import { PropsWithChildren } from "react";
 
 export default function RootLayout({ children }: PropsWithChildren) {

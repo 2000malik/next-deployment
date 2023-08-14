@@ -1,7 +1,7 @@
 
 "use client";
 
-import Button from "@/components/button/button.tsx";
+import Button from "@/components/button";
 import { Tab, Disclosure } from '@headlessui/react'
 import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react';
