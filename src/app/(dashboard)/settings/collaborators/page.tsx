@@ -1,3 +1,5 @@
+"use client";
+
 import { getProfile } from "@/app/api/auth";
 import Button from "@/components/button";
 import { useAppSelector, useAppDispatch } from "@/hooks";
