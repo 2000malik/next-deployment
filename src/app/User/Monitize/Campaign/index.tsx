@@ -9,7 +9,7 @@ import { updateUser } from "../../../../redux/auth"
 import { Tab, Listbox, Switch } from '@headlessui/react'
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import getSymbolFromCurrency from 'currency-symbol-map'
-import { Button } from "../../../../components/button"
+import { Button } from "../../../../components/button/button"
 import { Link } from "react-router-dom";
 
 const CampaignPage = () => {

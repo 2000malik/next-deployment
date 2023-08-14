@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/button";
+import Button from "@/components/button/button.tsx";
 import { Tab, Disclosure } from '@headlessui/react'
 import Image from "next/image";
 import { motion } from "framer-motion";

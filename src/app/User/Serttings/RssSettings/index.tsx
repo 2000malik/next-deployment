@@ -10,7 +10,7 @@ import { updateUser } from "../../../../redux/auth"
 import { Tab, Listbox, Disclosure, Switch } from '@headlessui/react'
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import getSymbolFromCurrency from 'currency-symbol-map'
-import { Button } from "../../../../components/button"
+import { Button } from "../../../../components/button/button"
 import { Input } from "../../../../components/input";
 
 

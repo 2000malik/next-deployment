@@ -1,6 +1,6 @@
 'use client';
 
-import Button from "@/components/button";
+import Button from "@/components/button/button.tsx";
 import Input from "@/components/input";
 import WokpaLogo from "@/components/wokpa-logo";
 import { getIcon } from "@/utils";
