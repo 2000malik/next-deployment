@@ -4,7 +4,7 @@ export const FooterDark = () => {
     return (
         <div className="w-full pt-16  mt-4 bg-black">
             <div className=" px-6  md:px-12">
-                <div className="flex justify-between">
+                <div className="flex md:flex-row flex-col justify-between">
                     <div>
                         <svg width="109" height="38" viewBox="0 0 109 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.4017 26.8211C11.6213 26.8211 11.9324 26.7535 12.3167 26.3477L11.7586 28.6195C11.5729 29.3718 11.1419 30.041 10.5334 30.5217C9.92498 31.0024 9.17368 31.2673 8.39789 31.2746C7.62211 31.2819 6.86592 31.0313 6.24847 30.5622C5.63103 30.093 5.18741 29.4321 4.98751 28.6834L0.0757469 10.1312C-0.0883018 9.4722 0.0164861 8.77513 0.36706 8.19332C0.717633 7.61151 1.28527 7.19261 1.94511 7.02877C2.60494 6.86494 3.30292 6.96959 3.88549 7.31971C4.46807 7.66982 4.88751 8.23672 5.05156 8.89569L8.45174 23.5021H8.51762L8.94218 21.8426C9.17276 23.0233 10.0054 26.7736 11.4017 26.8211Z" fill="#25AEA4" />
@@ -19,7 +19,7 @@ export const FooterDark = () => {
                             <p>Design amazing digital experiences <br /> that create more happy in the world.</p>
                         </div>
                     </div>
-                    <div className="grid grid-cols-4 gap-8 w-">
+                    <div className="grid md:grid-cols-4 gap-8 w-">
                         <div className="">
                             <div className="text-sm font-semibold">
                                 Company
@@ -108,7 +108,7 @@ export const FooterDark = () => {
                 </div>
             </div>
             <div className="bg-[#19746D] py-12 px-12 mt-12">
-                <div className="flex justify-between items-center">
+                <div className="flex md:flex-row flex-col md:gap-0 gap-6 justify-between items-center">
                     <div className="text-[#FCFCFD]">
                         © 2023 Wokpa. All rights reserved.
                     </div>

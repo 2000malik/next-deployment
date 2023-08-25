@@ -140,7 +140,7 @@ const DistributionPage
                                                         </defs>
                                                     </svg>
 
-                                                    <span className="text-sm text-[#063150] font-semibold">Copy</span>
+                                                    <span className="text-sm !text-[#063150] font-semibold">Copy</span>
                                                 </button>
                                             </div>
                                         </div>

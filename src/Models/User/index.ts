@@ -15,6 +15,25 @@ export interface UserModel {
     bvn_verified_at: string;
     has_pin: boolean;
     image: string;
+    podcast_goal_updated_at: string;
+    current_subscription: {
+        id: number;
+        name: string;
+        amount: number;
+        interval: string;
+        currency: string;
+        created_at: string;
+        updated_at: string;
+        subscription: {
+            user_id: number;
+            plan_id: number;
+            amount: number;
+            status: string;
+            expires_at: string;
+            created_at: string;
+            updated_at: string;
+        }
+    }
     role: {
         id: number;
         name: string;

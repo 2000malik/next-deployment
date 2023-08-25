@@ -55,7 +55,7 @@ const WalletPage = () => {
                             </Button>
                         </div>
                         <div>
-                            <Button className="!from-white !to-white text-[#063150] text-sm font-semibold">
+                            <Button className="!from-white !to-white !text-[#063150] text-sm font-semibold">
                                 Add money
                             </Button>
                         </div>

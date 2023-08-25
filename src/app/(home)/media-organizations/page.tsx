@@ -148,16 +148,16 @@ const MediaOrganizations = () => {
                 </div>
             </header>
             <section>
-                <div className="container px-4 mx-auto py-24">
+                <div className="container  px-4 mx-auto py-24">
                     <div className="text-center">
-                        <h2 className="text-4xl font-raleway font-bold">
+                        <h2 className="md:text-4xl text-2xl font-raleway font-bold">
                             Specially built for Media <span className="text-primary">Organizations</span>
                         </h2>
-                        <p className="text-lg max-w-4xl mx-auto mt-6 text-[#EAECF0]">
+                        <p className="md:text-lg text-sm max-w-4xl mx-auto mt-6 text-[#EAECF0]">
                             Wokpa records audio mp3 to give you the picture-perfect quality that your video podcast deserves.Record in 16-bit 48k WAV audio track per guest, regardless of internet connection (local recording), with no time limits.
                         </p>
                     </div>
-                    <div className="mt-16 container mx-auto px-4">
+                    <div className="mt-16 container  mx-auto px-4">
                         <div className="flex gap-8 justify-center">
                             <div className="rounded-xl bg-[#18181B] py-12 px-10 w-56 text-center">
                                 <svg className="inline text-center" width="73" height="72" viewBox="0 0 73 72" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -250,12 +250,12 @@ const MediaOrganizations = () => {
                 </div>
             </section>
             <section style={{ background: "linear-gradient(27deg, #005FF8 0%, #384459 100%)" }} className="relative bg-gradient-to-tr from-[#005FF8] to-[#384459]">
-                <div className="container px-4 mx-auto py-24">
+                <div className="container  px-4 mx-auto py-24">
                     <div className="text-center max-w-2xl mx-auto">
-                        <h2 className="text-4xl font-raleway font-bold">
+                        <h2 className="md:text-4xl text-2xl font-raleway font-bold">
                             Celebrate your podcast's success with Tips from listeners
                         </h2>
-                        <p className="text-lg max-w-4xl mx-auto mt-6 text-[#EAECF0]">
+                        <p className="md:text-lg text-sm max-w-4xl mx-auto mt-6 text-[#EAECF0]">
                             Wokpa gives you everything yoyu need to host, provide and track your podcast.
                         </p>
                     </div>
@@ -290,17 +290,17 @@ const MediaOrganizations = () => {
                     </svg>
 
                 </div>
-                <div className="container px-4 mx-auto py-24">
+                <div className="container  px-4 mx-auto py-24">
 
                     <div className="mt-10  mx-auto px-4 text-[#101828]">
                         <div className="space-y-16 mt-16">
                             <div className="flex flex-row-reverse gap-24 items-center">
                                 <div className="w-6/12">
                                     <div className="text-left">
-                                        <h2 className="text-4xl font-raleway font-bold">
+                                        <h2 className="md:text-4xl text-2xl font-raleway font-bold">
                                             Build your audience at any stage
                                         </h2>
-                                        <p className="text-xl max-w-4xl mx-auto mt-6">
+                                        <p className="md:text-xl text-sm max-w-4xl mx-auto mt-6">
                                             Wokpa records audio mp3 to give you the picture-perfect quality that your video podcast deserves.Record in 16-bit 48k WAV audio track per guest, regardless of internet connection (local recording), with no time limits.
                                         </p>
                                         <div className="mt-4">
@@ -315,10 +315,10 @@ const MediaOrganizations = () => {
                             <div className="flex gap-24 items-center">
                                 <div className="w-6/12">
                                     <div className="text-left">
-                                        <h2 className="text-4xl font-raleway font-bold">
+                                        <h2 className="md:text-4xl text-2xl font-raleway font-bold">
                                             Build your audience at any stage
                                         </h2>
-                                        <p className="text-xl max-w-4xl mx-auto mt-6">
+                                        <p className="md:text-xl text-sm max-w-4xl mx-auto mt-6">
                                             Wokpa records audio mp3 to give you the picture-perfect quality that your video podcast deserves.Record in 16-bit 48k WAV audio track per guest, regardless of internet connection (local recording), with no time limits.
                                         </p>
                                         <div className="mt-4">
@@ -336,7 +336,7 @@ const MediaOrganizations = () => {
                 </div>
             </section>
             <section className="relative bg-[#18181B]">
-                <div className="container px-4 mx-auto py-24">
+                <div className="container  px-4 mx-auto py-24">
                     <div className="flex items-center gap-16">
                         <div className="w-6/12">
                             <div className="">

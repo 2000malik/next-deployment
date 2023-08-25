@@ -1,23 +1,27 @@
 'use client';
+import { getPlans } from "@/app/api/general";
 import Button from "@/components/button";
 import WokpaLogo from "@/components/wokpa-logo";
+import { PlanModel } from "@/models/plan";
+import { formatToCurrency } from "@/utils";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
-const FreePlan = () => {
+const FreePlan: React.FC<{ plan: PlanModel }> = ({ plan }) => {
     const navigate = useRouter();
     return (
         <div className="bg-[#18181B] pt-10 px-6 rounded-3xl">
             <div>
                 <span className="rounded-3xl bg-[#E5F5F4] py-1 px-6 text-[#0D8478] text-lg font-semibold">
-                    Free
+                    {plan?.name}
                 </span>
             </div>
             <div>
                 <div className="py-6">
                     <div>
-                        <span className="text-4xl font-raleway font-medium">
-                            ₦0 <span className="text-lg font-sans text-[#8C8C8D]">
+                        <span className="md:text-4xl text-2xl font-raleway font-medium">
+                            ₦{formatToCurrency(plan?.amount / 100)} <span className="text-lg font-sans text-[#8C8C8D]">
                                 /month
                             </span>
                         </span>
@@ -30,7 +34,8 @@ const FreePlan = () => {
                                     <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 <span className="text-sm font-medium text-[#FCFCFD]">
-                                    2 hours
+
+                                    {plan?.details?.uploads} hours
                                     <span className="text-sm font-medium text-[#D1D1D6] ml-2">
                                         Audio uploads
                                     </span>
@@ -41,7 +46,7 @@ const FreePlan = () => {
                                     <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 <span className="text-sm font-medium text-[#FCFCFD]">
-                                    2 hours
+                                    {plan?.details?.uploads} hours
                                     <span className="text-sm font-medium text-[#D1D1D6] ml-2">
                                         Audio uploads
                                     </span>
@@ -52,7 +57,7 @@ const FreePlan = () => {
                                     <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 <span className="text-sm font-medium text-[#FCFCFD]">
-                                    3 days
+                                    {plan?.details?.storage} days
                                     <span className="text-sm font-medium text-[#D1D1D6] ml-2">
                                         Audio storage
                                     </span>
@@ -63,7 +68,7 @@ const FreePlan = () => {
                                     <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 <span className="text-sm font-medium text-[#FCFCFD]">
-                                    1
+                                    {plan?.details?.hosting}
                                     <span className="text-sm font-medium text-[#D1D1D6] ml-2">
                                         Audio hosting
                                     </span>
@@ -74,7 +79,7 @@ const FreePlan = () => {
                                     <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 <span className="text-sm font-medium text-[#FCFCFD]">
-                                    5 platforms
+                                    {plan?.details?.distributions} platforms
                                     <span className="text-sm font-medium text-[#D1D1D6] ml-2">
                                         Distribution
                                     </span>
@@ -85,7 +90,7 @@ const FreePlan = () => {
                                     <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 <span className="text-sm font-medium text-[#FCFCFD]">
-                                    Basic
+                                    {plan?.details?.analytics}
                                     <span className="text-sm font-medium text-[#D1D1D6] ml-2">
                                         Analytics
                                     </span>
@@ -96,7 +101,7 @@ const FreePlan = () => {
                                     <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 <span className="text-sm font-medium text-[#FCFCFD]">
-                                    Single
+                                    {plan?.details?.podcast_channels}
                                     <span className="text-sm font-medium text-[#D1D1D6] ml-2">
                                         Podcast Channels
                                     </span>
@@ -107,24 +112,27 @@ const FreePlan = () => {
                                     <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 <span className="text-sm font-medium text-[#FCFCFD]">
-                                    5 minutes
+                                    {plan?.details?.transcriptions} minutes
                                     <span className="text-sm font-medium text-[#D1D1D6] ml-2">
                                         Audio Transcription
                                     </span>
                                 </span>
                             </div>
-                            <div className="flex items-center gap-3">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <span className="text-sm font-medium text-[#FCFCFD]">
-                                    Audience Support
+                            {
+                                plan?.details?.audience_support ? <div className="flex items-center gap-3">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M7.5 12L10.5 15L16.5 9M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#98A2B3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                    <span className="text-sm font-medium text-[#FCFCFD]">
+                                        Audience Support
 
-                                </span>
-                            </div>
+                                    </span>
+                                </div> : <></>
+                            }
+
                         </div>
                         <div className="mt-8">
-                            <Button onClick={() => navigate.push("/payment")} className="w-full">
+                            <Button onClick={() => navigate.push(`/payment/${plan?.id}`)} className="w-full">
                                 Continue
                             </Button>
                         </div>
@@ -151,7 +159,7 @@ const SoloPlan = () => {
                 <div>
                     <div className="py-6">
                         <div>
-                            <span className="text-4xl font-raleway font-medium">
+                            <span className="md:text-4xl text-2xl font-raleway font-medium">
                                 ₦10,000 <span className="text-lg font-sans text-[#8C8C8D]">
                                     /month
                                 </span>
@@ -378,7 +386,7 @@ const PremiumPlan = () => {
                 <div>
                     <div className="py-6">
                         <div>
-                            <span className="text-4xl font-raleway font-medium">
+                            <span className="md:text-4xl text-2xl font-raleway font-medium">
                                 ₦10,000 <span className="text-lg font-sans text-[#8C8C8D]">
                                     /month
                                 </span>
@@ -587,7 +595,16 @@ const PremiumPlan = () => {
     )
 }
 
-export default async function PricingPlans() {
+export default function PricingPlans() {
+    const [plans, setPlans] = useState<PlanModel[]>([]);
+
+    useEffect(() => {
+        (async () => {
+            const response = await getPlans();
+            setPlans(response.data.data);
+        })()
+    }, [])
+
     return (
         <div>
             <div className="">
@@ -608,15 +625,12 @@ export default async function PricingPlans() {
                     </div>
                     <div className="mt-12">
                         <div className="grid grid-cols-3 gap-12">
-                            <div>
-                                <FreePlan />
-                            </div>
-                            <div>
-                                <SoloPlan />
-                            </div>
-                            <div>
-                                <PremiumPlan />
-                            </div>
+                            {plans.map((plan) => {
+                                return <div>
+                                    <FreePlan plan={plan} />
+                                </div>
+                            })}
+
                         </div>
                     </div>
                 </div>

@@ -6,16 +6,17 @@ import Image from "next/image";
 import AllInOne from "./partials/all-in-one";
 import TrendingEpisodes from "./partials/trending-episodes";
 import PodcastYouLike from "./partials/podcasts-you-will-like";
+import { useRouter } from "next/navigation";
 
 
 const Home = () => {
-
+    const router = useRouter();
     return (
         <div className="relative mt-[80px]">
             <header className="relative">
                 <div className="py-16">
-                    <div className="absolute top-0 right-0">
-                        <svg width="298" height="409" viewBox="0 0 298 409" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className="absolute md:top-0  bottom-[15rem] right-0">
+                        <svg className="md:w-[298px] w-[160px] h-auto" width="298" height="409" viewBox="0 0 298 409" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <line x1="203.24" y1="13.2244" x2="207.5" y2="1.51986" stroke="#F2F4F7" strokeWidth="2" />
                             <line x1="229.864" y1="12.6777" x2="236.092" y2="1.89079" stroke="#F2F4F7" strokeWidth="2" />
                             <line x1="256.656" y1="12.1453" x2="264.662" y2="2.60368" stroke="#F2F4F7" strokeWidth="2" />
@@ -516,28 +517,28 @@ const Home = () => {
                         </svg>
 
                     </div>
-                    <div className="lg:container mx-auto ">
-                        <div className="flex justify-between items-center">
-                            <div className="w-6/12">
-                                <div>
-                                    <h1 className="font-raleway text-6xl font-bold leading-[1.1]">
+                    <div className="container mx-auto px-4 xl:px-16">
+                        <div className="flex md:flex-row flex-col justify-between items-center md:gap-0 gap-12">
+                            <div className="md:md:w-6/12">
+                                <div className="md:text-left text-center">
+                                    <h1 className="font-raleway text-4xl md:text-6xl font-bold leading-[1.1]">
                                         Transform your <span className="text-[#36FFE8]"> podcast </span> into the next sensation
                                     </h1>
                                     <div className="mt-8">
                                         <p className="text-[#F2F4F7]">
-                                            Powerful tools for beginners, pros, and everyone in <br /> between - all for free.
+                                            Powerful tools for beginners, pros, and everyone in <br className="md:inline hidden" /> between - all for free.
                                         </p>
                                     </div>
                                     <div className="mt-6">
-                                        <div className="flex gap-6">
+                                        <div className="flex md:flex-row flex-col gap-3 md:gap-6">
 
                                             <div>
-                                                <Button className="font-medium">
+                                                <Button onClick={() => router.push("/signup")} className="font-medium w-full">
                                                     Get Started
                                                 </Button>
                                             </div>
                                             <div>
-                                                <Button className="font-medium !from-transparent !to-transparent border bg-gradient-to-r bg-clip-text !border-[#083F62]">
+                                                <Button onClick={() => window.location.href = "https://share-eu1.hsforms.com/1KbjPQ4jtQaeZOEnY1D1K6g2b3crg"} className="font-medium !from-transparent !to-transparent border bg-gradient-to-r bg-clip-text !border-[#083F62] w-full">
                                                     Join waitlist
                                                 </Button>
                                             </div>
@@ -545,17 +546,17 @@ const Home = () => {
                                     </div>
                                     <div className="mt-6">
 
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex md:flex-row flex-col justify-center items-center gap-2">
                                             <div className="flex">
-                                                <Image width={40} height={40} src={"/images/avatar.png"} alt="" className="relative" />
-                                                <Image width={40} height={40} src={"/images/avatar-1.png"} alt="" className="relative -left-3 " />
-                                                <Image width={40} height={40} src={"/images/avatar-2.png"} alt="" className="relative -left-6" />
-                                                <Image width={40} height={40} src={"/images/avatar-3.png"} alt="" className="relative -left-9" />
-                                                <Image width={40} height={40} src={"/images/avatar-4.png"} alt="" className="relative -left-12" />
+                                                <img width={40} height={40} src={"/images/avatar.png"} alt="" className="relative" />
+                                                <img width={40} height={40} src={"/images/avatar-1.png"} alt="" className="relative -left-3 " />
+                                                <img width={40} height={40} src={"/images/avatar-2.png"} alt="" className="relative -left-6" />
+                                                <img width={40} height={40} src={"/images/avatar-3.png"} alt="" className="relative -left-9" />
+                                                <img width={40} height={40} src={"/images/avatar-4.png"} alt="" className="relative -left-12" />
                                             </div>
 
 
-                                            <div className="relative -left-8">
+                                            <div className="relative -left-8 md:block flex justify-center w-full">
                                                 <div className="flex gap-1 ">
                                                     {
 
@@ -587,8 +588,8 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-5/12 relative">
-                                <Image width={1040} height={1120} src={"/images/home-cto.png"} alt="" />
+                            <div className="md:w-5/12 relative">
+                                <img width={1040} height={1120} src={"/images/home-cto.png"} alt="" />
                             </div>
 
                         </div>
@@ -616,7 +617,7 @@ const Home = () => {
                     </svg>
 
                 </div>
-                <div className="container mx-auto py-32">
+                <div className="container px-4 mx-auto py-32">
                     <div className="grid md:grid-cols-3 gap-6">
                         <div className="border border-[#36FFE8] rounded-3xl px-5 pt-12 pb-8 relative">
                             <div>
@@ -720,85 +721,85 @@ const Home = () => {
                         <path d="M200.904 115.922C201.208 116.692 202.08 117.069 202.85 116.765C203.621 116.46 203.998 115.588 203.693 114.818L200.904 115.922ZM89.2248 101.275L88.9036 102.74L88.904 102.74L89.2248 101.275ZM123.13 44.0481L121.923 44.9389L121.923 44.939L123.13 44.0481ZM11.6845 97.5159C11.4802 98.3188 11.9655 99.1352 12.7683 99.3394C13.5712 99.5437 14.3876 99.0584 14.5919 98.2556L11.6845 97.5159ZM209.586 102.518C209.864 101.737 209.457 100.879 208.676 100.601C207.896 100.323 207.038 100.731 206.76 101.511L209.586 102.518ZM202.94 116.706L202.621 118.172C203.359 118.332 204.1 117.92 204.353 117.209L202.94 116.706ZM187.725 112.192C186.902 112.101 186.16 112.694 186.069 113.518C185.977 114.341 186.571 115.082 187.394 115.174L187.725 112.192ZM202.298 115.37C203.693 114.818 203.693 114.817 203.692 114.816C203.692 114.815 203.691 114.814 203.691 114.813C203.69 114.81 203.688 114.807 203.687 114.802C203.683 114.792 203.677 114.779 203.67 114.761C203.656 114.726 203.635 114.675 203.608 114.608C203.554 114.474 203.473 114.277 203.366 114.022C203.152 113.512 202.833 112.769 202.411 111.826C201.567 109.939 200.309 107.252 198.649 104.037C195.331 97.6092 190.394 89.0484 183.922 80.5361C171.036 63.585 151.77 46.4513 126.822 47.403L126.937 50.4009C150.361 49.5072 168.805 65.6075 181.534 82.3517C187.871 90.687 192.719 99.0892 195.983 105.413C197.615 108.573 198.848 111.208 199.672 113.051C200.084 113.972 200.394 114.694 200.6 115.184C200.702 115.429 200.779 115.616 200.83 115.74C200.855 115.802 200.874 115.849 200.886 115.879C200.893 115.895 200.897 115.906 200.9 115.913C200.901 115.917 200.902 115.919 200.903 115.921C200.903 115.921 200.903 115.922 200.904 115.922C200.904 115.922 200.904 115.922 202.298 115.37ZM126.822 47.403C102.123 48.3453 87.1654 60.6298 81.0302 73.4835C77.9782 79.8778 77.0908 86.467 78.3775 91.843C79.6758 97.2678 83.2229 101.494 88.9036 102.74L89.5461 99.8096C85.1885 98.8541 82.3768 95.6642 81.2951 91.1447C80.2017 86.5765 80.913 80.6936 83.7376 74.7757C89.3559 63.0049 103.264 51.304 126.937 50.4009L126.822 47.403ZM88.904 102.74C94.3732 103.938 100.691 102.578 106.655 99.5753C112.641 96.5614 118.419 91.8216 122.866 86.0167C131.771 74.3911 135.47 58.2362 124.337 43.1571L121.923 44.939C132.043 58.6459 128.826 73.3022 120.484 84.1924C116.307 89.6453 110.879 94.0895 105.306 96.8958C99.7091 99.7134 94.1135 100.81 89.5457 99.8095L88.904 102.74ZM124.337 43.1573C118.683 35.4974 109.548 31.6912 99.045 31.0609C88.544 30.4307 76.5357 32.9561 64.8272 38.1084C41.4306 48.404 18.8445 69.371 11.6845 97.5159L14.5919 98.2556C21.4694 71.2208 43.2567 50.8781 66.0355 40.8543C77.4146 35.8469 88.9444 33.4602 98.8652 34.0555C108.784 34.6508 116.955 38.2078 121.923 44.9389L124.337 43.1573ZM206.76 101.511L201.527 116.203L204.353 117.209L209.586 102.518L206.76 101.511ZM202.94 116.706C203.259 115.24 203.259 115.24 203.259 115.24C203.259 115.24 203.259 115.24 203.259 115.24C203.258 115.24 203.258 115.24 203.257 115.24C203.256 115.239 203.253 115.239 203.25 115.238C203.244 115.237 203.235 115.235 203.223 115.232C203.2 115.227 203.165 115.22 203.119 115.21C203.027 115.19 202.893 115.161 202.721 115.124C202.377 115.049 201.882 114.943 201.279 114.814C200.073 114.557 198.432 114.21 196.696 113.852C193.263 113.145 189.335 112.371 187.725 112.192L187.394 115.174C188.832 115.333 192.594 116.07 196.091 116.79C197.818 117.146 199.451 117.492 200.653 117.748C201.253 117.876 201.746 117.982 202.088 118.056C202.259 118.093 202.393 118.122 202.483 118.142C202.529 118.152 202.563 118.159 202.586 118.164C202.598 118.167 202.607 118.168 202.613 118.17C202.616 118.17 202.618 118.171 202.619 118.171C202.62 118.171 202.62 118.171 202.621 118.172C202.621 118.172 202.621 118.172 202.621 118.172C202.621 118.172 202.621 118.172 202.94 116.706Z" fill="#4FFFEB" />
                     </svg>
                 </div>
-                <div className="container px-4 mx-auto py-24">
+                <div className="container  px-4 mx-auto py-24">
                     <div className="text-center">
-                        <h2 className="text-5xl font-raleway font-bold">
+                        <h2 className="md:text-5xl text-4xl font-raleway font-bold">
                             Use cases
                         </h2>
 
                     </div>
                     <div className="mt-10  mx-auto px-4">
                         <div className="space-y-16 mt-16">
-                            <div className="flex gap-24 items-center">
-                                <div className="w-6/12">
+                            <div className="flex md:flex-row flex-col gap-4 md:gap-24 items-center">
+                                <div className="md:w-6/12">
                                     <div className="text-left">
-                                        <h2 className="text-4xl font-raleway font-bold">
+                                        <h2 className="md:text-4xl text-2xl font-raleway font-bold">
                                             Radio Stations
                                         </h2>
-                                        <p className="text-xl max-w-4xl mx-auto mt-6">
+                                        <p className="md:text-xl text-sm max-w-4xl mx-auto mt-6">
                                             Wokpa records audio mp3 to give you the picture-perfect quality that your video podcast deserves.Record in 16-bit 48k WAV audio track per guest, regardless of internet connection (local recording), with no time limits.
                                         </p>
                                         <div className="mt-4">
-                                            <Button className="text-sm !py-2 from-white to-white font-medium !text-secondary">Explore</Button>
+                                            <Button className="text-sm !py-2 from-white to-white font-medium !text-secondary md:w-auto w-full">Explore</Button>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="">
-                                    <Image src={("/images/radio-stations-image.png")} alt="" width={567} height={300} />
+                                    <img src={("/images/radio-stations-image.png")} alt="" width={567} height={300} />
                                 </div>
                             </div>
-                            <div className="flex gap-24 items-center">
+                            <div className="flex md:flex-row flex-col gap-4 md:gap-24 items-center">
                                 <div className="">
-                                    <Image src={("/images/religious-image.png")} alt="" width={567} height={300} />
+                                    <img src={("/images/religious-image.png")} alt="" width={567} height={300} />
                                 </div>
-                                <div className="w-6/12">
+                                <div className="md:w-6/12">
                                     <div className="text-left">
-                                        <h2 className="text-4xl font-raleway font-bold">
+                                        <h2 className="md:text-4xl text-2xl font-raleway font-bold">
                                             Religious Groups
                                         </h2>
-                                        <p className="text-xl max-w-4xl mx-auto mt-6">
+                                        <p className="md:text-xl text-sm max-w-4xl mx-auto mt-6">
                                             Wokpa records audio mp3 to give you the picture-perfect quality that your video podcast deserves.Record in 16-bit 48k WAV audio track per guest, regardless of internet connection (local recording), with no time limits.
                                         </p>
                                         <div className="mt-4">
-                                            <Button className="text-sm !py-2 from-white to-white font-medium !text-secondary">Explore</Button>
+                                            <Button className="text-sm !py-2 from-white to-white font-medium !text-secondary md:w-auto w-full">Explore</Button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex gap-24 items-center">
+                            <div className="flex md:flex-row flex-col gap-4 md:gap-24 items-center">
 
-                                <div className="w-6/12">
+                                <div className="md:w-6/12">
                                     <div className="text-left">
-                                        <h2 className="text-4xl font-raleway font-bold">
+                                        <h2 className="md:text-4xl text-2xl font-raleway font-bold">
                                             Media Organizations
                                         </h2>
-                                        <p className="text-xl max-w-4xl mx-auto mt-6">
+                                        <p className="md:text-xl text-sm max-w-4xl mx-auto mt-6">
                                             Wokpa records audio mp3 to give you the picture-perfect quality that your video podcast deserves.Record in 16-bit 48k WAV audio track per guest, regardless of internet connection (local recording), with no time limits.
                                         </p>
                                         <div className="mt-4">
-                                            <Button className="text-sm !py-2 from-white to-white font-medium !text-secondary">Explore</Button>
+                                            <Button className="text-sm !py-2 from-white to-white font-medium !text-secondary md:w-auto w-full">Explore</Button>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="">
-                                    <Image src={("/images/media-image.png")} alt="" width={567} height={300} />
+                                    <img src={("/images/media-image.png")} alt="" width={567} height={300} />
                                 </div>
                             </div>
-                            <div className="flex gap-24 items-center">
+                            <div className="flex md:flex-row flex-col gap-4 md:gap-24 items-center">
                                 <div className="">
-                                    <Image src={("/images/indie-image.png")} alt="" width={567} height={300} />
+                                    <img src={("/images/indie-image.png")} alt="" width={567} height={300} />
                                 </div>
-                                <div className="w-6/12">
+                                <div className="md:w-6/12">
                                     <div className="text-left">
-                                        <h2 className="text-4xl font-raleway font-bold">
+                                        <h2 className="md:text-4xl text-2xl font-raleway font-bold">
                                             Indie Podcasters
                                         </h2>
-                                        <p className="text-xl max-w-4xl mx-auto mt-6">
+                                        <p className="md:text-xl text-sm max-w-4xl mx-auto mt-6">
                                             Wokpa records audio mp3 to give you the picture-perfect quality that your video podcast deserves.Record in 16-bit 48k WAV audio track per guest, regardless of internet connection (local recording), with no time limits.
 
                                         </p>
                                         <div className="mt-4">
-                                            <Button className="text-sm !py-2 from-white to-white font-medium !text-secondary">Explore</Button>
+                                            <Button className="text-sm !py-2 from-white to-white font-medium !text-secondary md:w-auto w-full">Explore</Button>
                                         </div>
                                     </div>
                                 </div>
@@ -808,14 +809,14 @@ const Home = () => {
                 </div>
             </section>
             <section className="relative bg-[#E5F5F4]">
-                <div className="container px-4 mx-auto py-24">
-                    <div className="flex gap">
-                        <div className="w-6/12">
+                <div className="container  px-4 mx-auto py-24">
+                    <div className="flex md:flex-row flex-col md:gap-0 gap-12">
+                        <div className="md:w-6/12">
                             <div className="text-[#101828]">
-                                <h2 className="text-4xl font-raleway font-bold">
+                                <h2 className="md:text-4xl text-3xl font-raleway font-bold">
                                     How it works
                                 </h2>
-                                <p className="max-w-4xl mt-6">
+                                <p className="max-w-4xl md:text-base tex-sm mt-6">
                                     Wokpa records audio mp3 to give you the picture-perfect quality that your video podcast deserves.
                                 </p>
 
@@ -900,16 +901,16 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-6/12">
-                            <Image src={("/images/how-it-works-image.png")} alt="" width={700} height={536} />
+                        <div className="md:w-6/12">
+                            <img src={("/images/how-it-works-image.png")} alt="" width={700} height={536} />
                         </div>
                     </div>
                 </div>
             </section>
             <section className="relative">
                 <div className="container px-4 mx-auto py-24">
-                    <div className="bg-white rounded-3xl flex items-center">
-                        <div className="px-16 flex-1">
+                    <div className="bg-white rounded-3xl flex md:flex-row flex-col items-center">
+                        <div className="md:px-16 px-6 flex-1 md:py-0 py-16">
                             <div className="space-y-6">
                                 <svg width="116" height="20" viewBox="0 0 116 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clipPath="url(#clip0_4100_46477)">
@@ -990,8 +991,8 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="w-[480px]">
-                            <img className="rounded-r-3xl" src={("/images/simplicity-image.png")} alt="" />
+                        <div className="md:w-[480px]">
+                            <img className="md:rounded-r-3xl" src={("/images/simplicity-image.png")} alt="" />
                         </div>
                     </div>
                 </div>
@@ -1002,9 +1003,9 @@ const Home = () => {
                         <path d="M200.904 115.922C201.208 116.692 202.08 117.069 202.85 116.765C203.621 116.46 203.998 115.588 203.693 114.818L200.904 115.922ZM89.2248 101.275L88.9036 102.74L88.904 102.74L89.2248 101.275ZM123.13 44.0481L121.923 44.9389L121.923 44.939L123.13 44.0481ZM11.6845 97.5159C11.4802 98.3188 11.9655 99.1352 12.7683 99.3394C13.5712 99.5437 14.3876 99.0584 14.5919 98.2556L11.6845 97.5159ZM209.586 102.518C209.864 101.737 209.457 100.879 208.676 100.601C207.896 100.323 207.038 100.731 206.76 101.511L209.586 102.518ZM202.94 116.706L202.621 118.172C203.359 118.332 204.1 117.92 204.353 117.209L202.94 116.706ZM187.725 112.192C186.902 112.101 186.16 112.694 186.069 113.518C185.977 114.341 186.571 115.082 187.394 115.174L187.725 112.192ZM202.298 115.37C203.693 114.818 203.693 114.817 203.692 114.816C203.692 114.815 203.691 114.814 203.691 114.813C203.69 114.81 203.688 114.807 203.687 114.802C203.683 114.792 203.677 114.779 203.67 114.761C203.656 114.726 203.635 114.675 203.608 114.608C203.554 114.474 203.473 114.277 203.366 114.022C203.152 113.512 202.833 112.769 202.411 111.826C201.567 109.939 200.309 107.252 198.649 104.037C195.331 97.6092 190.394 89.0484 183.922 80.5361C171.036 63.585 151.77 46.4513 126.822 47.403L126.937 50.4009C150.361 49.5072 168.805 65.6075 181.534 82.3517C187.871 90.687 192.719 99.0892 195.983 105.413C197.615 108.573 198.848 111.208 199.672 113.051C200.084 113.972 200.394 114.694 200.6 115.184C200.702 115.429 200.779 115.616 200.83 115.74C200.855 115.802 200.874 115.849 200.886 115.879C200.893 115.895 200.897 115.906 200.9 115.913C200.901 115.917 200.902 115.919 200.903 115.921C200.903 115.921 200.903 115.922 200.904 115.922C200.904 115.922 200.904 115.922 202.298 115.37ZM126.822 47.403C102.123 48.3453 87.1654 60.6298 81.0302 73.4835C77.9782 79.8778 77.0908 86.467 78.3775 91.843C79.6758 97.2678 83.2229 101.494 88.9036 102.74L89.5461 99.8096C85.1885 98.8541 82.3768 95.6642 81.2951 91.1447C80.2017 86.5765 80.913 80.6936 83.7376 74.7757C89.3559 63.0049 103.264 51.304 126.937 50.4009L126.822 47.403ZM88.904 102.74C94.3732 103.938 100.691 102.578 106.655 99.5753C112.641 96.5614 118.419 91.8216 122.866 86.0167C131.771 74.3911 135.47 58.2362 124.337 43.1571L121.923 44.939C132.043 58.6459 128.826 73.3022 120.484 84.1924C116.307 89.6453 110.879 94.0895 105.306 96.8958C99.7091 99.7134 94.1135 100.81 89.5457 99.8095L88.904 102.74ZM124.337 43.1573C118.683 35.4974 109.548 31.6912 99.045 31.0609C88.544 30.4307 76.5357 32.9561 64.8272 38.1084C41.4306 48.404 18.8445 69.371 11.6845 97.5159L14.5919 98.2556C21.4694 71.2208 43.2567 50.8781 66.0355 40.8543C77.4146 35.8469 88.9444 33.4602 98.8652 34.0555C108.784 34.6508 116.955 38.2078 121.923 44.9389L124.337 43.1573ZM206.76 101.511L201.527 116.203L204.353 117.209L209.586 102.518L206.76 101.511ZM202.94 116.706C203.259 115.24 203.259 115.24 203.259 115.24C203.259 115.24 203.259 115.24 203.259 115.24C203.258 115.24 203.258 115.24 203.257 115.24C203.256 115.239 203.253 115.239 203.25 115.238C203.244 115.237 203.235 115.235 203.223 115.232C203.2 115.227 203.165 115.22 203.119 115.21C203.027 115.19 202.893 115.161 202.721 115.124C202.377 115.049 201.882 114.943 201.279 114.814C200.073 114.557 198.432 114.21 196.696 113.852C193.263 113.145 189.335 112.371 187.725 112.192L187.394 115.174C188.832 115.333 192.594 116.07 196.091 116.79C197.818 117.146 199.451 117.492 200.653 117.748C201.253 117.876 201.746 117.982 202.088 118.056C202.259 118.093 202.393 118.122 202.483 118.142C202.529 118.152 202.563 118.159 202.586 118.164C202.598 118.167 202.607 118.168 202.613 118.17C202.616 118.17 202.618 118.171 202.619 118.171C202.62 118.171 202.62 118.171 202.621 118.172C202.621 118.172 202.621 118.172 202.621 118.172C202.621 118.172 202.621 118.172 202.94 116.706Z" fill="#4FFFEB" />
                     </svg>
                 </div>
-                <div className="container px-4 mx-auto py-24">
+                <div className="container  px-4 mx-auto py-24">
                     <div className="text-center">
-                        <h2 className="text-5xl font-raleway font-medium">
+                        <h2 className="md:text-5xl text-3xl font-raleway font-medium">
                             Frequently asked questions
                         </h2>
                         <p className="text-lg max-w-4xl mx-auto mt-6">
@@ -1015,12 +1016,12 @@ const Home = () => {
                         <Disclosure defaultOpen={true}>
                             {({ open }) => (
                                 <>
-                                    <div className={`p-8 rounded-2xl ${open ? "bg-[#344054]" : ""}`}>
+                                    <div className={`md:p-8 p-4 rounded-2xl ${open ? "bg-[#344054]" : ""} text-left`}>
 
                                         <Disclosure.Button onClick={() => {
 
-                                        }} className="md:text-lg font-semibold w-full">
-                                            <div className="flex gap-4">
+                                        }} className="md:text-lg font-medium md:font-semibold w-full">
+                                            <div className="flex md:flex-row justify-between md:justify-start flex-row-reverse gap-4">
                                                 <div>
                                                     {
                                                         open ? <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1038,7 +1039,7 @@ const Home = () => {
                                                 </div>
                                             </div>
                                         </Disclosure.Button>
-                                        <Disclosure.Panel className="pl-10 pr-12">
+                                        <Disclosure.Panel className="md:pl-10 md:pr-12">
                                             Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.
                                         </Disclosure.Panel>
                                     </div>
@@ -1048,12 +1049,11 @@ const Home = () => {
                         <Disclosure >
                             {({ open }) => (
                                 <>
-                                    <div className={`p-8 rounded-2xl ${open ? "bg-[#344054]" : ""}`}>
+                                    <div className={`md:p-8 p-4 rounded-2xl ${open ? "bg-[#344054]" : ""} text-left`}>
 
                                         <Disclosure.Button onClick={() => {
-
-                                        }} className="md:text-lg font-semibold w-full">
-                                            <div className="flex gap-4">
+                                        }} className="md:text-lg font-medium md:font-semibold w-full">
+                                            <div className="flex md:flex-row justify-between md:justify-start flex-row-reverse gap-4">
                                                 <div>
                                                     {
                                                         open ? <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1071,7 +1071,7 @@ const Home = () => {
                                                 </div>
                                             </div>
                                         </Disclosure.Button>
-                                        <Disclosure.Panel className="pl-10 pr-12">
+                                        <Disclosure.Panel className="md:pl-10 md:pr-12">
                                             Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.
                                         </Disclosure.Panel>
                                     </div>
@@ -1081,12 +1081,11 @@ const Home = () => {
                         <Disclosure>
                             {({ open }) => (
                                 <>
-                                    <div className={`p-8 rounded-2xl ${open ? "bg-[#344054]" : ""}`}>
+                                    <div className={`md:p-8 p-4 rounded-2xl ${open ? "bg-[#344054]" : ""} text-left`}>
 
                                         <Disclosure.Button onClick={() => {
-
-                                        }} className="md:text-lg font-semibold w-full">
-                                            <div className="flex gap-4">
+                                        }} className="md:text-lg font-medium md:font-semibold w-full">
+                                            <div className="flex md:flex-row justify-between md:justify-start flex-row-reverse gap-4">
                                                 <div>
                                                     {
                                                         open ? <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1104,7 +1103,7 @@ const Home = () => {
                                                 </div>
                                             </div>
                                         </Disclosure.Button>
-                                        <Disclosure.Panel className="pl-10 pr-12">
+                                        <Disclosure.Panel className="md:pl-10 md:pr-12">
                                             Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.
                                         </Disclosure.Panel>
                                     </div>
@@ -1114,12 +1113,11 @@ const Home = () => {
                         <Disclosure >
                             {({ open }) => (
                                 <>
-                                    <div className={`p-8 rounded-2xl ${open ? "bg-[#344054]" : ""}`}>
+                                    <div className={`md:p-8 p-4 rounded-2xl ${open ? "bg-[#344054]" : ""} text-left`}>
 
                                         <Disclosure.Button onClick={() => {
-
-                                        }} className="md:text-lg font-semibold w-full">
-                                            <div className="flex gap-4">
+                                        }} className="md:text-lg font-medium md:font-semibold w-full">
+                                            <div className="flex md:flex-row justify-between md:justify-start flex-row-reverse gap-4">
                                                 <div>
                                                     {
                                                         open ? <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1132,12 +1130,12 @@ const Home = () => {
 
                                                     }
                                                 </div>
-                                                <div>
+                                                <div className="text-left ">
                                                     Can other info be added to an invoice?
                                                 </div>
                                             </div>
                                         </Disclosure.Button>
-                                        <Disclosure.Panel className="pl-10 pr-12">
+                                        <Disclosure.Panel className="md:pl-10 md:pr-12">
                                             Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.
                                         </Disclosure.Panel>
                                     </div>
@@ -1147,12 +1145,11 @@ const Home = () => {
                         <Disclosure>
                             {({ open }) => (
                                 <>
-                                    <div className={`p-8 rounded-2xl ${open ? "bg-[#344054]" : ""}`}>
+                                    <div className={`md:p-8 p-4 rounded-2xl ${open ? "bg-[#344054]" : ""} text-left`}>
 
                                         <Disclosure.Button onClick={() => {
-
-                                        }} className="md:text-lg font-semibold w-full">
-                                            <div className="flex gap-4">
+                                        }} className="md:text-lg font-medium md:font-semibold w-full">
+                                            <div className="flex md:flex-row justify-between md:justify-start flex-row-reverse gap-4">
                                                 <div>
                                                     {
                                                         open ? <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1170,7 +1167,7 @@ const Home = () => {
                                                 </div>
                                             </div>
                                         </Disclosure.Button>
-                                        <Disclosure.Panel className="pl-10 pr-12">
+                                        <Disclosure.Panel className="md:pl-10 md:pr-12">
                                             Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.
                                         </Disclosure.Panel>
                                     </div>
@@ -1180,12 +1177,11 @@ const Home = () => {
                         <Disclosure >
                             {({ open }) => (
                                 <>
-                                    <div className={`p-8 rounded-2xl ${open ? "bg-[#344054]" : ""}`}>
+                                    <div className={`md:p-8 p-4 rounded-2xl ${open ? "bg-[#344054]" : ""} text-left`}>
 
                                         <Disclosure.Button onClick={() => {
-
-                                        }} className="md:text-lg font-semibold w-full">
-                                            <div className="flex gap-4">
+                                        }} className="md:text-lg font-medium md:font-semibold w-full">
+                                            <div className="flex md:flex-row justify-between md:justify-start flex-row-reverse gap-4">
                                                 <div>
                                                     {
                                                         open ? <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1203,7 +1199,7 @@ const Home = () => {
                                                 </div>
                                             </div>
                                         </Disclosure.Button>
-                                        <Disclosure.Panel className="pl-10 pr-12">
+                                        <Disclosure.Panel className="md:pl-10 md:pr-12">
                                             Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.
                                         </Disclosure.Panel>
                                     </div>

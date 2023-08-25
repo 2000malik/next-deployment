@@ -21,7 +21,7 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        reset: () => {
+        resetAuth: () => {
             return initialState;
         },
         setUserType: (state, action: PayloadAction<"user" | "agent">) => {
@@ -40,5 +40,5 @@ const authSlice = createSlice({
     },
 });
 
-export const { reset, authLogin, authLogout, setUserType, updateUser } = authSlice.actions;
+export const { resetAuth, authLogin, authLogout, setUserType, updateUser } = authSlice.actions;
 export default authSlice.reducer; 

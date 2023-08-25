@@ -8,12 +8,12 @@ const Company = () => {
         <div className="relative mt-[80px]">
             <header className="relative">
                 <section className="relative">
-                    <div className="container px-4 mx-auto py-24">
+                    <div className="container  px-4 mx-auto py-24">
                         <div className="text-center">
                             <h2 className="text-5xl font-raleway font-medium">
                                 We do things differently
                             </h2>
-                            <p className="text-lg max-w-4xl mx-auto mt-6">
+                            <p className="md:text-lg text-sm max-w-4xl mx-auto mt-6">
                                 We focus on the details of everything we do. All to help businesses around the world focus on what’s most important to them. We take pride in this.
                             </p>
                         </div>
@@ -169,12 +169,12 @@ const Company = () => {
 
             <section className="relative bg-[#141414]">
 
-                <div className="container px-4 mx-auto py-24">
+                <div className="container  px-4 mx-auto py-24">
                     <div className="text-center">
-                        <h2 className="text-4xl font-raleway font-medium">
+                        <h2 className="md:text-4xl text-2xl font-raleway font-medium">
                             We're an ambitious and smart team <br /> with a shared mission
                         </h2>
-                        <p className="text-lg max-w-4xl mx-auto mt-6">
+                        <p className="md:text-lg text-sm max-w-4xl mx-auto mt-6">
                             Our shared values keep us connected and guide us as one team.
                         </p>
                     </div>
@@ -232,12 +232,12 @@ const Company = () => {
                 </div>
             </section>
             <section className="relative">
-                <div className="container px-4 mx-auto py-24">
+                <div className="container  px-4 mx-auto py-24">
                     <div className="text-center">
-                        <h2 className="text-4xl font-raleway font-medium">
+                        <h2 className="md:text-4xl text-2xl font-raleway font-medium">
                             Meet our team
                         </h2>
-                        <p className="text-lg max-w-4xl mx-auto mt-6">
+                        <p className="md:text-lg text-sm max-w-4xl mx-auto mt-6">
                             Our philosophy is simple — hire a team of diverse, passionate people and foster a culture that empowers you to do your best work.
                         </p>
                     </div>
@@ -281,7 +281,7 @@ const Company = () => {
                 </div>
             </section >
             <section className="relative bg-[#141414]">
-                <div className="container px-4 mx-auto py-24">
+                <div className="container  px-4 mx-auto py-24">
 
                     <div className="mt-16 mx-auto ">
                         <div className="grid grid-cols-3 px-8 gap-x-8 gap-y-16">

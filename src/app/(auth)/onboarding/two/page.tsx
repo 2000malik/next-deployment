@@ -70,7 +70,7 @@ export default function OnboardingTwo() {
                         </div>
                     </div>
                     <div style={{ background: "linear-gradient(45deg, #005FF8  0%, #384459  100%)" }}
-                        className="w-6/12 flex justify-center items-center container md:mx-auto md:px-12">
+                        className="w-6/12 flex justify-center items-center container  md:mx-auto md:px-12">
                         <div className="">
                             <div className="self text-gray-50 text-[64px] font-extrabold font-raleway leading-tight">Tell us about your business</div>
                             <div className="w-[558px] text-gray-100 text-[20px] font-normal leading-normal">

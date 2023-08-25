@@ -2,63 +2,34 @@
 "use client";
 
 import { configureStore } from '@reduxjs/toolkit'
-// import { persistReducer, FLUSH, PAUSE, PURGE, persistStore, REGISTER, REHYDRATE, PERSIST } from 'redux-persist'
+import { persistReducer, FLUSH, PAUSE, PURGE, persistStore, REGISTER, REHYDRATE, PERSIST } from 'redux-persist'
 import { rootReducer } from '@/setup/redux/root-reducer'
-// import storage from 'redux-persist/lib/storage'
-import { createWrapper } from "next-redux-wrapper"; ''
+import storage from "./custom-storage"
+import logger from "redux-logger";
 
-const makeConfiguredStore = () =>
-    configureStore({
-        reducer: rootReducer,
-        devTools: true,
-    });
-
-export const store = () => {
-    const isServer = typeof window === "undefined";
-    if (isServer) {
-        return makeConfiguredStore();
-    } else {
-        return makeConfiguredStore();
-
-        // const persistConfig = {
-        //     key: 'wokpa',
-        //     version: 1.001,
-        //     storage,
-        //     blacklist: ["sidebar"]
-        // }
-
-        // const persistedReducer = persistReducer(persistConfig, rootReducer);
-        // let store: any = configureStore({
-        //     reducer: persistedReducer,
-        //     devTools: process.env.NODE_ENV !== "production",
-        // });
-        // store.__persistor = persistStore(store); // Nasty hack
-        // return store;
-    }
+const persistConfig = {
+    key: "wokpa",
+    storage: storage,
+    blacklist: [],
 };
 
-// Previous codes 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// const store = () => configureStore({
-//     reducer: persistedReducer,
-//     middleware: (getDefaultMiddleware) =>
-//         getDefaultMiddleware({
-//             serializableCheck: {
-//                 ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-//             }
-//         }),
 
-//     devTools: process.env.NODE_ENV !== 'production',
-// })
 
-export type AppStore = ReturnType<typeof store>;
-export type AppState = ReturnType<AppStore["getState"]>;
+const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+            }
+        }).concat(logger),
 
-export const wrapper = createWrapper<AppStore>(store);
+    devTools: process.env.NODE_ENV !== 'production',
+})
 
-// export const persistor = persistStore(store())
+
+export const persistor = persistStore(store)
 export default store;
-
-const d = store().dispatch
-
-export type AppDispatch = typeof d
+export type AppDispatch = typeof store.dispatch

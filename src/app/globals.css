@@ -75,3 +75,8 @@ body:not(._native-scrollbars) *::-webkit-scrollbar-corner {
     background: #36FFE8 !important;
 
 }
+
+.slider-track-0 {
+    /* color of the track before the thumb */
+    background-color: #F2F4F7 !important;
+}

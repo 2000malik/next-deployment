@@ -6,12 +6,17 @@ import 'swiper/css/pagination';
 import { PropsWithChildren } from "react";
 import { Inter, Raleway, Poppins } from 'next/font/google'
 import axios from "axios";
-import store, { wrapper } from '@/setup/redux/store';
+import store from '@/setup/redux/store';
 import * as _redux from "@/setup"
 import { Provider } from 'react-redux';
+import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
+import React from 'react';
+
+export const loadingBarRef = React.createRef<LoadingBarRef | null>();
+
 // import { PersistGate } from 'redux-persist/integration/react';
 
-_redux.setupAxios(axios, store())
+_redux.setupAxios(axios, store)
 
 const inter = Inter({
     subsets: ['latin'],
@@ -40,13 +45,10 @@ function RootLayout({ children, ...rest }: PropsWithChildren) {
 
         <html lang="en" className={`${inter.variable} ${raleway.variable} ${poppins.variable}`} >
             <body className="" >
-                <Provider store={store()}>
-
-                    <main className="relative">
-                        {children}
-                    </main>
-
-                </Provider>
+                <main className="relative">
+                    <LoadingBar color='#36FFE8' ref={loadingBarRef as React.RefObject<LoadingBarRef>} height={5} />
+                    {children}
+                </main>
             </body>
         </html >
     )

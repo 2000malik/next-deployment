@@ -1,6 +1,8 @@
 'use client';
 
+import { loadingBarRef } from "@/app/layout";
 import { useRef, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export function getAbsoluteUrl(path: string) {
     return process.env.PUBLIC_URL + path;
@@ -21,6 +23,44 @@ export function getLogo(name: string) {
 export function getSVG(name: string) {
     return process.env.PUBLIC_URL + `/media/svg/${name}`;
 }
+
+
+const FPS = 1;
+const DELAY = 1000 / FPS;
+let time = 0;
+let frame = -1;
+let tref = 0;
+
+export const handleRequestAnimationFrame = (callback: (timestamp: number) => void) => {
+    return function loop(timestamp: number) {
+        if (!time) time = timestamp;
+        let seg = Math.floor((timestamp - time) / DELAY);
+
+        if (seg > frame) {
+            frame = seg;
+            callback(timestamp);
+        }
+        tref = requestAnimationFrame(loop);
+    }
+}
+
+export const APICall = async (fn: (...args: any) => Promise<any>, args?: any, showSuccessToast?: boolean) => {
+    try {
+        loadingBarRef.current?.continuousStart();
+        const response = args !== null && typeof args[Symbol.iterator] === 'function' ? await fn(...args) : await fn(args)
+        if (showSuccessToast)
+            toast(response.data.message, { type: "success" });
+        loadingBarRef.current?.complete();
+        return response;
+    } catch (error: any) {
+        if (error.response) {
+            toast(error.response.data.message, { type: "error" });
+        }
+        loadingBarRef.current?.complete();
+        throw error;
+    }
+}
+
 
 export const formatToCurrency = (amount: number | string) => {
     return Intl.NumberFormat('en-GB', {
@@ -80,4 +120,4 @@ export const useDimensions = (ref: any) => {
 };
 
 
-export const API_URL = "https://paywithfish.ddns.net/api"
+export const API_URL = "https://wokpa.ddns.net/api"

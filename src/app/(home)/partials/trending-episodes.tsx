@@ -23,10 +23,10 @@ export const FeaturedPodcasts = () => {
         <section className="relative">
             <div className="mx-auto py-24">
                 <div className="text-center">
-                    <h2 className="text-5xl font-raleway font-bold">
+                    <h2 className="md:text-5xl text-2xl font-raleway font-bold">
                         Featured Podcasts
                     </h2>
-                    <p className="text-lg max-w-4xl mx-auto mt-6">
+                    <p className="md:text-lg text-sm max-w-4xl mx-auto mt-6">
                         Discover our top podcasts
                     </p>
                 </div>
@@ -42,7 +42,7 @@ export const FeaturedPodcasts = () => {
                     >
                         {/* episode-card */}
                         {[1, 2, 2, 1, 1, 3, 4, 5, 1, 1, 1, 1].map((i) => <SwiperSlide className="!w-[280px] !h-[320px]">  <div className="w-[280px] h-[280px]">
-                            <Image width={280} height={280} src={("/images/podcast-image" + ((i % 4) + 1) + ".png")} alt="" />
+                            <img width={280} height={280} src={("/images/podcast-image" + ((i % 4) + 1) + ".png")} alt="" />
                         </div>
                         </SwiperSlide>)}
                     </Swiper>
@@ -77,10 +77,10 @@ export const FictionAndDrama = () => {
         <section className="relative">
             <div className="mx-auto py-24">
                 <div className="text-center">
-                    <h2 className="text-5xl font-raleway font-bold">
+                    <h2 className="md:text-5xl text-2xl font-raleway font-bold">
                         Fiction & Drama
                     </h2>
-                    <p className="text-lg max-w-4xl mx-auto mt-6">
+                    <p className="md:text-lg text-sm max-w-4xl mx-auto mt-6">
                         Discover our top podcasts
                     </p>
                 </div>
@@ -96,7 +96,7 @@ export const FictionAndDrama = () => {
                     >
                         {/* episode-card */}
                         {[1, 2, 2, 1, 1, 3, 4, 5, 1, 1, 1, 1].map((i) => <SwiperSlide className="!w-[280px] !h-[320px]">  <div className="w-[280px] h-[280px]">
-                            <Image width={280} height={280} src={("/images/podcast-image" + ((i % 4) + 1) + ".png")} alt="" />
+                            <img width={280} height={280} src={("/images/podcast-image" + ((i % 4) + 1) + ".png")} alt="" />
                         </div>
                         </SwiperSlide>)}
                     </Swiper>
@@ -131,10 +131,10 @@ export const RadioPrograms = () => {
         <section className="relative  bg-[#141414]">
             <div className="mx-auto py-24">
                 <div className="text-center">
-                    <h2 className="text-5xl font-raleway font-bold">
+                    <h2 className="md:text-5xl text-2xl font-raleway font-bold">
                         Radio Programs
                     </h2>
-                    <p className="text-lg max-w-4xl mx-auto mt-6">
+                    <p className="md:text-lg text-sm max-w-4xl mx-auto mt-6">
                         Discover our top podcasts
                     </p>
                 </div>
@@ -150,7 +150,7 @@ export const RadioPrograms = () => {
                     >
                         {/* episode-card */}
                         {[1, 2, 2, 1, 1, 3, 4, 5, 1, 1, 1, 1].map((i) => <SwiperSlide className="!w-[280px] !h-[320px]">  <div className="w-[280px] h-[280px]">
-                            <Image width={280} height={280} src={("/images/podcast-image" + ((i % 4) + 1) + ".png")} alt="" />
+                            <img width={280} height={280} src={("/images/podcast-image" + ((i % 4) + 1) + ".png")} alt="" />
                         </div>
                         </SwiperSlide>)}
                     </Swiper>
@@ -186,10 +186,10 @@ const TrendingEpisodes = () => {
             </div>
             <div className="mx-auto py-24">
                 <div className="text-center">
-                    <h2 className="text-5xl font-raleway font-bold">
+                    <h2 className="md:text-5xl text-2xl font-raleway font-bold">
                         Trending <span className="text-primary">episodes</span> today
                     </h2>
-                    <p className="text-lg max-w-4xl mx-auto mt-6">
+                    <p className="md:text-lg text-sm max-w-4xl mx-auto mt-6">
                         Discover fresh content
                     </p>
                 </div>
@@ -206,7 +206,7 @@ const TrendingEpisodes = () => {
                         {/* episode-card */}
                         {[1, 2, 2, 1, 1, 3, 4, 5].map(() => <SwiperSlide className="!w-[400px]"> <div className="w-[400px] h-[262px] rounded-2xl p-5 bg-[#26272B]">
                             <div className="flex gap-4">
-                                <Image src={("/images/episode-card-image.png")} alt="" width={80} height={80} />
+                                <img src={("/images/episode-card-image.png")} alt="" width={80} height={80} />
                                 <div className="py-1">
                                     <h6 className="text-lg font-semibold">7 good memories</h6>
                                     <p className="text-sm text-[#EAECF0]">8 hours ago</p>

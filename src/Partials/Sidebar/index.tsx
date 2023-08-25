@@ -1,6 +1,6 @@
 "use client";
 
-import { reset } from "@/redux/auth";
+import { resetAuth } from "@/redux/auth";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import { Disclosure, Transition } from "@headlessui/react";
 import { PropsWithChildren } from "react";
@@ -23,9 +23,9 @@ const NavLink: React.FC<NavLinkProps> = ({ href, exact, children, ...props }) =>
 
     return (
         <Link href={href}>
-            <a {...props}>
+            <div {...props}>
                 {children}
-            </a>
+            </div>
         </Link>
     );
 }
@@ -49,7 +49,7 @@ const Sidebar = () => {
                 </svg>
             </button>
 
-            <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-[20-2rem] h-screen transition-transform -translate-x-full sm:translate-x-0 !bg-grayTrue" aria-label="Sidebar">
+            <aside id="logo-sidebar" className="fixed top-0 left-0 z-10 w-[20-2rem] h-screen transition-transform -translate-x-full sm:translate-x-0 !bg-grayTrue" aria-label="Sidebar">
                 <div className={`h-screen overflow-y-auto fixed inset-0 pt-7 pb-12 w-[20.2rem] tracking-normal z-10 bg-grayTrue`}>
                     <div>
                         <div className="px-6 space-y-8">
@@ -93,7 +93,7 @@ const Sidebar = () => {
                                         <Disclosure.Button className="w-full outline-none">
                                             <div className="flex justify-between items-center font-medium">
                                                 <div className="text-xs">
-                                                    Joseph UX Podcast
+                                                    {user?.first_name} {user?.last_name} Podcast
                                                 </div>
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -175,22 +175,22 @@ const Sidebar = () => {
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link href="/episodes" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/podcast/episodes" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Episodes
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link href="/distribution" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/podcast/distribution" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Distribution
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link href="/social-distribution" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/podcast/social-distribution" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Social distribution
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link href="/embedded player" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/podcast/embedded-player" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Embedded player
                                                             </Link>
                                                         </div>
@@ -306,22 +306,22 @@ const Sidebar = () => {
                                                 <Disclosure.Panel>
                                                     <div className="space-y-1 mt-2">
                                                         <div>
-                                                            <Link href="/podcast-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/settings/podcast-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Podcast settings
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link href="/website-page-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/settings/website-page-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Website page settings
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link href="/rss-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/settings/rss-settings" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Rss settings
                                                             </Link>
                                                         </div>
                                                         <div>
-                                                            <Link href="/collaborators" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
+                                                            <Link href="/settings/collaborators" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Collaborators
                                                             </Link>
                                                         </div>
@@ -345,7 +345,7 @@ const Sidebar = () => {
                                 </div>
                                 {!minimized && <div
                                     onClick={() => {
-                                        dispatch(reset());
+                                        dispatch(resetAuth());
                                     }}
                                     className="font-source font-medium text-sm cursor-pointer">
                                     Logout

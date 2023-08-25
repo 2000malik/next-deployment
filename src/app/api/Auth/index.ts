@@ -2,8 +2,10 @@ import { API_URL } from "@/utils";
 import axios from "axios";
 
 
-export const register = async (data: any) => axios.post(`${API_URL}/register`, data);
-export const login = async (data: any) => axios.post(`${API_URL}/login`, data);
+export const register = async (data: any) => axios.post(`${API_URL}/publishers/register`, data);
+export const login = async (data: any) => axios.post(`${API_URL}/publishers/login`, data);
+export const googleLogin = (access_token: string) => axios.post(`${API_URL}/publishers/google-login`, { access_token });
+
 export const getProfile = async () => axios.get(`${API_URL}/profile`);
 export const createPin = async (pin: string, pin_confirmation: string) => axios.post(`${API_URL}/pin`, { pin, pin_confirmation });
 export const verifyUser = async (data: any) => axios.put(`${API_URL}/verify-user`, data);

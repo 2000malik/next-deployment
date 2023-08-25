@@ -4,9 +4,39 @@ import Button from "@/components/button";
 import WokpaLogo from "@/components/wokpa-logo";
 import Input from "@/components/input";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getPlan } from "@/app/api/general";
+import { PlanModel } from "@/models/plan";
+import { formatToCurrency } from "@/utils";
+import { subscribeToPlan } from "@/app/api/publishers";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
-const PaymentPageSolo = () => {
+
+const PaymentPageSolo = ({ params }: { params: { planId: string } }) => {
+    const [plan, setPlan] = useState<PlanModel | null>(null);
+    const navigate = useRouter();
+
+    const handleSubscribe = async () => {
+        try {
+            const response = await subscribeToPlan(params.planId);
+            window.location.href = response.data.data.authorization_url
+            toast(response.data.message, { type: "success" });
+            navigate.push("/dashboard")
+        } catch (error: any) {
+            if (error.response) {
+                toast(error.response.data.message, { type: "error" });
+            }
+        }
+    }
+
+    useEffect(() => {
+        (async () => {
+            const response = await getPlan(params.planId);
+            setPlan(response.data.data);
+        })()
+    }, []);
 
     return (
         <div>
@@ -20,15 +50,14 @@ const PaymentPageSolo = () => {
                             <div>
                                 <div className="bg-[#141414] p-8 flex flex-col gap-6 rounded-xl">
                                     <div className="font-raleway text-4xl">
-                                        <span className="text-white font-medium">Subscribing to  <span className="text-teal-400 font-medium ">Solo</span></span>
+                                        <span className="text-white font-medium">Subscribing to  <span className="text-teal-400 font-medium ">{plan?.name}</span></span>
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
                                             <path d="M14 40V10H15L33 38H34V8M8 20H40M8 28H40" stroke="#FCFCFD" strokeWidth="2" />
                                         </svg>
-                                        <span className="font-medium text-4xl font-raleway">
-                                            10,000
-
+                                        <span className="font-medium md:text-4xl text-2xl font-raleway">
+                                            {plan?.amount ? formatToCurrency(Number(plan?.amount / 100)) : ""}
                                             <span className="text-xl font-normal">
                                                 Per month
                                             </span>
@@ -50,7 +79,7 @@ const PaymentPageSolo = () => {
                                     <div className="bg-[#141414] p-8 flex flex-col gap-6 rounded-xl">
                                         <div className="border-b flex justify-between pb-4">
                                             <div className="font-raleway text-2xl">
-                                                Solo (Monthly)
+                                                {plan?.amount ? formatToCurrency(Number(plan?.amount / 100)) : "0"} (Monthly)
                                             </div>
                                         </div>
                                         <div>
@@ -73,7 +102,7 @@ const PaymentPageSolo = () => {
                                         </div>
                                         <div className="font-zl flex justify-between border-t pt-4">
                                             <div className="font-semibold">
-                                                Am  ount due today
+                                                Am ount due today
                                             </div>
                                             <div className="font-semibold">
                                                 ₦100,000
@@ -84,7 +113,7 @@ const PaymentPageSolo = () => {
                                 <div className="mt-4">
                                     <div className="bg-[#141414] p-8 flex flex-col gap-6 rounded-xl">
                                         <div className="font-lg ">
-                                            You’re subscribing to Solo. You’ll be charged     10,000 today and again automatically each month, until you cancel your subscription. Each month is paid in advance, and you can cancel at any time from your Account Settings. The payment will be processed by Stripe, a secure payment gateway.
+                                            You’re subscribing to {plan?.name}. You’ll be charged  {plan?.amount ? formatToCurrency(Number(plan?.amount / 100)) : "0"} today and again automatically each month, until you cancel your subscription. Each month is paid in advance, and you can cancel at any time from your Account Settings. The payment will be processed by Stripe, a secure payment gateway.
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +223,7 @@ const PaymentPageSolo = () => {
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <Button className="">
+                                                <Button onClick={handleSubscribe} className="">
                                                     Subscribe
                                                 </Button>
 

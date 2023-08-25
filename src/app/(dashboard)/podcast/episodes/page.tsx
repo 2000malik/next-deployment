@@ -487,7 +487,7 @@ const EpisodesPage = () => {
                 </div>
                 <div className="flex justify-end gap-2 mt-4">
                     <div>
-                        <Button className="!from-white !to-white text-[#063150] text-sm font-semibold">
+                        <Button className="!from-white !to-white !text-[#063150] text-sm font-semibold">
                             Record new episode
                         </Button>
                     </div>

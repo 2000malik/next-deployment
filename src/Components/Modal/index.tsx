@@ -36,7 +36,7 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, size, children }) => {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className={`${size == "lg" ? "md:w-[70vw]" : size == "md" ? "md:w-[55vw]" : size == "sm" ? "md:w-[32vw]" : "md:w-[25vw]"} w-[90vw] overflow-hidden rounded-xl bg-white transition-all`}>
+                            <Dialog.Panel className={`${size == "lg" ? "md:w-[70vw]" : size == "md" ? "md:w-[55vw]" : size == "sm" ? "md:w-[32vw]" : "md:w-[25vw]"} w-[90vw] overflow-hidden rounded-xl bg-[#26272B] transition-all`}>
                                 <div className=''>
                                     {
                                         children

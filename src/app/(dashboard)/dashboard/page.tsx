@@ -3,8 +3,11 @@
 import { useRouter } from 'next/navigation';
 import Button from '@/components/button';
 import { useAppSelector, useAppDispatch } from '@/hooks';
-import { useState, } from 'react';
+import { useEffect, useState, } from 'react';
 import { Listbox, Tab } from '@headlessui/react';
+import { PodcastModel } from '@/models/podcast';
+import { getPodcasts } from '@/app/api/publishers';
+import moment from "moment"
 
 const GetPaidCard = () => {
     return (
@@ -74,7 +77,7 @@ const AnalyticsCard = () => {
     )
 }
 
-const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
+const PodcastItem: React.FC<{ mode: "list" | "card", podcast: PodcastModel }> = ({ mode, podcast }) => {
     const navigate = useRouter();
 
     return (
@@ -85,18 +88,18 @@ const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
                         <div className="flex gap-4">
 
                             <div>
-                                <img className="w-[120px] h-[120px] rounded-lg" src={("/images/product.jpeg")} alt="" />
+                                <img className="w-[120px] h-[120px] rounded-lg" src={podcast.picture_url} alt="" />
                             </div>
                             <div className="h-full">
                                 <div className="flex justify-between flex-col gap-2">
                                     <div>
                                         <div className="text-sm font-medium">
-                                            Published:  17 May , 2023
+                                            Published: {moment(podcast.created_at).format("DD MMM, YYYY")}
                                         </div>
                                     </div>
                                     <div>
-                                        <div onClick={() => navigate.push("/episodes/1 ")} className="font-semibold text-lg">
-                                            The midnight miracle of the gospel of Jesus  -
+                                        <div onClick={() => navigate.push(`/podcast/episode-view/${podcast.id}`)} className="font-semibold text-lg cursor-pointer">
+                                            {podcast.title}
                                         </div>
                                     </div>
                                     <div className="flex gap-2 items-center text-[#D0D5DD]">
@@ -105,9 +108,9 @@ const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
                                                 <path d="M9 13.6195L13.635 16.417L12.405 11.1445L16.5 7.59699L11.1075 7.13949L9 2.16699L6.8925 7.13949L1.5 7.59699L5.595 11.1445L4.365 16.417L9 13.6195Z" fill="#D0D5DD" />
                                             </svg>
                                             <div className="text-sm font-semibold">
-                                                4.6
+                                                {podcast.average_rating}
                                                 <span className="font-normal ml-1">
-                                                    (20)
+                                                    ({podcast.rating_count})
                                                 </span>
                                             </div>
                                         </div>
@@ -116,7 +119,8 @@ const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
                                         </svg>
 
                                         <div className="text-sm">
-                                            Society & Culture
+
+                                            {podcast.category_name}
                                         </div>
 
                                         <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +135,7 @@ const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
                                     <div className="flex gap-4 items-center">
                                         <div className="">
                                             <div className="text-[8px] text-[#0D0D0D] font-semibold bg-white rounded-full py-2 px-4">
-                                                20 Episodes
+                                                {podcast.episode_count} Episodes
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-1 text-sm">
@@ -140,7 +144,7 @@ const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
                                             </svg>
 
                                             <div>
-                                                500 Plays
+                                                {podcast.play_count} Plays
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-1 text-sm">
@@ -168,7 +172,7 @@ const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
                         {/* action buttons */}
                         <div className="flex gap-4">
                             <div className="text-center">
-                                <button>
+                                <button onClick={() => navigate.push(`/podcast/create-podcast/${podcast.id}`)}>
                                     <div>
                                         <svg className="inline" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M11 4.00023H6.8C5.11984 4.00023 4.27976 4.00023 3.63803 4.32721C3.07354 4.61483 2.6146 5.07377 2.32698 5.63826C2 6.27999 2 7.12007 2 8.80023V17.2002C2 18.8804 2 19.7205 2.32698 20.3622C2.6146 20.9267 3.07354 21.3856 3.63803 21.6732C4.27976 22.0002 5.11984 22.0002 6.8 22.0002H15.2C16.8802 22.0002 17.7202 22.0002 18.362 21.6732C18.9265 21.3856 19.3854 20.9267 19.673 20.3622C20 19.7205 20 18.8804 20 17.2002V13.0002M7.99997 16.0002H9.67452C10.1637 16.0002 10.4083 16.0002 10.6385 15.945C10.8425 15.896 11.0376 15.8152 11.2166 15.7055C11.4184 15.5818 11.5914 15.4089 11.9373 15.063L21.5 5.50023C22.3284 4.6718 22.3284 3.32865 21.5 2.50023C20.6716 1.6718 19.3284 1.6718 18.5 2.50022L8.93723 12.063C8.59133 12.4089 8.41838 12.5818 8.29469 12.7837C8.18504 12.9626 8.10423 13.1577 8.05523 13.3618C7.99997 13.5919 7.99997 13.8365 7.99997 14.3257V16.0002Z" stroke="#EAECF0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -209,21 +213,21 @@ const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
                     :
                     <div className="">
                         <div className="relative">
-                            <img className="w-[240px] h-[200px] rounded-xl" src={("/images/product.jpeg")} alt="" />
+                            <img className="w-[240px] h-[200px] rounded-xl" src={podcast.picture_url} alt="" />
                             <div className="absolute top-0 p-2">
                                 <div className="text-[8px] text-[#0D0D0D] font-semibold bg-white rounded-full py-2 px-4">
-                                    20 Episodes
+                                    {podcast.episode_count} Episodes
                                 </div>
                             </div>
                         </div>
                         <div className="mt-2">
                             <div className="font-semibold text-lg">
-                                The midnight miracle ...
+                                {podcast.title}
                             </div>
                         </div>
                         <div className="">
                             <div className="text-sm font-medium text-[#EAECF0]">
-                                Published:  17 May , 2023
+                                Published:   {moment(podcast.created_at).format("DD MMM, YYYY")}
                             </div>
                         </div>
                         <div className="flex gap-4 items-center mt-1">
@@ -233,7 +237,7 @@ const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
                                 </svg>
 
                                 <div>
-                                    500 Plays
+                                    {podcast.play_count} Plays
                                 </div>
                             </div>
                             <div className="flex items-center gap-1 text-sm">
@@ -253,6 +257,22 @@ const EpisodeItem: React.FC<{ mode: "list" | "card" }> = ({ mode }) => {
 
 const PodcastTable = () => {
     const [viewMode, setViewMode] = useState<"list" | "card">("list");
+    const [podcasts, setPodcasts] = useState<PodcastModel[]>([]);
+    const navigate = useRouter();
+
+
+    const handleGetPodcast = async () => {
+        try {
+            const response = await getPodcasts();
+            setPodcasts(response.data.data.data);
+            console.log(response.data.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => { handleGetPodcast() }, []);
+
     return (
         <div className="mt-4">
             <div className="flex justify-between">
@@ -391,14 +411,31 @@ const PodcastTable = () => {
             <div className="mt-8">
                 {
                     <div className={`${viewMode == "list" ? "divide-y pr-12" : "grid grid-cols-4 gap-y-8"}`}>
-                        <EpisodeItem mode={viewMode} />
-                        <EpisodeItem mode={viewMode} />
-                        <EpisodeItem mode={viewMode} />
-                        <EpisodeItem mode={viewMode} />
-                        <EpisodeItem mode={viewMode} />
-                        <EpisodeItem mode={viewMode} />
-                        <EpisodeItem mode={viewMode} />
-                        <EpisodeItem mode={viewMode} />
+                        {
+                            podcasts.length ? podcasts.map(podcast => {
+                                return <PodcastItem key={"podcast" + podcast.id} podcast={podcast} mode={viewMode} />
+                            }) :
+
+                                <div className="text-center py-12">
+                                    <svg className='inline' width="201" height="200" viewBox="0 0 201 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="0.5" width="200" height="200" rx="100" fill="url(#paint0_linear_3977_49889)" />
+                                        <path d="M126.094 130C137.811 122.075 145.5 108.89 145.5 93.9248C145.5 69.6665 125.352 50 100.5 50C75.6479 50 55.5 69.6665 55.5 93.9248C55.5 108.89 63.1885 122.075 74.9056 130M82.2983 110C78.0937 105.75 75.5 100.043 75.5 93.7527C75.5 80.6355 86.694 70 100.5 70C114.306 70 125.5 80.6355 125.5 93.7527C125.5 100.048 122.906 105.75 118.702 110M100.5 150C94.9772 150 90.5 145.523 90.5 140V130C90.5 124.477 94.9772 120 100.5 120C106.023 120 110.5 124.477 110.5 130V140C110.5 145.523 106.023 150 100.5 150ZM105.5 95C105.5 97.7614 103.261 100 100.5 100C97.7386 100 95.5 97.7614 95.5 95C95.5 92.2386 97.7386 90 100.5 90C103.261 90 105.5 92.2386 105.5 95Z" stroke="#BEE7E4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <defs>
+                                            <linearGradient id="paint0_linear_3977_49889" x1="0.5" y1="0" x2="200.5" y2="-2.08482e-08" gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#475467" />
+                                                <stop offset="1" stop-color="#667085" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                    <div className="text-lg font-medium mt-4">
+                                        Create your first podcast
+                                    </div>
+                                    <div className="mt-4">
+                                        <Button onClick={() => navigate.push("/podcast/create-podcast")} className='text-sm'>Create new podcast</Button>
+                                    </div>
+                                </div>
+                        }
+
                     </div>
                 }
             </div>
@@ -411,18 +448,17 @@ const UserDashboard = () => {
     const dispatch = useAppDispatch();
     const navigate = useRouter();
 
-
     return (
         <div id="dashboard">
             <div className="">
                 <div className="flex justify-end gap-2">
                     <div>
-                        <Button className="!from-white !to-white text-[#063150] text-sm font-semibold">
+                        <Button onClick={() => navigate.push("/podcast/import-podcast")} className="!from-white !to-white !text-[#063150] text-sm font-semibold">
                             Import new podcast
                         </Button>
                     </div>
                     <div>
-                        <Button onClick={() => navigate.push("/create-podcast")} className="font-semibold text-sm">
+                        <Button onClick={() => navigate.push("/podcast/create-podcast")} className="font-semibold text-sm">
                             Create new podcast
                         </Button>
                     </div>
