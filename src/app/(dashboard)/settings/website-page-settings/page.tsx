@@ -36,11 +36,11 @@ const WebsitePageSettings = () => {
         try {
             setSubmitting(true);
             const response = await updateWebsiteSettings(values);
-            toast(response.data.message, {type: "success"})
+            toast(response.data.message, { type: "success" })
             setSubmitting(false);
         } catch (error: any) {
             if (error.response) {
-                toast(error.response.data.message, {type: "error"})
+                toast(error.response.data.message, { type: "error" })
             }
             setSubmitting(false);
         }

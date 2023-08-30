@@ -3,6 +3,7 @@
 import Button from "../../../components/button";
 import WokpaLogo from "../../../components/wokpa-logo";
 import Input from "../../../components/input";
+import Link from "next/link";
 
 export default function ForgotPassword() {
     return (
@@ -45,7 +46,16 @@ export default function ForgotPassword() {
                                             </Button>
 
                                         </div>
+                                        <div className="mt-8 text-sm font-semibold ">
+                                            <Link href="/login" className="flex justify-center gap-2 items-center">
 
+                                                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M13.3334 6.99984H1.66669M1.66669 6.99984L7.50002 12.8332M1.66669 6.99984L7.50002 1.1665" stroke="#FCFCFD" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                                <span>Back to login</span>
+                                            </Link>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

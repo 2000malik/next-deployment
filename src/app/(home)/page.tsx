@@ -7,12 +7,14 @@ import AllInOne from "./partials/all-in-one";
 import TrendingEpisodes from "./partials/trending-episodes";
 import PodcastYouLike from "./partials/podcasts-you-will-like";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 const Home = () => {
     const router = useRouter();
     return (
         <div className="relative mt-[80px]">
+
             <header className="relative">
                 <div className="py-16">
                     <div className="absolute md:top-0  bottom-[15rem] right-0">
@@ -533,9 +535,9 @@ const Home = () => {
                                         <div className="flex md:flex-row flex-col gap-3 md:gap-6">
 
                                             <div>
-                                                <Button onClick={() => router.push("/signup")} className="font-medium w-full">
+                                                <Link href={"/signup"} className="font-medium w-full rounded-[40px] py-3 px-5 bg-gradient-to-r from-[#083F62] to-[#25AEA4] text-white">
                                                     Get Started
-                                                </Button>
+                                                </Link>
                                             </div>
                                             <div>
                                                 <Button onClick={() => window.location.href = "https://share-eu1.hsforms.com/1KbjPQ4jtQaeZOEnY1D1K6g2b3crg"} className="font-medium !from-transparent !to-transparent border bg-gradient-to-r bg-clip-text !border-[#083F62] w-full">
