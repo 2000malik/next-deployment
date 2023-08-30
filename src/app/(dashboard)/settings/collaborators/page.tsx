@@ -2,12 +2,13 @@
 
 import { getProfile } from "@/app/api/auth";
 import Button from "@/components/button";
+import Modal from "@/components/modal";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import { updateUser } from "@/redux/auth";
 import { useState, useEffect } from "react";
 
 
-const TransactionsTable = () => {
+const CollaboratorsTable = () => {
     const [viewMode, setViewMode] = useState<"list" | "card">("list");
     return (
         <div className="mt-4">
@@ -73,10 +74,69 @@ const TransactionsTable = () => {
 const CollaboratorsPage = () => {
     const user = useAppSelector(state => state.auth.user);
     const dispatch = useAppDispatch();
+    const [loading, setLoading] = useState(false);
 
+    const [collaborators, setCollaborators] = useState(false)
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleSendInvite = () => {
+
+    }
 
     return (
         <div id="dashboard">
+            <Modal size="md" open={showModal} onClose={(val) => setShowModal(val)}>
+                <div className="border-b text-center text-2xl font-raleway font-bold py-5">
+                    Add & Invite new collaborators
+                </div>
+                <div className="py-10 text-center">
+                    <div className="px-6">
+                        <div className="flex gap-3">
+                            <div className="flex-1 text-left">
+                                <label htmlFor="password" className="text-sm">
+                                    Email
+                                </label>
+                                <input name="email" placeholder="olivia@gmail.com" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+
+                            <div className="flex-1 text-left">
+                                <label htmlFor="password" className="text-sm">
+                                    Email
+                                </label>
+                                <input name="email" placeholder="olivia@gmail.com" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+
+                            <div className="flex-1 text-left">
+                                <label htmlFor="password" className="text-sm">
+                                    Email
+                                </label>
+                                <input name="email" placeholder="olivia@gmail.com" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="mt-8">
+                        <Button onClick={handleSendInvite} className="!text-sm !py-[0.63rem] text-center">
+                            {loading ? <svg className="w-5 h-5 inline" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
+                                <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                    <animateTransform
+                                        attributeName="transform"
+                                        attributeType="XML"
+                                        type="rotate"
+                                        dur="1s"
+                                        from="0 50 50"
+                                        to="360 50 50"
+                                        repeatCount="indefinite" />
+                                </path>
+                            </svg> :
+                                "Confirm Code & finish importing"}
+
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
             <div className="relative">
                 <div className="flex gap-3 items-center">
                     <div className="text-sm font-medium">
@@ -122,11 +182,11 @@ const CollaboratorsPage = () => {
                             <p className="text-xs text-[#F2F4F7]">Detailed list of collaborators on this podcast</p>
                         </div>
                     </div>
-                    <Button className="text-sm">
+                    <Button onClick={() => setShowModal(true)} className="text-sm">
                         Add new collaborators
                     </Button>
                 </div>
-                <TransactionsTable />
+                <CollaboratorsTable />
 
             </div>
         </div>
