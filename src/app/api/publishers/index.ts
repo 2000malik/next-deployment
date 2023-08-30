@@ -7,7 +7,12 @@ export const getPodcastEpisodes = async (id: number | string, page = 1, perPage 
 export const getPodcastEpisode = async (podcastId: number | string, episodeId: number | string) => axios.get(`${API_URL}/publishers/podcasts/${podcastId}/episodes/${episodeId}`);
 export const subscribeToPlan = async (id: number | string) => axios.post(`${API_URL}/publishers/plans/${id}/subscriptions`);
 export const updateWebsiteSettings = async (data: any) => axios.post(`${API_URL}/publishers/settings/website-page`, data);
+export const createCollaborators = async (data: any) => axios.post(`${API_URL}/publishers/collaborators`, data);
+export const getCollaborators = async () => axios.get(`${API_URL}/publishers/collaborators`);
+export const updateCollaborators = async (id: number, data: any) => axios.put(`${API_URL}/publishers/collaborators/${id}`, data);
+export const deleteCollaborators = async (id: number) => axios.delete(`${API_URL}/publishers/collaborators/${id}`);
 
+export const getVirtualAccount = async () => axios.get(`${API_URL}/publishers/virtual-accounts`);
 
 export const createPodcast = async (data: any) => axios.post(`${API_URL}/publishers/podcasts`, data, {
     headers: {

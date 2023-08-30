@@ -1,21 +1,168 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Button from "@/components/button";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import Link from "next/link";
 import TransactionsTable from "../../components/transactions-table";
+import { VirtualAccountModel } from "@/models/virtual-account";
+import { getVirtualAccount } from "@/app/api/publishers";
+import { formatToCurrency } from "@/utils";
+import Modal from "@/components/modal";
 
 const WalletPage = () => {
     const user = useAppSelector(state => state.auth.user);
     const dispatch = useAppDispatch();
+    const [showAccountModal, setShowAccountModal] = useState(false);
+    const [showTransferModal, setShowTransferModal] = useState(false);
 
+    const [virtualAccount, setVirtualAccount] = useState<VirtualAccountModel | null>(null);
+
+
+    const handleGetVirtualAccount = async () => {
+        try {
+            const response = await getVirtualAccount();
+            setVirtualAccount(response.data.data);
+        } catch (error) {
+
+        }
+    }
+
+
+
+    useEffect(() => { handleGetVirtualAccount() }, [])
 
     return (
         <div id="dashboard">
+            <Modal size="md" open={showAccountModal} onClose={(val) => setShowAccountModal(val)}>
+                <div className="border-b text-center text-2xl font-raleway font-bold py-5">
+                    KYC
+                </div>
+                <div className="py-10 text-center">
+                    <div className="px-8">
+                        <div className="text-lg font-semibold text-left">
+                            Personal Information
+                        </div>
+                        <div className="space-y-4">
+                            <div className="flex-1 text-left">
+                                <label htmlFor="name" className="text-sm">
+                                    Account number
+                                </label>
+                                <input readOnly value={virtualAccount?.number} name="name" placeholder="Enter full name" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+
+                            <div className="flex-1 text-left">
+                                <label htmlFor="name" className="text-sm">
+                                    Account name
+                                </label>
+                                <input readOnly value={virtualAccount?.name} name="name" placeholder="Enter full name" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+
+                            <div className="flex-1 text-left">
+                                <label htmlFor="name" className="text-sm">
+                                    BVN number
+                                </label>
+                                <input readOnly value={""} name="name" placeholder="Enter full name" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+                        </div>
+                        <div className="space-y-4 mt-6">
+                            <div className="text-lg font-semibold text-left">
+                                Address Information
+                            </div>
+                            <div className="flex-1 text-left">
+                                <label htmlFor="name" className="text-sm">
+                                    Proof of address
+                                </label>
+                                <input readOnly value={virtualAccount?.number} name="name" placeholder="Enter full name" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+
+                            <div className="flex-1 text-left">
+                                <label htmlFor="name" className="text-sm">
+                                    Address
+                                </label>
+                                <input readOnly value={virtualAccount?.name} name="name" placeholder="Enter full name" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+                        </div>
+                        <div className="space-y-4 mt-6">
+                            <div className="text-lg font-semibold text-left">
+                                Identification Documents
+                            </div>
+                            <div className="flex-1 text-left">
+                                <label htmlFor="name" className="text-sm">
+                                    Id type
+                                </label>
+                                <input readOnly value={virtualAccount?.number} name="name" placeholder="Enter full name" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-8 space-y-4 px-8">
+                        <div className="text-right space-x-4">
+                            <Button className="from-white !to-white !text-[#063150] font-semibold !py-[0.63rem] text-center">
+                                Cancel
+                            </Button>
+                            <Button className="!text-sm !py-[0.63rem] text-center">
+                                Edit details
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
+            <Modal size="md" open={showTransferModal} onClose={(val) => setShowTransferModal(val)}>
+                <div className="border-b text-center text-2xl font-raleway font-bold py-5">
+                    Send money
+                </div>
+                <div className="py-10 text-center">
+                    <div className="px-8">
+
+                        <div className="space-y-4">
+                            <div className="flex-1 text-left">
+                                <label htmlFor="name" className="text-sm">
+                                    Enter amount
+                                </label>
+                                <input readOnly name="name" placeholder="Enter amount" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+
+                            <div className="flex-1 text-left">
+                                <div className="mb-2 text-slate-600">
+                                    <label htmlFor="name" className="text-sm">
+                                        Destination account details
+                                    </label>
+                                </div>
+                                <label htmlFor="name" className="text-sm">
+                                    Account number
+                                </label>
+                                <input readOnly name="name" placeholder="Enter account number" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+
+                            <div className="flex-1 text-left">
+                                <label htmlFor="name" className="text-sm">
+                                    Bank name
+                                </label>
+                                <input readOnly value={""} name="name" placeholder="Enter bank name" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+                            <div className="flex-1 text-left">
+                                <label htmlFor="name" className="text-sm">
+                                    Account name
+                                </label>
+                                <input readOnly value={""} name="name" placeholder="Enter account name" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-8 space-y-4 px-8">
+                        <div className="text-right space-x-4">
+                            <Button className="!text-sm !py-[0.63rem] text-center">
+                                Proceed to send money
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </Modal>
             <div className="relative">
                 <div className="flex gap-3 items-center">
                     <div className="text-sm font-medium">
-                        Emax podcast
+                        {user?.first_name} podcast
                     </div>
                     <div>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,17 +197,17 @@ const WalletPage = () => {
                     </div>
                     <div className="flex justify-end gap-2 mt-4">
                         <div>
-                            <Button className="!from-transparent !to-transparent text-sm font-semibold border bg-gradient-to-r bg-clip-text">
+                            <Button onClick={() => setShowAccountModal(true)} className="!from-transparent !to-transparent text-sm font-semibold border bg-gradient-to-r bg-clip-text">
                                 View account details
                             </Button>
                         </div>
                         <div>
-                            <Button className="!from-white !to-white !text-[#063150] text-sm font-semibold">
+                            <Button onClick={() => setShowTransferModal(true)} className="!from-white !to-white !text-[#063150] text-sm font-semibold">
                                 Add money
                             </Button>
                         </div>
                         <div>
-                            <Button className="font-semibold text-sm">
+                            <Button onClick={() => setShowTransferModal(true)} className="font-semibold text-sm">
                                 Transfer money
                             </Button>
                         </div>
@@ -73,15 +220,18 @@ const WalletPage = () => {
                             <span className="font-normal mr-1">
                                 ₦
                             </span>
-                            2,000,000
+                            {
+                                virtualAccount ? formatToCurrency(virtualAccount.available_balance) : "0.00"
+                            }
+
                         </div>
                         <div className="self-end">
-                            <span className="text-sm font-medium bg-green-100 py-1 px-3 rounded-full inline-flex items-center gap-1 font-inter text-green-600">
+                            {/* <span className="text-sm font-medium bg-green-100 py-1 px-3 rounded-full inline-flex items-center gap-1 font-inter text-green-600">
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6 9.5V2.5M6 2.5L2.5 6M6 2.5L9.5 6" stroke="#12B76A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                                 <span>7.2%</span>
-                            </span>
+                            </span> */}
                         </div>
                     </div>
                 </div>
@@ -96,7 +246,11 @@ const WalletPage = () => {
                             <div>
                                 <div className="text-sm font-medium">Account Info</div>
                                 <div className="mt-4 flex gap-4 items-center">
-                                    <div className="text-lg font-medium">2003428772</div>
+                                    <div className="text-lg font-medium">
+                                        {
+                                            virtualAccount ? virtualAccount?.number : "------------"
+                                        }
+                                    </div>
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M7.5 3H14.6C16.8402 3 17.9603 3 18.816 3.43597C19.5686 3.81947 20.1805 4.43139 20.564 5.18404C21 6.03969 21 7.15979 21 9.4V16.5M6.2 21H14.3C15.4201 21 15.9802 21 16.408 20.782C16.7843 20.5903 17.0903 20.2843 17.282 19.908C17.5 19.4802 17.5 18.9201 17.5 17.8V9.7C17.5 8.57989 17.5 8.01984 17.282 7.59202C17.0903 7.21569 16.7843 6.90973 16.408 6.71799C15.9802 6.5 15.4201 6.5 14.3 6.5H6.2C5.0799 6.5 4.51984 6.5 4.09202 6.71799C3.71569 6.90973 3.40973 7.21569 3.21799 7.59202C3 8.01984 3 8.57989 3 9.7V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.0799 21 6.2 21Z" stroke="#F9FAFB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
@@ -118,7 +272,11 @@ const WalletPage = () => {
                             <div>
                                 ₦
                             </div>
-                            <div className=" font-semibold">20,000</div>
+                            <div className=" font-semibold">
+                                {
+                                    virtualAccount ? formatToCurrency(virtualAccount.available_balance) : "0.00"
+                                }
+                            </div>
 
                         </div>
                     </div>
@@ -136,7 +294,9 @@ const WalletPage = () => {
                             <div>
                                 ₦
                             </div>
-                            <div className=" font-semibold">10,000</div>
+                            <div className=" font-semibold">
+                                {0}
+                            </div>
 
                         </div>
                     </div>
