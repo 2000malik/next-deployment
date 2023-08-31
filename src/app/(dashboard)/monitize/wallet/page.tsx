@@ -1,22 +1,62 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Button from "@/components/button";
 import { useAppSelector, useAppDispatch } from "@/hooks";
 import Link from "next/link";
 import TransactionsTable from "../../components/transactions-table";
 import { VirtualAccountModel } from "@/models/virtual-account";
-import { getVirtualAccount } from "@/app/api/publishers";
-import { formatToCurrency } from "@/utils";
+import { getBanks, getVirtualAccount, nameEnquiry, updateKYC } from "@/app/api/publishers";
+import { APICall, formatToCurrency } from "@/utils";
 import Modal from "@/components/modal";
+import { useFilePicker } from "use-file-picker";
+import * as Yup from "yup";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useDropzone } from "react-dropzone";
 
 const WalletPage = () => {
     const user = useAppSelector(state => state.auth.user);
     const dispatch = useAppDispatch();
+
     const [showAccountModal, setShowAccountModal] = useState(false);
+    const [showEditAccountModal, setEditShowAccountModal] = useState(false);
+
     const [showTransferModal, setShowTransferModal] = useState(false);
 
     const [virtualAccount, setVirtualAccount] = useState<VirtualAccountModel | null>(null);
+    const [kyc, setKYC] = useState<null>(null);
+
+    const [utilityBill, setUtilityBill] = useState<File | null>(null);
+    const [idFile, setIdFile] = useState<File | null>(null);
+
+    const [banks, setBanks] = useState<{ name: string, code: string }[]>([]);
+
+    const onDropId = useCallback((acceptedFiles: File[]) => {
+        if (acceptedFiles.length) {
+            setIdFile(acceptedFiles[0])
+        }
+
+    }, []);
+
+    const onDropUtility = useCallback((acceptedFiles: File[]) => {
+        if (acceptedFiles.length) { }
+        setUtilityBill(acceptedFiles[0])
+
+    }, []);
+
+
+    const { acceptedFiles: idFiles, getRootProps: getIdRootProps, getInputProps: getIdInputProps } = useDropzone({ onDrop: onDropId, maxFiles: 1, maxSize: 2000000000, multiple: false, accept: { 'image/*': [] } })
+    const { acceptedFiles: utilityFiles, getRootProps: getUtilityRootProps, getInputProps: getUtilityInputProps } = useDropzone({ onDrop: onDropUtility, maxFiles: 1, maxSize: 2000000000, multiple: false, accept: { 'image/*': [] } })
+
+    const validationSchema = Yup.object().shape({
+        account_number: Yup.string().required("This field is required"),
+        account_name: Yup.string().required("This field is required"),
+        bvn: Yup.string().required("This field is required"),
+        bank_code: Yup.string().required("This field is required"),
+        address: Yup.string().required("This field is required"),
+        identification_type: Yup.string().required("This field is required"),
+        identification_number: Yup.string().required("This field is required"),
+    });
 
 
     const handleGetVirtualAccount = async () => {
@@ -28,9 +68,39 @@ const WalletPage = () => {
         }
     }
 
+    const handleGetBanks = async () => {
+        try {
+            const response = await getBanks();
+            setBanks(response.data.data);
+        } catch (error) {
+
+        }
+    }
+
+    const handleEditKYC = async (values: any, setSubmitting: (val: boolean) => void) => {
+        try {
+            setSubmitting(true);
+
+            const data = {
+                ...values,
+                utility_bill: utilityBill,
+                identification: idFile  
+            };
+
+            const response = APICall(updateKYC, data, true)
+            
+            setSubmitting(false);
+
+        } catch (error: any) {
+            setSubmitting(false);
+            console.log(error)
+        }
+    }
 
 
-    useEffect(() => { handleGetVirtualAccount() }, [])
+    useEffect(() => {
+        handleGetVirtualAccount()
+    }, [])
 
     return (
         <div id="dashboard">
@@ -98,10 +168,17 @@ const WalletPage = () => {
 
                     <div className="mt-8 space-y-4 px-8">
                         <div className="text-right space-x-4">
-                            <Button className="from-white !to-white !text-[#063150] font-semibold !py-[0.63rem] text-center">
+                            <Button onClick={() => {
+                                setShowAccountModal(false);
+                            }} className="from-white !to-white !text-[#063150] font-semibold !py-[0.63rem] text-center">
                                 Cancel
                             </Button>
-                            <Button className="!text-sm !py-[0.63rem] text-center">
+                            <Button
+                                onClick={() => {
+                                    setShowAccountModal(false);
+                                    setEditShowAccountModal(true)
+                                }}
+                                className="!text-sm !py-[0.63rem] text-center">
                                 Edit details
                             </Button>
                         </div>
@@ -159,6 +236,182 @@ const WalletPage = () => {
                     </div>
                 </div>
             </Modal>
+            <Modal size="md2" open={showEditAccountModal} onClose={(val) => setEditShowAccountModal(val)}>
+                <div className="border-b text-center text-2xl font-raleway font-bold py-5">
+                    Edit  KYC
+                </div>
+                <Formik
+                    initialValues={{
+                        account_number: "",
+                        account_name: "",
+                        bvn: "",
+                        bank_code: "",
+                        //  "",
+                        address: "",
+                        identification_type: "",
+                        identification_number: "",
+                    }}
+                    validationSchema={validationSchema}
+                    onSubmit={(values, { setSubmitting }) => {
+                        handleEditKYC(values, setSubmitting)
+                    }}
+                >
+                    {({ isSubmitting, values, handleChange, handleBlur, setFieldValue }) => (
+                        <Form>
+                            <div className="py-10 text-center">
+                                <div className="px-8">
+                                    <div className="text-lg font-semibold text-left">
+                                        Personal Information
+                                    </div>
+                                    <div className="space-y-4">
+                                        <div className="flex-1 text-left">
+                                            <label htmlFor="name" className="text-sm">
+                                                Account number
+                                            </label>
+                                            <Field type="text" name="account_number" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                                            <ErrorMessage name="account_number" component={"div"} className="text-red-600 text-sm text-left" />
+                                        </div>
+
+                                        <div className="flex-1 text-left">
+                                            <label htmlFor="name" className="text-sm">
+                                                Account name
+                                            </label>
+                                            <Field readOnly type="text" name="account_name" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                                            <ErrorMessage name="account_name" component={"div"} className="text-red-600 text-sm text-left" />
+                                        </div>
+
+                                        <div className="flex-1 text-left">
+                                            <label htmlFor="name" className="text-sm">
+                                                Bank
+                                            </label>
+                                            <select disabled={values.account_number.length < 10} onChange={async (e) => {
+                                                setFieldValue("bank_code", e.target.value);
+                                                const response = nameEnquiry(values.account_number, e.target.value)
+                                            }} name="bank_code" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`}>
+                                                <option value="">Select Bank</option>
+                                                {
+                                                    banks.map(bank => {
+                                                        return <option value={bank.code}>{bank.name}</option>
+                                                    })
+                                                }
+                                            </select>
+                                            <ErrorMessage name="bank_code" component={"div"} className="text-red-600 text-sm text-left" />
+                                        </div>
+                                    </div>
+                                    <div className="space-y-4 mt-6">
+                                        <div className="text-lg font-semibold text-left">
+                                            Address Information
+                                        </div>
+                                    
+                                        <div className="flex-1 text-left">
+                                            <label htmlFor="name" className="text-sm">
+                                                Address
+                                            </label>
+                                            <Field readOnly type="text" name="address" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                                            <ErrorMessage name="address" component={"div"} className="text-red-600 text-sm text-left" />
+                                        </div>
+                                        <div className="mt-4">
+                                            <div className="font-medium text-left">
+                                                Utility bill
+                                            </div>
+                                            <div className="py-4">
+                                                <div   {...getUtilityRootProps({ className: 'dropzone border-2 rounded-lg bg-dark border-[#98A2B3] px-10 py-2 text-center' })}>
+                                                    <input {...getUtilityInputProps()} />
+                                                    {
+                                                        idFile ? idFile.name : <div className="text-center space-y-4">
+
+                                                            <svg className="inline" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect x="3" y="3" width="40" height="40" rx="20" fill="#F5F5F5" />
+                                                                <path d="M19.6665 26.3333L22.9998 23M22.9998 23L26.3332 26.3333M22.9998 23V30.5M29.6665 26.9524C30.6844 26.1117 31.3332 24.8399 31.3332 23.4167C31.3332 20.8854 29.2811 18.8333 26.7498 18.8333C26.5677 18.8333 26.3974 18.7383 26.3049 18.5814C25.2182 16.7374 23.2119 15.5 20.9165 15.5C17.4647 15.5 14.6665 18.2982 14.6665 21.75C14.6665 23.4718 15.3627 25.0309 16.489 26.1613" stroke="#757575" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                                                                <rect x="3" y="3" width="40" height="40" rx="20" stroke="#FAFAFA" stroke-width="6" />
+                                                            </svg>
+                                                            <div className="text-xs">
+                                                                <span className="font-semibold text-[#36FFE8] text-sm">Click to upload</span> or drag and drop
+                                                            </div>
+                                                            <div className="text-xs">
+                                                                SVG, PNG, JPG or GIF (max. 800x400px)
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-4 mt-6">
+                                        <div className="text-lg font-semibold text-left">
+                                            Identification Documents
+                                        </div>
+                                        <div className="flex-1 text-left">
+                                            <label htmlFor="name" className="text-sm">
+                                                Id type
+                                            </label>
+                                            <Field as="select" type="text" name="identification_type" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} >
+                                                <option value="">Select Id type</option>
+                                                <option value="NIN">NIN</option>
+                                                <option value="DRIVERS LICENSE">Drivers license</option>
+                                                <option value="INTERNATIONAL PASSPORT">International passport</option>
+
+                                            </Field>
+                                            <ErrorMessage name="identification_type" component={"div"} className="text-red-600 text-sm text-left" />
+                                        </div>
+                                        <div className="flex-1 text-left">
+                                            <label htmlFor="name" className="text-sm">
+                                                Identification Number
+                                            </label>
+                                            <Field type="text" name="identification_number" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
+                                            <ErrorMessage name="identification_number" component={"div"} className="text-red-600 text-sm text-left" />
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-4">
+                                        <div className="font-medium text-left">
+                                            Upload ID image
+                                        </div>
+                                        <div className="py-4">
+                                            <div   {...getIdRootProps({ className: 'dropzone border-2 rounded-lg bg-dark border-[#98A2B3] px-10 py-2 text-center' })}>
+                                                <input {...getIdInputProps()} />
+                                                {
+                                                    idFile ? idFile.name : <div className="text-center space-y-4">
+
+                                                        <svg className="inline" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect x="3" y="3" width="40" height="40" rx="20" fill="#F5F5F5" />
+                                                            <path d="M19.6665 26.3333L22.9998 23M22.9998 23L26.3332 26.3333M22.9998 23V30.5M29.6665 26.9524C30.6844 26.1117 31.3332 24.8399 31.3332 23.4167C31.3332 20.8854 29.2811 18.8333 26.7498 18.8333C26.5677 18.8333 26.3974 18.7383 26.3049 18.5814C25.2182 16.7374 23.2119 15.5 20.9165 15.5C17.4647 15.5 14.6665 18.2982 14.6665 21.75C14.6665 23.4718 15.3627 25.0309 16.489 26.1613" stroke="#757575" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                                                            <rect x="3" y="3" width="40" height="40" rx="20" stroke="#FAFAFA" stroke-width="6" />
+                                                        </svg>
+                                                        <div className="text-xs">
+                                                            <span className="font-semibold text-[#36FFE8] text-sm">Click to upload</span> or drag and drop
+                                                        </div>
+                                                        <div className="text-xs">
+                                                            SVG, PNG, JPG or GIF (max. 800x400px)
+                                                        </div>
+                                                    </div>
+                                                }
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                   
+                                </div>
+
+                                <div className="mt-8 space-y-4 px-8">
+                                    <div className="text-right space-x-4">
+                                        <Button type="button" onClick={() => setEditShowAccountModal(false)} className="from-white !to-white !text-[#063150] font-semibold !py-[0.63rem] text-center">
+                                            Cancel
+                                        </Button>
+                                        <Button type="submit" className="!text-sm !py-[0.63rem] text-center">
+                                            Edit details
+                                        </Button>
+                                    </div>
+                                </div>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
+
+            </Modal>
+
             <div className="relative">
                 <div className="flex gap-3 items-center">
                     <div className="text-sm font-medium">

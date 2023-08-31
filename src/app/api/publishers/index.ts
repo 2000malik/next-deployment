@@ -13,6 +13,15 @@ export const updateCollaborators = async (id: number, data: any) => axios.put(`$
 export const deleteCollaborators = async (id: number) => axios.delete(`${API_URL}/publishers/collaborators/${id}`);
 
 export const getVirtualAccount = async () => axios.get(`${API_URL}/publishers/virtual-accounts`);
+export const getKYC = async () => axios.get(`${API_URL}/publishers/kyc`);
+export const updateKYC = async () => axios.post(`${API_URL}/publishers/kyc`, {
+    headers: {
+        "Content-Type": "multipart/form-data",
+    }
+});
+export const getBanks = async () => axios.get(`${API_URL}/publishers/banks`);
+export const nameEnquiry = async (acct = "", bank_code = "") => axios.get(`${API_URL}/publishers/name-enquiry?account_number${acct}&bank_code=${bank_code}`);
+
 
 export const createPodcast = async (data: any) => axios.post(`${API_URL}/publishers/podcasts`, data, {
     headers: {
