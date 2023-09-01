@@ -54,7 +54,7 @@ const CreatePodcastPage = ({ params }: { params: { podcastId: string[] } }) => {
                 explicit: isExplicit
             };
 
-            const response = isEdit ? await updatePodcast(params.podcastId[0], data) : await createPodcast(data);
+            const response = await updatePodcast(params.podcastId[0], data);
             toast(response.data.message, { type: "success" });
             setSubmitting(false);
 
@@ -123,7 +123,7 @@ const CreatePodcastPage = ({ params }: { params: { podcastId: string[] } }) => {
                     </div>
                 </div>
                 <div className="mt-8">
-                    {podcast ? <Formik
+                    {podcast && <Formik
                         initialValues={{
                             title: podcast?.title,
                             language: podcast?.language,
@@ -206,215 +206,17 @@ const CreatePodcastPage = ({ params }: { params: { podcastId: string[] } }) => {
                                                                 ))}
 
                                                             </>
-                                                            : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-32 inline">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                                            </svg>
-                                                    }
+                                                            : <>
 
-                                                    <div className="text-xs text-[#EAECF0] px-6">
-                                                        We recommend uploading an artwork of at least 1400x1400 pixels and maximum 5MB. We support jpg, png, gif and tiff formats.
-                                                    </div>
-                                                    <div className="mt-4">
-                                                        <button type="button" onClick={() => imagePicker()} className="bg-[#F9F5FF] rounded-full py-2 px-4 text-sm font-semibold text-[#042946]">
-                                                            Upload image
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-5">
-                                            <div className="md:w-6/12">
-                                                <label htmlFor="password" className="text-sm font-medium">
-                                                    Description
-                                                </label>
-                                                <Field as="textarea" rows={8} name="description" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500 `} />
-                                                <ErrorMessage name="description" component={"div"} className="text-red-600 text-sm text-left" />
-
-                                                <div className="text-xs text-[#D0D5DD] mt-1">
-                                                    Listeners want to know what your podcast is about before they tune in. Hook them in with a persuasive description that quickly sums up what the main concept and structure of your podcast is.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-5">
-                                            <div className="md:w-6/12">
-                                                <label htmlFor="password" className="text-sm font-medium">
-                                                    Tips
-                                                </label>
-                                                <div className="flex items-center gap-2">
-                                                    <Switch
-                                                        checked={enableTips}
-                                                        onChange={(val) => { setEnableTips(val) }}
-                                                        className={`${enableTips ? 'bg-[#21A79C]' : 'bg-slate-600'} relative inline-flex h-[18px] w-[32px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
-                                                    >
-                                                        <span className="sr-only">Use setting</span>
-                                                        <span
-                                                            aria-hidden="true"
-                                                            className={`${enableTips ? 'translate-x-[0.82rem]' : 'translate-x-0'} pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
-                                                        />
-                                                    </Switch>
-                                                    <div className="text-sm font-medium">
-                                                        Activate tips and donations
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex">
-                                            <div className="md:w-6/12">
-                                                <label htmlFor="tips_and_donations_amount" className="text-sm font-medium">
-                                                    Set amount
-                                                </label>
-                                                <Field type="text" name="tips_and_donations_amount" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
-                                                <ErrorMessage name="tips_and_donations_amount" component={"div"} className="text-red-600 text-sm text-left" />
-                                                <div className="text-xs text-[#D0D5DD] mt-1">
-                                                    Input a range of amount
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex">
-                                            <div className="md:w-6/12">
-                                                <label htmlFor="email" className="text-sm font-medium">
-                                                    Email
-                                                </label>
-                                                <Field type="text" name="email" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
-                                                <ErrorMessage name="email" component={"div"} className="text-red-600 text-sm text-left" />
-                                                <div className="text-xs text-[#D0D5DD] mt-1">
-                                                    By adding your email address here, it will be displayed on your podcast page and RSS feed. This email address allows you to confirm the ownership into platforms like Spotify and Google Podcasts.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-5">
-                                            <div className="md:w-6/12">
-                                                <label htmlFor="password" className="text-sm font-medium">
-                                                    Explicit
-                                                </label>
-                                                <div className="flex items-center gap-2">
-                                                    <Switch
-                                                        checked={isExplicit}
-                                                        onChange={(val) => { setIsExplicit(val) }}
-                                                        className={`${isExplicit ? 'bg-[#21A79C]' : 'bg-slate-600'} relative inline-flex h-[18px] w-[32px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
-                                                    >
-                                                        <span className="sr-only">Use setting</span>
-                                                        <span
-                                                            aria-hidden="true"
-                                                            className={`${isExplicit ? 'translate-x-[0.82rem]' : 'translate-x-0'} pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
-                                                        />
-                                                    </Switch>
-                                                    <div className="text-sm font-medium">
-                                                        If Episodes has explicit content
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="mt-1 text-right">
-                                            <Button type="submit" className="py-2 text-sm font-medium">
-                                                {
-                                                    isSubmitting ?
-                                                        <svg className="w-5 h-5" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                            viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
-                                                            <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
-                                                                <animateTransform
-                                                                    attributeName="transform"
-                                                                    attributeType="XML"
-                                                                    type="rotate"
-                                                                    dur="1s"
-                                                                    from="0 50 50"
-                                                                    to="360 50 50"
-                                                                    repeatCount="indefinite" />
-                                                            </path>
-                                                        </svg> : "Create new podcast"
-                                                }
-
-                                            </Button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Form>)}
-                    </Formik> : <Formik
-                        initialValues={{
-                            title: "",
-                            language: "",
-                            podcast_category: "",
-                            description: "",
-                            tips_and_donations_amount: "",
-                            email: "",
-                        }}
-                        validationSchema={validationSchema}
-                        onSubmit={(values, { setSubmitting }) => {
-                            handleCreatePodcast(values, setSubmitting)
-                        }}
-                    >
-                        {({ isSubmitting, values, handleChange, handleBlur, setFieldValue }) => (
-                            <Form>
-                                <div>
-                                    <div className="space-y-8">
-                                        <div className="flex">
-                                            <div className="md:w-6/12">
-                                                <label htmlFor="password" className="text-sm font-medium">
-                                                    Podcast Title*
-                                                </label>
-                                                <Field type="text" name="title" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`} />
-                                                <ErrorMessage name="title" component={"div"} className="text-red-600 text-sm text-left" />
-
-                                                <div className="text-xs text-[#D0D5DD] mt-1">
-                                                    Learn how to write a professional podcast title.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-5">
-                                            <div className="md:w-6/12">
-                                                <label htmlFor="password" className="text-sm font-medium">
-                                                    Language
-                                                </label>
-                                                <Field as="select" type="text" name="language" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`}>
-                                                    <option value="">Select preferred language</option>
-                                                    <option value="English">English</option>
-                                                    <option value="Yoruba">Yoruba</option>
-                                                    <option value="Igbo">Igbo</option>
-                                                    <option value="Hausa">Hausa</option>
-
-
-                                                </Field>
-                                                <ErrorMessage name="language" component={"div"} className="text-red-600 text-sm text-left" />
-
-                                            </div>
-                                            <div className="md:w-6/12">
-                                                <label htmlFor="email" className="text-sm font-medium">
-                                                    Category
-                                                </label>
-                                                <Field as="select" type="text" name="podcast_category" className={`w-full px-3.5 py-2.5 bg-white rounded-lg shadow border border-gray-300 text-gray-500`}>
-                                                    <option value=""></option>
-                                                    {
-                                                        categories.map((category) => {
-                                                            return (
-                                                                <option value={category.id}>{category.name}</option>
-                                                            )
-                                                        })
-                                                    }
-                                                </Field>
-                                                <ErrorMessage name="podcast_category" component={"div"} className="text-red-600 text-sm text-left" />
-
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div className="font-medium">
-                                                Picture
-                                            </div>
-                                            <div className="w-[348px] py-4">
-                                                <div className="text-center">
-                                                    {
-                                                        filesContent.length ?
-                                                            <>
-                                                                {filesContent.map((file, index) => (
-                                                                    <div key={index}>
-                                                                        <img className="max-w-sm" alt={file.name} src={file.content}></img>
-                                                                        <br />
-                                                                    </div>
-                                                                ))}
-
+                                                                {podcast.picture_url ? <div>
+                                                                    <img className="max-w-[150px] rounded-lg inline" src={podcast.picture_url}></img>
+                                                                </div>
+                                                                    :
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-32 inline">
+                                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                                                                    </svg>
+                                                                }
                                                             </>
-                                                            : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-32 inline">
-                                                                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                                                            </svg>
                                                     }
 
                                                     <div className="text-xs text-[#EAECF0] px-6">
