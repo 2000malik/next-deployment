@@ -1,0 +1,118 @@
+{
+  "pages": {
+    "/(dashboard)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/layout.css",
+      "static/chunks/app/(dashboard)/layout.js"
+    ],
+    "/(dashboard)/loading": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/loading.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/(dashboard)/podcast/distribution/[[...podcastId]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/podcast/distribution/[[...podcastId]]/page.css",
+      "static/chunks/app/(dashboard)/podcast/distribution/[[...podcastId]]/page.js"
+    ],
+    "/(dashboard)/dashboard/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/dashboard/page.css",
+      "static/chunks/app/(dashboard)/dashboard/page.js"
+    ],
+    "/(dashboard)/podcast/podcast-view/[[...podcastId]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/podcast/podcast-view/[[...podcastId]]/page.css",
+      "static/chunks/app/(dashboard)/podcast/podcast-view/[[...podcastId]]/page.js"
+    ],
+    "/(dashboard)/podcast/edit-podcast/[[...podcastId]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/podcast/edit-podcast/[[...podcastId]]/page.css",
+      "static/chunks/app/(dashboard)/podcast/edit-podcast/[[...podcastId]]/page.js"
+    ],
+    "/(dashboard)/podcast/social-sharing/[[...podcastId]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/podcast/social-sharing/[[...podcastId]]/page.css",
+      "static/chunks/app/(dashboard)/podcast/social-sharing/[[...podcastId]]/page.js"
+    ],
+    "/(dashboard)/settings/podcast-settings/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/settings/podcast-settings/page.js"
+    ],
+    "/(dashboard)/settings/website-page-settings/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/settings/website-page-settings/page.css",
+      "static/chunks/app/(dashboard)/settings/website-page-settings/page.js"
+    ],
+    "/(dashboard)/settings/rss-settings/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(dashboard)/settings/rss-settings/page.js"
+    ],
+    "/(dashboard)/settings/collaborators/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/settings/collaborators/page.css",
+      "static/chunks/app/(dashboard)/settings/collaborators/page.js"
+    ],
+    "/(dashboard)/podcast/episodes/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/podcast/episodes/page.css",
+      "static/chunks/app/(dashboard)/podcast/episodes/page.js"
+    ],
+    "/(dashboard)/podcast/edit-episode/[[...episodeId]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/podcast/edit-episode/[[...episodeId]]/page.css",
+      "static/chunks/app/(dashboard)/podcast/edit-episode/[[...episodeId]]/page.js"
+    ],
+    "/(home)/live-player/[[...podcastId]]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(home)/live-player/[[...podcastId]]/page.css",
+      "static/chunks/app/(home)/live-player/[[...podcastId]]/page.js"
+    ],
+    "/(home)/not-found": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(home)/not-found.js"
+    ],
+    "/(home)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(home)/layout.js"
+    ],
+    "/(home)/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(home)/page.js"
+    ],
+    "/(dashboard)/analytics/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/analytics/page.css",
+      "static/chunks/app/(dashboard)/analytics/page.js"
+    ],
+    "/(dashboard)/monetize/wallet/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(dashboard)/monetize/wallet/page.css",
+      "static/chunks/app/(dashboard)/monetize/wallet/page.js"
+    ]
+  }
+}

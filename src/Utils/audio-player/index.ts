@@ -2,7 +2,7 @@ import { loadingBarRef } from '@/app/layout';
 import { PlaybackData } from '@/models/playback';
 import { Howl, Howler } from 'howler';
 
-function formatTime(seconds: number) {
+export function formatTime(seconds: number) {
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = Math.round(seconds % 60);
@@ -11,6 +11,15 @@ function formatTime(seconds: number) {
         m > 9 ? m : (h ? '0' + m : m || '0'),
         s > 9 ? s : '0' + s
     ].filter(Boolean).join(':');
+}
+
+export function formatTimeW(seconds?: number) {
+    if (!seconds) return ""
+    const h = Math.floor(seconds / 3600) ? `${Math.floor(seconds / 3600)}h` : "";
+    const m = Math.floor((seconds % 3600) / 60) ? `${Math.floor((seconds % 3600) / 60)}mins` : ""
+    const s = Math.round(seconds % 60) ? `${Math.round(seconds % 60)}secs` : "";
+
+    return `${h} ${m} ${s}`
 }
 
 export class AudioPlayer {
@@ -132,7 +141,7 @@ export class AudioPlayer {
                 AudioPlayer._playing = false;
                 AudioPlayer.paused = false;
                 AudioPlayer.loaded = false;
-                
+
                 AudioPlayer?.onEndFn();
             },
             onpause: () => {
