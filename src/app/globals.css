@@ -6,11 +6,32 @@ body {
     margin: 0;
     text-align: left !important;
     color: #F9FAFB;
+    font-family: var(--font-poppins) !important;
     /* overflow-x: hidden; */
     -webkit-font-smoothing: subpixel-antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+a:hover {
+    color: #F9FAFB;
+    text-decoration: none;
+}
+
+.react-datetime-picker__wrapper {
+    border: none !important;
+}
+
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+}
+
+.react-datetime-picker__inputGroup {
+    display: flex;
+}
+
+.react-datetime-picker__inputGroup input {}
 
 *::-webkit-scrollbar {
     width: 1px;
@@ -79,4 +100,15 @@ body:not(._native-scrollbars) *::-webkit-scrollbar-corner {
 .slider-track-0 {
     /* color of the track before the thumb */
     background-color: #F2F4F7 !important;
+}
+
+.loader {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-block;
+    border-top: 3px solid #182cd1;
+    border-right: 3px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 0.8s linear infinite;
 }

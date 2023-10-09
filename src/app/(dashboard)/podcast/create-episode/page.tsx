@@ -15,6 +15,8 @@ import { toast } from "react-toastify";
 import { useFilePicker } from "use-file-picker";
 import * as Yup from "yup"
 import { useDropzone, Accept } from 'react-dropzone'
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 
 
@@ -25,7 +27,7 @@ const CreateEpisodePage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [audioFile, setAudioFile] = useState<File | null>(null)
     const [podcasts, setPodcasts] = useState<PodcastModel[]>([]);
-
+    const router = useRouter();
 
 
     const handleGetPodcast = async () => {
@@ -63,6 +65,7 @@ const CreateEpisodePage = () => {
 
             const response = await uploadEpisode(selectedPodcast, data);
             toast(response.data.message, { type: "success" });
+            router.push("/podcast/episodes")
             setIsLoading(false);
 
         } catch (error: any) {
@@ -80,7 +83,9 @@ const CreateEpisodePage = () => {
             <div className="relative">
                 <div className="flex gap-3 items-center">
                     <div className="text-sm font-medium">
-                        Dashboard
+                        <Link href="/dashboard">
+                            Dashboard
+                        </Link>
                     </div>
                     <div>
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -146,10 +151,10 @@ const CreateEpisodePage = () => {
                             </div>
 
                             <div className="mt-1 ">
-                                <Button onClick={handleCreateEpisode} type="submit" className="py-2 text-sm font-medium">
+                                <Button onClick={handleCreateEpisode} type="submit" className="py-2 text-sm font-medium text-center">
                                     {
                                         isLoading ?
-                                            <svg className="w-5 h-5" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                            <svg className="w-5 h-5 inline" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                 viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
                                                 <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
                                                     <animateTransform
