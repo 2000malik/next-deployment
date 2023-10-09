@@ -1,8 +1,3 @@
 {
-  "/(home)/page": "app/(home)/page.js",
-  "/(dashboard)/dashboard/page": "app/(dashboard)/dashboard/page.js",
-  "/(dashboard)/monetize/wallet/page": "app/(dashboard)/monetize/wallet/page.js",
-  "/(dashboard)/podcast/podcast-view/[[...podcastId]]/page": "app/(dashboard)/podcast/podcast-view/[[...podcastId]]/page.js",
-  "/(dashboard)/podcast/distribution/[[...podcastId]]/page": "app/(dashboard)/podcast/distribution/[[...podcastId]]/page.js",
-  "/(dashboard)/podcast/edit-podcast/[[...podcastId]]/page": "app/(dashboard)/podcast/edit-podcast/[[...podcastId]]/page.js"
+  "/(home)/live-player/[[...podcastId]]/page": "app/(home)/live-player/[[...podcastId]]/page.js"
 }

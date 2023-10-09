@@ -338,31 +338,6 @@ const EditEpisodePage = ({ params }: { params: { episodeId: string[] } }) => {
         }
     }
 
-    useEffect(() => {
-        // if (episode) {
-        //     fetch(episode?.picture_url)
-        //         .then(response => response.blob())
-        //         .then(blob => {
-        //             // Create an Object URL for the Blob
-        //             const blobURL = URL.createObjectURL(blob);
-
-        //             // Create an <img> element
-
-        //             imgRef.current.src = blobURL;
-
-
-        //             // Clean up the Object URL when it's no longer needed
-        //             imgRef.current.onload = () => {
-        //                 URL.revokeObjectURL(blobURL);
-        //             };
-        //         })
-        //         .catch(error => {
-        //             console.error("Error fetching the image:", error);
-        //         });
-        // }
-    }, [episode])
-
-
     return (
         <div id="dashboard">
             <Modal size="sm" open={showEditModal} onClose={(val) => setShowEditModal(val)}>

@@ -179,7 +179,7 @@ const Sidebar = () => {
                                                                 Episodes
                                                             </Link>
                                                         </div>
-                                                        <div>
+                                                        {/* <div>
                                                             <Link href="/podcast/distribution" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Distribution
                                                             </Link>
@@ -193,7 +193,7 @@ const Sidebar = () => {
                                                             <Link href="/podcast/embedded-player" className={`block w-full outline-none py-2 px-6 font-medium rounded-lg bg-[#101828]`}>
                                                                 Embedded player
                                                             </Link>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
                                                 </Disclosure.Panel>
                                             </Transition>

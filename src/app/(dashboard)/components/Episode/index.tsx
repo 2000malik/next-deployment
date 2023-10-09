@@ -8,12 +8,29 @@ import { APICall } from "@/utils";
 import { formatTimeW } from "@/utils/audio-player";
 import { Listbox, Popover } from "@headlessui/react";
 import moment from "moment";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { usePopper } from 'react-popper'
 import ShowMoreText from "react-show-more-text";
 
+// Assets
+import podChaserPng from "../../../../../public/images/podchaser.png";
+import googlePodsPng from "../../../../../public/images/google-pod.png";
+import boomPlayPng from "../../../../../public/images/boomplay.png";
+import audioMackPng from "../../../../../public/images/audiomack.png";
+import iHeartPng from "../../../../../public/images/iHeart.png";
+import jiosaavnPng from "../../../../../public/images/jiosaavn.png";
+import goodPodsPng from "../../../../../public/images/goodpods.png";
+import deezerPodsPng from "../../../../../public/images/deezer.png";
+import castBoxPng from "../../../../../public/images/castbox.png";
+import amazonPng from "../../../../../public/images/amazon.png";
+import amazonMusicPng from "../../../../../public/images/amazon-music.png";
+import podcastAddictsPng from "../../../../../public/images/podcast-addicts.png";
+import wokpaPng from "../../../../../public/icons/wokpa.png";
+import spotifyPng from "../../../../../public/images/spotify.png";
+import applePng from "../../../../../public/icons/podcast.png"
 
 export const EpisodeItem: React.FC<{ mode: "list" | "card", episode: EpisodeModel, isArchive: boolean }> = ({ mode, episode, isArchive }) => {
     const [selectedEpisode, setSelectedEpisode] = useState<EpisodeModel | null>(null);
@@ -677,3 +694,474 @@ export const EpisodeView: React.FC<{
         </div >
     )
 }
+
+// Episode Live View
+
+// Episode LIve View Items
+export const EpisodeLiveViewItem: React.FC<{ mode: "list" | "card", episode: EpisodeModel, isArchive: boolean }> = ({ mode, episode, isArchive }) => {
+    const [selectedEpisode, setSelectedEpisode] = useState<EpisodeModel | null>(null);
+    const [showArchiveModal, setShowArchiveModal] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const dispatch = useAppDispatch();
+    const navigate = useRouter();
+
+    const handleArchive = async () => {
+        try {
+            setLoading(true);
+            const response = await APICall(archiveEpisode, [selectedEpisode?.podcast_id, selectedEpisode?.id], true);
+            setShowArchiveModal(false);
+            dispatch(refreshPodcasts(new Date().toISOString()))
+            navigate.refresh();
+            setLoading(false);
+        } catch (error) {
+            setShowArchiveModal(false);
+            setLoading(false);
+        }
+    }
+
+    const handleUnarchive = async () => {
+        try {
+            setLoading(true);
+            const response = await APICall(removeArchiveEpisode, [selectedEpisode?.podcast_id, selectedEpisode?.id], true);
+            dispatch(refreshPodcasts(new Date().toISOString()))
+            setShowArchiveModal(false);
+            setLoading(false);
+        } catch (error) {
+            setShowArchiveModal(false);
+            setLoading(false);
+        }
+    }
+
+    function convertToTimeFormat(inputString) {
+        // Check if the inputString is a valid number
+        if (!/^\d+$/.test(inputString)) {
+            return "Invalid input";
+        }
+
+        // Extract hours and minutes from the inputString
+        const hours = Math.floor(parseInt(inputString) / 100);
+        const minutes = parseInt(inputString) % 100;
+
+        // Format the hours and minutes with leading zeros if necessary
+        const formattedHours = hours < 10 ? `0${hours}` : `${hours}`;
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+
+        // Combine the formatted hours and minutes with a colon
+        return `${formattedHours}:${formattedMinutes}`;
+    }
+
+    const truncateText = (text: string, length: number) => {
+        return text?.length > length ? `${text?.substring(0, length)}...` : text;
+    }
+
+    return (
+        <tr className="bg-[#292929] text-white my-3 ">
+            <td className="text-white rounded-l-lg px-5 py-3 font-medium my-3 flex flex-row justify-start items-center gap-3">
+                <svg className="cursor-pointer" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="32" height="32" rx="16" fill="url(#paint0_linear_6057_59739)" />
+                    <path d="M20.1175 14.2002L11.2 19.5777C10.675 19.8927 10 19.5177 10 18.9027V12.9027C10 10.2852 12.8275 8.65022 15.1 9.95522L18.5425 11.9352L20.11 12.8352C20.6275 13.1427 20.635 13.8927 20.1175 14.2002Z" fill="#E5F5F4" />
+                    <path d="M20.5686 18.595L17.5311 20.35L14.5011 22.0975C13.4136 22.72 12.1836 22.5925 11.2911 21.9625C10.8561 21.6625 10.9086 20.995 11.3661 20.725L20.8986 15.01C21.3486 14.74 21.9411 14.995 22.0236 15.5125C22.2111 16.675 21.7311 17.9275 20.5686 18.595Z" fill="#E5F5F4" />
+                    <defs>
+                        <linearGradient id="paint0_linear_6057_59739" x1="-0.000498336" y1="31.9998" x2="31.9996" y2="-0.000389615" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#083F62" />
+                            <stop offset="1" stop-color="#25AEA4" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+
+
+                <span className="text-sm">{truncateText(episode.title, 35)}</span>
+            </td>
+            <td className="py-3 pr-2 my-3 text-xs"> {moment(episode?.created_at).format("ll")}</td>
+            <td className="py-3 pr-2 text-xs font-semibold rounded-r-md">{convertToTimeFormat(episode?.duration)}</td>
+        </tr>
+    )
+}
+
+// Episode Live view component
+
+export const EpisodeLiveView: React.FC<{
+    episodes: EpisodeModel[],
+    isArchive: boolean,
+    view: "list" | "table",
+    setEpisodes: (episodes: EpisodeModel[], page?: number) => void,
+    setIsArchive: (value: boolean) => void,
+}> = ({ episodes, setEpisodes, setIsArchive, isArchive, view }) => {
+    const [viewMode, setViewMode] = useState<"list" | "table">(view);
+
+
+    return (
+        <div className="mt-4">
+            <div className="">
+                {episodes.length ?
+                    <table className="w-full h-full border-spacing-y-5 border-separate">
+                        <tr className="font-medium">
+                            <td className="text-sm"></td>
+                            <td className="text-sm">Date</td>
+                            <td className="text-sm">Duration</td>
+                        </tr>
+                        {episodes.map((episode) => {
+                            return <EpisodeLiveViewItem key={episode?.id + "ep"} episode={episode} mode={viewMode} isArchive={isArchive} />
+                        })}
+                    </table>
+                    :
+                    <p className="w-full justify-center items-center flex flex-row">No episode found</p>
+                }
+
+            </div>
+        </div>
+    )
+}
+
+export const LiveViewListOnTab = () => {
+    return (
+        <div className="mt-5">
+
+            <div className="flex justify-between items-center p-4 bg-[#141414] rounded-xl mb-5">
+                <div className="flex items-center gap-5">
+                    <div className="">
+                        <Image
+                            width={50}
+                            alt="Apple Podcast"
+                            className="rounded-full"
+                            src={applePng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Apple Podcasts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Apple podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center p-4 bg-[#141414] rounded-xl mb-5">
+                <div className="flex items-center">
+                    <div className="mr-5">
+                        <Image
+                            width={50}
+                            alt="Apple Podcast"
+                            className="rounded-full"
+                            src={spotifyPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Spotify Podcasts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Spotify podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center px-6 p-4 bg-[#141414] rounded-xl mb-5">
+                <div className="flex items-center gap-3">
+                    <div className="">
+                        <Image
+                            width={60}
+                            alt="Wokpa Podcast"
+                            className="rounded-full"
+                            src={wokpaPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Wokpa Podcast</div>
+                        <div className="text-xs mt-2">
+                            Listen to Wokpa podcast
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center px-7 py-4 bg-[#141414] rounded-xl mb-5">
+                <div className="flex items-center gap-4">
+                    <div className="">
+                        <Image
+                            width={60}
+                            alt="Audiomack Podcast"
+                            className="rounded-full"
+                            src={audioMackPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Audiomack podcast</div>
+                        <div className="text-xs mt-2">
+                            Listen to Apple podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center px-10 py-4 bg-[#141414] rounded-xl mb-5">
+                <div className="flex items-center gap-4">
+                    <div className="mr-2">
+                        <Image
+                            width={40}
+                            alt="castApple Podcast"
+                            className="rounded-full"
+                            src={googlePodsPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Google Podcasts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Google podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center px-8 py-4 bg-[#141414] rounded-xl mb-5">
+                <div className="flex items-center gap-2">
+                    <div className="mr-">
+                        <Image
+                            width={70}
+                            alt="Boomplay Podcast"
+                            className="rounded-full"
+                            src={boomPlayPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Bomplay Podcasts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Boomplay podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center pl-10 py-4 bg-[#141414] rounded-xl mb-5">
+                <div className="flex items-center gap-2">
+                    <div className="mr-3">
+                        <Image
+                            width={50}
+                            alt="Boomplay Podcast"
+                            className="rounded-full"
+                            src={amazonMusicPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Amazon Podcasts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Amazon podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center pl-10 py-4 bg-[#141414] rounded-xl mb-5 cursor-pointer">
+                <div className="flex items-center gap-2">
+                    <div className="mr-3">
+                        <Image
+                            width={50}
+                            alt="Deezer Podcast"
+                            className="rounded-full"
+                            src={deezerPodsPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Deezer Podcasts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Deezer podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center pl-6 py-4 bg-[#141414] rounded-xl mb-5 cursor-pointer">
+                <div className="flex items-center ">
+                    <div className="">
+                        <Image
+                            width={90}
+                            alt="Good Podcast"
+                            className="rounded-full"
+                            src={goodPodsPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Good Podcasts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Good podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center pl-6 py-4 bg-[#141414] rounded-xl mb-5 cursor-pointer">
+                <div className="flex items-center ">
+                    <div className="">
+                        <Image
+                            width={90}
+                            alt="Good Podcast"
+                            className="rounded-full"
+                            src={iHeartPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">iHearts Podcasts</div>
+                        <div className="text-xs mt-2">
+                            Listen on iHearts podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center pl-6 py-4 bg-[#141414] rounded-xl mb-5 cursor-pointer">
+                <div className="flex items-center ">
+                    <div className="">
+                        <Image
+                            width={90}
+                            alt="Good Podcast"
+                            className="rounded-full"
+                            src={castBoxPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Castbox Podcasts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Castbox podcasts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center pl-10 py-4 bg-[#141414] rounded-xl mb-5 cursor-pointer">
+                <div className="flex items-center gap-6">
+                    <div className="">
+                        <Image
+                            width={45}
+                            alt="Podcast Addict"
+                            className="rounded-full ml-1"
+                            src={podcastAddictsPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Podcast Addicts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Podcast Addicts
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center pl-10 py-4 bg-[#141414] rounded-xl mb-5 cursor-pointer">
+                <div className="flex items-center gap-6">
+                    <div className="">
+                        <Image
+                            width={45}
+                            alt="Jiosaavn Addict"
+                            className="rounded-full ml-1"
+                            src={jiosaavnPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Jiosaavn Addicts</div>
+                        <div className="text-xs mt-2">
+                            Listen on Jiosaavn Podcast
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="flex justify-between items-center pl-6 py-4 bg-[#141414] rounded-xl mb-5 cursor-pointer">
+                <div className="flex items-center">
+                    <div className="">
+                        <Image
+                            width={95}
+                            alt="Podchaser Addict"
+                            className="rounded-full"
+                            src={podChaserPng}
+                        />
+                    </div>
+                    <div className="text-left">
+                        <div className="text-sm font-bold">Podchaser Podcast</div>
+                        <div className="text-xs mt-2">
+                            Listen on Podchaser Podcast
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const LiveViewAboutPodcastTab = () => {
+    return (
+        <div></div>
+    )
+}
+
+
+// {
+
+//     <div className="flex gap-4">
+//         <div>
+//             <div className='cursor-pointer !w-[120px] !h-[120px] py-5'>
+//                 <img className="object-cover rounded-lg" src={episode.picture_url} alt="" />
+//             </div>
+//         </div>
+//         <div className="w-full flex gap-6 justify-between items-center py-5 self-center">
+//             <div className="flex gap-4">
+//                 <div className="h-full">
+//                     <div className="flex justify-between flex-col gap-2">
+//                         <div>
+//                             <div className="text-sm font-medium uppercase">
+//                                 {moment(episode.created_at).format("dddd Do MMM, YYYY")}
+//                             </div>
+//                         </div>
+//                         <div>
+//                             <div className="font-semibold text-lg">
+//                                 {
+//                                     episode.title
+//                                 }
+//                             </div>
+//                         </div>
+//                         <div>
+//                             <ShowMoreText
+//                                 /* Default options */
+//                                 lines={1}
+//                                 more="Show more"
+//                                 less="Show less"
+//                                 className="text-xs"
+//                                 anchorClass="show-more-less-clickable"
+//                                 // onClick={this.executeOnClick}
+//                                 expanded={false}
+//                                 // width={280}
+//                                 truncatedEndingComponent={"... "}
+//                             >
+
+//                                 <p className="" dangerouslySetInnerHTML={{ __html: episode.description }}></p>
+//                             </ShowMoreText>
+
+//                         </div>
+
+//                         <div className="flex gap-4 items-center">
+//                             {/* <div className="">
+//                                 <div className="text-[8px] text-[#0D0D0D] font-semibold bg-white rounded-full py-2 px-4">
+//                                     20 Episodes
+//                                 </div>
+//                             </div> */}
+//                             <div className="flex items-center gap-1 text-sm">
+//                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                                     <path d="M6.66675 13.3337H9.33341V2.66699H6.66675V13.3337ZM2.66675 13.3337H5.33341V8.00033H2.66675V13.3337ZM10.6667 6.00033V13.3337H13.3334V6.00033H10.6667Z" fill="#E5F5F4" />
+//                                 </svg>
+
+//                                 <div>
+//                                     {episode.play_count} Plays
+//                                 </div>
+//                             </div>
+//                             <div className="flex items-center gap-1 text-sm">
+//                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                                     <path d="M15.1333 7.66667L13.8004 9L12.4666 7.66667M13.9634 8.66667C13.9876 8.44778 14 8.22534 14 8C14 4.68629 11.3137 2 8 2C4.68629 2 2 4.68629 2 8C2 11.3137 4.68629 14 8 14C9.88484 14 11.5667 13.1309 12.6667 11.7716M8 4.66667V8L10 9.33333" stroke="#E5F5F4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+//                                 </svg>
+//                                 <div>
+//                                     {formatTimeW(episode.duration)}
+
+//                                 </div>
+//                             </div>
+//                             <div className="flex items-center gap-1 text-sm">
+//                                 <div>
+//                                     ₦
+//                                 </div>
+//                                 <div>
+//                                     0
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+
+//             </div>
+
+//         </div>
+//     </div>
+
+// }
