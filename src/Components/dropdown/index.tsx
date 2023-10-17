@@ -3,8 +3,9 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Popover, Transition, Disclosure } from "@headlessui/react";
 import Link from "next/link";
-import { useAppDispatch, useAppSelector } from "@/Hooks";
-import { resetAuth } from "@/redux/auth";
+import { resetAuth } from "@/src/Redux/Auth";
+import { useAppSelector,useAppDispatch } from "@/src/Hooks";
+
 
 const HomeNavbarPopOver = () => {
     const user = useAppSelector(state => state.auth.user);

@@ -1,15 +1,16 @@
 'use client';
-import { getPlans } from "@/app/api/general";
-import Button from "@/components/button";
-import WokpaLogo from "@/components/wokpa-logo";
-import { PlanModel } from "@/models/plan";
-import { formatToCurrency } from "@/utils";
+import Button from "@/src/Components/button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getPlans } from "../../api/General";
+import WokpaLogo from "@/src/Components/wokpa-logo";
+import { PlanModel } from "@/src/Models/plan";
+import { formatToCurrency } from "@/src/Utils";
 
 
 const FreePlan: React.FC<{ plan: PlanModel }> = ({ plan }) => {
     const navigate = useRouter();
+    Button
     return (
         <div className="bg-[#18181B] pt-10 px-6 rounded-3xl">
             <div>

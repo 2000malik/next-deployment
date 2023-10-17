@@ -1,11 +1,11 @@
 'use client';
-import { getPodcastGoals } from "@/app/api/general";
-import { updatePodcastGoals } from "@/app/api/publishers";
-import Button from "@/components/button";
-import { PodcastGoal } from "@/models/podcast";
+import { getPodcastGoals } from "../../../api/General";
+import Button from "../../../../Components/button";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { PodcastGoal } from "@/src/Models/podcast";
+import { updatePodcastGoals } from "@/src/app/api/publishers";
 
 export default function OnboardingOne() {
     const [podcastGoals, setPodcastGoals] = useState<PodcastGoal[]>([]);
@@ -16,7 +16,7 @@ export default function OnboardingOne() {
     const [loading, setLoading] = useState(false);
     const [presenters, setPresenters] = useState("");
     const router = useRouter();
-
+   
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         try {
             event.preventDefault();

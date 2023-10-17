@@ -3,9 +3,9 @@
 
 import { configureStore } from '@reduxjs/toolkit'
 import { persistReducer, FLUSH, PAUSE, PURGE, persistStore, REGISTER, REHYDRATE, PERSIST } from 'redux-persist'
-import { rootReducer } from '@/setup/redux/root-reducer'
 import storage from "./custom-storage"
 import logger from "redux-logger";
+import { rootReducer } from './root-reducer';
 
 const persistConfig = {
     key: "wokpa",

@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { Popover, Transition, Disclosure } from "@headlessui/react";
 import React from "react";
 import Link from "next/link";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { resetAuth } from "@/redux/auth";
-import HomeNavbarPopOver from "@/Components/dropdown";
+import { useAppSelector,useAppDispatch } from "@/src/Hooks";
+import { resetAuth } from "@/src/Redux/Auth";
+import HomeNavbarPopOver from "@/src/Components/dropdown";
 
 const Navbar = () => {
     const user = useAppSelector(state => state.auth.user);
@@ -316,7 +316,7 @@ export const HomeNavbar = () => {
                                 </div>
                              </>
                              }
-                            <HomeNavbarPopOver />
+                            <HomeNavbarPopOver/>
                             </div>
                         </div>
 

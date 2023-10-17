@@ -4,10 +4,10 @@
 import Link from "next/link";
 import * as Yup from "yup"
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { APICall } from "@/Utils";
-import { forgotPassword } from "@/app/api/Auth";
-import WokpaLogo from "@/Components/wokpa-logo";
-import Button from "@/Components/button";
+import { APICall } from "@/src/Utils";
+import { forgotPassword } from "../../api/Auth";
+import WokpaLogo from "@/src/Components/wokpa-logo";
+import Button from "@/src/Components/button";
 
 
 const schema = Yup.object().shape({
@@ -33,7 +33,7 @@ export default function ForgotPassword() {
             <div className="">
                 <div className="bg-dark contianer md:px-24 py-8 min-h-screen">
                     <div className="text-center">
-                        <WokpaLogo />
+                        <WokpaLogo/>
                     </div>
                     <div className="py-6 px-16 mt-8">
                         <div className="flex items-center justify-center gap-8">

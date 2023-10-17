@@ -1,11 +1,10 @@
 "use client";
-
-import { resetAuth } from "@/redux/auth";
-import { useAppSelector, useAppDispatch } from "@/hooks";
 import { Disclosure, Transition } from "@headlessui/react";
 import { PropsWithChildren } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { resetAuth } from "@/src/Redux/Auth";
+import { useAppDispatch,useAppSelector } from "@/src/Hooks";
 
 interface NavLinkProps extends PropsWithChildren {
     href: string;

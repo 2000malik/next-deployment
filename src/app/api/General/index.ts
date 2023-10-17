@@ -1,4 +1,4 @@
-import { API_URL } from "@/utils";
+import { API_URL } from "@/src/Utils";
 import axios from "axios";
 
 export const getCountries = async () => axios.get(`${API_URL}/countries`);

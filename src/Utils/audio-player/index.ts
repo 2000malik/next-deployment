@@ -1,5 +1,6 @@
-import { loadingBarRef } from '@/app/layout';
-import { PlaybackData } from '@/models/playback';
+
+import { PlaybackData } from '@/src/Models/playback';
+import { loadingBarRef } from '@/src/app/layout';
 import { Howl, Howler } from 'howler';
 
 export function formatTime(seconds: number) {

@@ -1,6 +1,6 @@
 'use client';
-import Button from "@/components/button";
-import Input from "@/components/input";
+import Button from "../../../../Components/button";
+import Input from "../../../../Components/Input";
 
 export default function OnboardingTwo() {
     return (

@@ -1,4 +1,4 @@
 "use client";
 
-export { default as setupAxios } from "@/setup/axios"
-export * from '@/setup/redux/root-reducer'
+export { default as setupAxios } from "../Setup/axios"
+export * from '../Setup/redux/root-reducer'
