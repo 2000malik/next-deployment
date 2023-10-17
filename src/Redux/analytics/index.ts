@@ -1,6 +1,6 @@
 "use client";
 
-import { AnalyticsModel } from "@/models/Analytics";
+import { AnalyticsModel } from "@/src/Models/Analytics";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { profile } from "console";

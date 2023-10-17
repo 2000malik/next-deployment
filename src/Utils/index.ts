@@ -1,6 +1,6 @@
 'use client';
 
-import { loadingBarRef } from "@/app/layout";
+import { loadingBarRef } from "@/src/app/layout";
 import { useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 

@@ -1,23 +1,25 @@
 'use client';
 
-import Button from "@/components/button";
-import WokpaLogo from "@/components/wokpa-logo";
-import Input from "@/components/input";
+
+
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getPlan } from "@/app/api/general";
-import { PlanModel } from "@/models/plan";
-import { formatToCurrency } from "@/utils";
-import { subscribeToPlan } from "@/app/api/publishers";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import Button from "@/src/Components/button";
+import WokpaLogo from "@/src/Components/wokpa-logo";
+import Input from "@/src/Components/Input";
+import { getPlan } from "@/src/app/api/General";
+import { PlanModel } from "@/src/Models/plan";
+import { formatToCurrency } from "@/src/Utils";
+import { subscribeToPlan } from "@/src/app/api/publishers";
 
 
 
 const PaymentPageSolo = ({ params }: { params: { planId: string } }) => {
     const [plan, setPlan] = useState<PlanModel | null>(null);
     const navigate = useRouter();
-
+    
     const handleSubscribe = async () => {
         try {
             const response = await subscribeToPlan(params.planId);
@@ -30,14 +32,14 @@ const PaymentPageSolo = ({ params }: { params: { planId: string } }) => {
             }
         }
     }
-
+    
     useEffect(() => {
         (async () => {
             const response = await getPlan(params.planId);
             setPlan(response.data.data);
         })()
     }, []);
-
+    
     return (
         <div>
             <div className="">

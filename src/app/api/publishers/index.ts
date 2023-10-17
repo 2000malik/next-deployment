@@ -1,4 +1,4 @@
-import { API_URL } from "@/utils";
+import { API_URL } from "@/src/Utils";
 import axios from "axios";
 
 export const getPodcasts = async (page = 1, perPage = 15, q= "") => axios.get(`${API_URL}/publishers/podcasts?q=${q}&page=${page}&per_page=${perPage}`);

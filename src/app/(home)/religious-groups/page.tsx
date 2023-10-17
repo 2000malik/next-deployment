@@ -3,7 +3,7 @@
 
 import { Tab, Disclosure } from '@headlessui/react'
 import AllInOne from "../partials/all-in-one";
-import Button from '@/Components/button';
+import Button from '@/src/Components/button';
 
 
 const ReligiousGroup = () => {

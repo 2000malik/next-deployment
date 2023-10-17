@@ -1,4 +1,4 @@
-import { PlaybackData } from "@/models/playback";
+import { PlaybackData } from "@/src/Models/playback";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 

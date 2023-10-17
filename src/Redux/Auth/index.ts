@@ -1,6 +1,6 @@
 "use client";
 
-import { ProfileModel, UserModel } from "@/models/user";
+import { ProfileModel, UserModel } from "@/src/Models/User";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AxiosResponse } from "axios";
 import { profile } from "console";
