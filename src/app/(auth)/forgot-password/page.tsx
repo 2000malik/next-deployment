@@ -1,13 +1,14 @@
 'use client'
 
-import Button from "../../../components/button";
-import WokpaLogo from "../../../components/wokpa-logo";
-import Input from "../../../components/input";
+
 import Link from "next/link";
 import * as Yup from "yup"
 import { Formik, Form, ErrorMessage, Field } from "formik";
-import { APICall } from "@/utils";
-import { forgotPassword } from "@/app/api/auth";
+import { APICall } from "@/Utils";
+import { forgotPassword } from "@/app/api/Auth";
+import WokpaLogo from "@/Components/wokpa-logo";
+import Button from "@/Components/button";
+
 
 const schema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required!'),

@@ -1,13 +1,9 @@
 'use client';
-import { authLogin, resetAuth, updateProfile } from "@/redux/auth";
-import Button from "../../../components/button";
-import Input from "../../../components/input";
-import PasswordInput from "../../../components/password-input";
+
+
+// import Input from "../../../components/input";
 import Link from "next/link";
 import * as Yup from "yup"
-import { useAppDispatch } from "@/hooks";
-import { APICall } from "@/utils";
-import { getProfile, googleLogin, login } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useGoogleLogin } from "@react-oauth/google";
@@ -16,6 +12,12 @@ import { useState } from "react";
 import Image from "next/image"
 import { resetPodcast } from "@/redux/podcast";
 import { resetAnalytics } from "@/redux/analytics";
+import { authLogin, resetAuth,updateProfile } from "@/redux/auth";
+import Button from "@/Components/button";
+import PasswordInput from "@/Components/password-input";
+import { useAppDispatch } from "@/Hooks";
+import { APICall } from "@/Utils";
+import { getProfile,googleLogin, login  } from "@/app/api/Auth";
 
 const loginValidationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required!'),

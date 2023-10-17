@@ -1,7 +1,8 @@
 'use client'
-import Button from "@/components/button";
+// import Button from "@/components/button";
 import { Tab, Disclosure } from '@headlessui/react'
 import AllInOne from "../partials/all-in-one";
+import Button from '@/Components/button';
 
 
 const Features = () => {
