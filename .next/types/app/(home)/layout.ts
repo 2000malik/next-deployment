@@ -1,4 +1,4 @@
-// File: C:\Users\DELL\Documents\GitHub\wokpa-frontend-publisher\src\app\(home)\layout.tsx
+// File: /Users/malikojo/Documents/GitHub/wokpa-frontend-publisher/src/app/(home)/layout.tsx
 import * as entry from '../../../../src/app/(home)/layout.js'
 import type { ResolvingMetadata } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

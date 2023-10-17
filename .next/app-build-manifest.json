@@ -1,5 +1,16 @@
 {
   "pages": {
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/(home)/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(home)/page.js"
+    ],
     "/(home)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -10,17 +21,17 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(home)/not-found.js"
     ],
-    "/layout": [
+    "/(auth)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
+      "static/css/app/(auth)/layout.css",
+      "static/chunks/app/(auth)/layout.js"
     ],
-    "/(home)/live-player/[[...podcastId]]/page": [
+    "/(auth)/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/(home)/live-player/[[...podcastId]]/page.css",
-      "static/chunks/app/(home)/live-player/[[...podcastId]]/page.js"
+      "static/css/app/(auth)/login/page.css",
+      "static/chunks/app/(auth)/login/page.js"
     ]
   }
 }
