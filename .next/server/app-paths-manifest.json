@@ -1,3 +1,5 @@
 {
-  "/(home)/live-player/[[...podcastId]]/page": "app/(home)/live-player/[[...podcastId]]/page.js"
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/(home)/page": "app/(home)/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js"
 }
