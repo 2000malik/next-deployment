@@ -8,7 +8,7 @@ import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useEffectOnce } from "react-use";
-import useCopyToClipboard from "../../../../../hooks/useCopyToClipboard";
+import useCopyToClipboard from "../../../../../Hooks/useCopyToClipboard";
 
 import podChaserPng from "../../../../../../public/images/podchaser.png";
 import googlePodsPng from "../../../../../../public/images/google-pod.png";
